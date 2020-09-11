@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Касса "{{casherPlace.name}}"</h1>
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <div>
+      <p>Статус: {{casherPlace.userInPlace?'Занято':'Свободно'}}</p>
+    </div>
+    <div>
+      <p>Пользователь: {{casherPlace.userInPlace?.fio|absent}}</p>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" >
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <p>Активен: {{casherPlace.isActive|yesNo}}</p>
+      </div>
+      <div>
+        <div *ngIf="casherPlace.isActive;else enableTemplate">
+          <button mat-button (click)="disableCasherPlace()">Отключить</button>
+        </div>
+        <ng-template #enableTemplate>
+          <button mat-button (click)="enableCasherPlace()">Включить</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+</div>

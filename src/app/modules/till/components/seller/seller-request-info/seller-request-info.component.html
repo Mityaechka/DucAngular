@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Информация о заказе</h1>
+<div mat-dialog-content>
+  <p>Поставщик: {{productRequest.fromShop.name}}</p>
+  <h2>Данные об оплате</h2>
+  <p>Всего: {{productRequest.totalSum}}</p>
+  <p>Оплачено: {{productRequest.payedSum}}</p>
+  <p>Остаток: {{productRequest.leftSum}}</p>
+
+  <p>Всего к оплате: {{productRequest.totalSumToPaid}}</p>
+  <ng-container *ngIf="productRequest.logisticProductRequest">
+    <h2>Данные о доставке</h2>
+    <p *ngIf="productRequest.logisticProductRequest.shop" >Логистическая комапния: {{productRequest.logisticProductRequest.shop.name}}</p>
+    <p *ngIf="productRequest.logisticProductRequest.user" >Водитель: {{productRequest.logisticProductRequest.user.fio}}</p>
+    <p>Статус: {{productRequest.logisticProductRequest.isShipped?"Доставлено":"Не доставлено"}}</p>
+  </ng-container>
+  <button mat-stroked-button color="primary" (click)="showCode()" >Показать код</button>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+</div>

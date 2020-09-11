@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Продукт "{{productLeft.product.name}}"</h1>
+<div mat-dialog-content>
+  <p>Цена за 1 шт.: {{productLeft.myShopPrice}}</p>
+  <button mat-raised-button (click)="changePrice()">Изменить цену</button>
+  <p>Остаток: {{productLeft.currentLeft}}</p>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+</div>

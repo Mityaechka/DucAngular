@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>
+  Активный запрос на выплату
+</h1>
+<div mat-dialog-content>
+<div fxLayout="column">
+  <p>Номер заявки: {{payRequest.id}}</p>
+  <p>Статус: {{RequestStatusDisplay[payRequest.status]}}</p>
+  <p>Создано пользователем: {{payRequest.user?.fio|absent}}</p>
+  <div fxLayout="column" fxLayoutAlign="center center" >
+    <button mat-raised-button (click)="showCode()">Показать код</button>
+  </div>
+</div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Закрыть</button>
+</div>

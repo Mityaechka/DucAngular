@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Оплата заказа</h1>
+<div mat-dialog-content>
+<form>
+  <div *ngIf="!productRequest.logisticProductRequest.isShipped" >
+    <mat-checkbox [formControl]="accept">Я передал товары в магазин</mat-checkbox>
+  </div>
+  <mat-form-field appearance="outline" *ngIf="productRequest.leftSum!=0" >
+    <mat-label>Сумма, переданная от магазина</mat-label>
+    <input matInput placeholder="Сумма" min="1" type="number" [formControl]="sum">
+  </mat-form-field>
+</form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button [disabled]="!canConfirm" (click)="addPayRequest()" >Подтвердить</button>
+</div>

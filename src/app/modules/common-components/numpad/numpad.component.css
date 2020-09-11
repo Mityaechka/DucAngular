@@ -1,0 +1,11 @@
+.calc-container {
+  display: grid;
+  grid-template-columns: 64px 64px 64px;
+  grid-gap: 5px;
+  align-items: center;
+}
+
+  .calc-container > button {
+      width: 64px;
+      height: 64px;
+  }

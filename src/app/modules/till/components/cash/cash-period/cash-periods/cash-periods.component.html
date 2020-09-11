@@ -1,0 +1,18 @@
+<app-table [loadData]="loadData.bind(this)" [columns]="['startTime','startSum','endTime','endSum']">
+  <ng-container matColumnDef="startTime">
+    <th mat-header-cell *matHeaderCellDef> Время начала </th>
+    <td mat-cell *matCellDef="let element"> {{element.startTime|date:'MM.dd.yyyy HH:mm'}}</td>
+  </ng-container>
+  <ng-container matColumnDef="startSum">
+    <th mat-header-cell *matHeaderCellDef> Сумма на начало </th>
+    <td mat-cell *matCellDef="let element"> {{element.startSum}}</td>
+  </ng-container>
+  <ng-container matColumnDef="endTime">
+    <th mat-header-cell *matHeaderCellDef> Время закрытия </th>
+    <td mat-cell *matCellDef="let element"> {{element.endTime|date:'MM.dd.yyyy HH:mm'}}</td>
+  </ng-container>
+  <ng-container matColumnDef="endSum">
+    <th mat-header-cell *matHeaderCellDef> Сумма на закрытие </th>
+    <td mat-cell *matCellDef="let element"> {{element.endSum}}</td>
+  </ng-container>
+</app-table>

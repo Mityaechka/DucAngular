@@ -1,0 +1,38 @@
+<app-table [loadData]="loadData.bind(this)"
+  [columns]="['ownerShop','saleFormType','currentBalance','paid','consigmentDate','implementSum','action']">
+  <ng-container matColumnDef="ownerShop">
+    <th mat-header-cell *matHeaderCellDef>Поставщик</th>
+    <td mat-cell *matCellDef="let element"> {{element.ownerShop?.name|absent}}</td>
+  </ng-container>
+  <ng-container matColumnDef="currentBalance">
+    <th mat-header-cell *matHeaderCellDef> Текущий остаток по оплате</th>
+    <td mat-cell *matCellDef="let element"> {{element.currentBalance}}</td>
+  </ng-container>
+  <ng-container matColumnDef="paid">
+    <th mat-header-cell *matHeaderCellDef> Оплачено</th>
+    <td mat-cell *matCellDef="let element"> {{element.paid}}</td>
+  </ng-container>
+  <ng-container matColumnDef="saleFormType">
+    <th mat-header-cell *matHeaderCellDef> Форма продажи</th>
+    <td mat-cell *matCellDef="let element"> {{SaleformTypeDisplay[element.saleFormType]}}</td>
+  </ng-container>
+  <ng-container matColumnDef="consigmentDate">
+    <th mat-header-cell *matHeaderCellDef> Дата оплаты по консигнации </th>
+    <td mat-cell *matCellDef="let element"> {{element.consigmentDate|date:'MM.dd.yyyy'}}</td>
+  </ng-container>
+  <ng-container matColumnDef="implementSum">
+    <th mat-header-cell *matHeaderCellDef> Сумма реализованного товара </th>
+    <td mat-cell *matCellDef="let element"> {{element.implementSum}}</td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="element.hasActiveRequest;else noRequest">
+        <button mat-raised-button (click)="actvivePayRequest(element)">Активный запрос</button>
+      </div>
+      <ng-template #noRequest>
+        <button mat-raised-button (click)="makeRequest(element)" >Отправить запрос на выплату</button>
+      </ng-template>
+    </td>
+  </ng-container>
+</app-table>

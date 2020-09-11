@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Измнеие цены для "{{productLeft.product.name}}"</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Введите новую цену</mat-label>
+    <input matInput placeholder="Новая цена" type="number" [formControl]="price">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button (click)="changePrice()" [disabled]="price.invalid">Изменить цену</button>
+</div>

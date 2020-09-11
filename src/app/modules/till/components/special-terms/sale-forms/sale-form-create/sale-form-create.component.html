@@ -1,0 +1,60 @@
+<form [formGroup]="form" mat-dialog-content (ngSubmit)="createSaleForm()">
+  <h1 mat-dialog-title>Создание формы продажи </h1>
+
+  <div fxLayout="row">
+    <div fxFlex>
+      <mat-form-field appearance="outline">
+        <mat-label>Магазин</mat-label>
+        <mat-select formControlName="shopId">
+          <mat-option value="-1">
+            Все
+          </mat-option>
+          <mat-option *ngFor="let shop of shops"  value="{{shop.id}}">
+            {{shop.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxFlex>
+      <mat-form-field appearance="outline">
+        <mat-label>Продукт</mat-label>
+        <mat-select formControlName="productId">
+          <mat-option value="-1">
+            Все
+          </mat-option>
+          <mat-option *ngFor="let product of products"  value="{{product.id}}">
+            {{product.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout="column">
+    <div fxFlex>
+      <mat-checkbox formControlName="canConsigment">Возможность консигнации</mat-checkbox>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between"
+      [style.visibility]="canConsigment.value?'visible':'hidden'">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Макс. срок консигнации</mat-label>
+          <input matInput placeholder="Скрок" type="number" min="1" formControlName="maxTermConsigment">
+        </mat-form-field>
+      </div>
+      <mat-checkbox class="m-10" fxFlex formControlName="orderOnDelayConsignment">Заказы при просрочке</mat-checkbox>
+    </div>
+    <div fxFlex>
+      <mat-checkbox formControlName="canImplement">Возможность реализации</mat-checkbox>
+    </div>
+    <div fxFlex fxLayout="row">
+      <mat-checkbox formControlName="cash">Нал. расчет</mat-checkbox>
+      <mat-checkbox class="ml-10" formControlName="cashless">Безнал. расчет</mat-checkbox>
+    </div>
+  </div>
+
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Закрыть</button>
+    <button mat-button type="submit" [disabled]="form.invalid">Создать</button>
+  </div>
+</form>

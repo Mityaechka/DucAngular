@@ -1,0 +1,18 @@
+<app-table [loadData]="loadData.bind(this)" [columns]="displayedColumns" (rowClick)="selectLeft($event)">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Название продукта </th>
+    <td mat-cell *matCellDef="let element" > {{element.product.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Тип продукта </th>
+    <td mat-cell *matCellDef="let element"> {{element.product.productType.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="supplierShop">
+    <th mat-header-cell *matHeaderCellDef> Поставщик </th>
+    <td mat-cell *matCellDef="let element"> {{element.product.supplierShop.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Цена </th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+  </ng-container>
+</app-table>

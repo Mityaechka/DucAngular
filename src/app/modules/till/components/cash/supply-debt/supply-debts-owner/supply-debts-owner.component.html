@@ -1,0 +1,38 @@
+<app-table [loadData]="loadData.bind(this)"
+  [columns]="['debtorShop','saleFormType','currentBalance','paid','consigmentDate','implementSum','action']">
+  <ng-container matColumnDef="debtorShop">
+    <th mat-header-cell *matHeaderCellDef>Должник</th>
+    <td mat-cell *matCellDef="let element"> {{element.debtorShop?.name|absent}}</td>
+  </ng-container>
+  <ng-container matColumnDef="currentBalance">
+    <th mat-header-cell *matHeaderCellDef> Текущий остаток по оплате</th>
+    <td mat-cell *matCellDef="let element"> {{element.currentBalance}}</td>
+  </ng-container>
+  <ng-container matColumnDef="paid">
+    <th mat-header-cell *matHeaderCellDef> Оплачено</th>
+    <td mat-cell *matCellDef="let element"> {{element.paid}}</td>
+  </ng-container>
+  <ng-container matColumnDef="saleFormType">
+    <th mat-header-cell *matHeaderCellDef> Форма продажи</th>
+    <td mat-cell *matCellDef="let element"> {{SaleformTypeDisplay[element.saleFormType]}}</td>
+  </ng-container>
+  <ng-container matColumnDef="consigmentDate">
+    <th mat-header-cell *matHeaderCellDef> Дата оплаты по консигнации </th>
+    <td mat-cell *matCellDef="let element"> {{element.consigmentDate|date:'MM.dd.yyyy'}}</td>
+  </ng-container>
+  <ng-container matColumnDef="implementSum">
+    <th mat-header-cell *matHeaderCellDef> Сумма реализованного товара </th>
+    <td mat-cell *matCellDef="let element"> {{element.implementSum}}</td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="element.bindedDriver;else bindDriverTemplate">
+        <p>Водитель уже назначен</p>
+      </div>
+      <ng-template #bindDriverTemplate>
+        <button mat-raised-button (click)="bindDriver(element)" >Назначить водителя</button>
+      </ng-template>
+    </td>
+  </ng-container>
+</app-table>

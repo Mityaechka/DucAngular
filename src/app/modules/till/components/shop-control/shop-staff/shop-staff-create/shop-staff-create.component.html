@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Новый пользователь</h1>
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between stretch">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Логин</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width ml-10">
+        <mat-label>Пароль</mat-label>
+        <input matInput>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-form-field appearance="outline"class="full-width">
+    <mat-label>Ф.И.О.</mat-label>
+    <input matInput>
+  </mat-form-field>
+  <mat-form-field appearance="outline"class="full-width">
+    <mat-label>Роль</mat-label>
+    <mat-select>
+      <mat-option value="option">Option</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+</div>

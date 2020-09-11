@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Инкассация</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Сумма инкассации</mat-label>
+    <input matInput placeholder="Сумма" type="number" min="1" [max]="maxSum" [formControl]="sumControl">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button (click)="collect()" [disabled]="sumControl.invalid">Произвести инкассацию</button>
+</div>

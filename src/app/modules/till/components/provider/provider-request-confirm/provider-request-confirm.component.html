@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Подтверждение заказа</h1>
+<div mat-dialog-content>
+  <div>
+    <p>Общая стоимость: {{productRequest.totalSum}}</p>
+    <p>К оплате: {{productRequest.totalSumToPaid}}</p>
+    <mat-form-field appearance="outline" *ngIf="logisticticShops" class="full-width">
+      <mat-label>Транспортная компания</mat-label>
+      <mat-select (selectionChange)="onCompanySelect($event)" [(ngModel)]="logisticCompanyId">
+        <mat-option *ngFor="let shop of logisticticShops" [value]="shop.id">
+          {{shop.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="productRequest.logisticProductRequest" class="full-width">
+      <mat-label>Водитель</mat-label>
+      <mat-select (selectionChange)="onDriverSelect($event)" [(ngModel)]="logisticDriverId">
+        <mat-option *ngFor="let driver of dirvers" [value]="driver.id">
+          {{driver.fio}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Расчетная дата поставки</mat-label>
+      <input (input)="onDateChange($event)" matInput placeholder="Дата" type="date" [value]="productRequest.planeDeliveryDate">
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button mat-dialog-close *ngIf="canConfirmRequest" (click)="confirmRequest()" >Подтвердить</button>
+</div>

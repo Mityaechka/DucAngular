@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Продукт "{{productLeft.product.name}}"</h1>
+<div mat-dialog-content>
+  <div class="flex   full-page flex-row">
+    <div>
+      <p>{{productLeft.product.name}}</p>
+      <p>Цена за 1шт.:{{productLeft.myShopPrice}}</p>
+      <p>Текущее количество: {{count}}</p>
+      <p>Итого: {{count*productLeft.myShopPrice}}</p>
+    </div>
+    <div>
+      <app-numpad  (countEvent)="getCount($event)"></app-numpad>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-raised-button color="warn" [disabled]="!canSell" (click)="sellProductClick()" >Продать</button>
+</div>

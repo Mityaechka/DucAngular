@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Форма продажи</h1>
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div>
+        <p>Магазин: {{saleForm.shopDisplay()}}</p>
+      </div>
+      <div>
+        <p>Продукт: {{saleForm.productDisplay()}}</p>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div>
+      <p>Возможность консигнации: {{saleForm.canConsigment|yesNo}}</p>
+    </div>
+    <div *ngIf="saleForm.canConsigment">
+      <p>Макс. срок консигнации: {{saleForm.maxTermConsignment}}</p>
+    </div>
+    <div *ngIf="saleForm.canConsigment">
+      <p>Заказы при просрочке: {{saleForm.orderOnDelayConsignment|yesNo}}</p>
+    </div>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div>
+    <p>Возможность реализации: {{saleForm.canImplement|yesNo}}</p>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div>
+    <p>Нал. расчет: {{saleForm.cash|yesNo}}</p>
+  </div>
+  <div>
+    <p>
+      Безнал. расчет: {{saleForm.cashless|yesNo}}</p>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button (click)="editSaleForm()" >Редактировать</button>
+</div>

@@ -1,0 +1,25 @@
+<div [formGroup]="form">
+  <h1 mat-dialog-title>Создание нового отдела</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Название</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Адрес</mat-label>
+      <input matInput formControlName="adress">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Тип магазина</mat-label>
+      <mat-select formControlName="shopType">
+        <mat-option [value]="ShopType.Logistic">{{ShopTypeDisplay[ShopType.Logistic]}}</mat-option>
+        <mat-option [value]="ShopType.Provider">{{ShopTypeDisplay[ShopType.Provider]}}</mat-option>
+        <mat-option [value]="ShopType.Shop">{{ShopTypeDisplay[ShopType.Shop]}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Закрыть</button>
+    <button mat-button [disabled]="form.invalid" (click)="createShop()">Создать</button>
+  </div>
+</div>

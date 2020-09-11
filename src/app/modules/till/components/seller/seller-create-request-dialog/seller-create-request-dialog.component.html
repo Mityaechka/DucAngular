@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Закуп "{{productLeft.product.name}}"</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Укажите необходимое количество товара "{{productLeft.product.name}}"</mat-label>
+      <input (input)="calcSum($event)" matInput placeholder="Количество" type="number" min="0" formControlName="count">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Желаемая дата доставки</mat-label>
+      <input matInput placeholder="Дата доставки" type="date" [min]="today" formControlName="planeDeliveryDate">
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="saleForm">
+      <mat-label>Желаемая дата доставки</mat-label>
+      <mat-select formControlName="saleFormType" (valueChange)="changeSaleForm($event)">
+        <mat-option value="0">
+          Нет
+        </mat-option>
+        <ng-container *ngIf="!saleForm.canConsigment">
+          <mat-option value="1">
+            Консигнация
+          </mat-option>
+        </ng-container>
+        <ng-container *ngIf="!saleForm.canImplement">
+          <mat-option value="2">
+            Реализация
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+    <ng-container *ngIf="currentSaleForm==1">
+      <p>Срок консигнации: {{saleForm.maxTermConsignment}}</p>
+    </ng-container>
+    <p>Скидка: {{directDiscount}} %</p>
+    <p>Цена: {{productLeft.myShopPrice}}</p>
+    <p>Текущая стоимость: {{totalSum}}</p>
+    <p>С учетом скидки: {{totalDiscountSum}}</p>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button mat-dialog-close [disabled]="form.invalid" (click)="createrRequest()" >Заказать</button>
+</div>

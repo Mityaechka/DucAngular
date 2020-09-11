@@ -1,0 +1,36 @@
+<app-table [loadData]="loadData.bind(this)" [columns]="['fromUser','toShop','payedUser','acceptedUser','sum','action']">
+  <ng-container matColumnDef="fromUser">
+    <th mat-header-cell *matHeaderCellDef> Принял деньги </th>
+    <td mat-cell *matCellDef="let element"> {{element.fromUser?.fio|absent}}</td>
+  </ng-container>
+  <ng-container matColumnDef="toShop">
+    <th mat-header-cell *matHeaderCellDef> Магазин назначения </th>
+    <td mat-cell *matCellDef="let element"> {{element.toShop?.name|absent}}</td>
+  </ng-container>
+  <ng-container matColumnDef="payedUser">
+    <th mat-header-cell *matHeaderCellDef> Олативший сотрудник </th>
+    <td mat-cell *matCellDef="let element"> {{element.payedUser?.fio|absent}}</td>
+  </ng-container>
+  <ng-container matColumnDef="acceptedUser">
+    <th mat-header-cell *matHeaderCellDef> Принявший оплату сотрудник </th>
+    <td mat-cell *matCellDef="let element"> {{element.acceptedUser?.fio|absent}}</td>
+  </ng-container>
+  <ng-container matColumnDef="sum">
+    <th mat-header-cell *matHeaderCellDef> Сумма </th>
+    <td mat-cell *matCellDef="let element"> {{element.sum}}</td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="element.transferState==MoneyTransferState.Requested">
+        <button mat-raised-button (click)="payTransfer(element)" >Выплатить по назначению</button>
+      </div>
+      <div *ngIf="element.transferState==MoneyTransferState.WaitAccept">
+        <button mat-raised-button >Запрос отправлен пользователем {{element.payedUser.fio}}</button>
+      </div>
+      <div *ngIf="element.transferState==MoneyTransferState.Transfared">
+        <button mat-raised-button >Выплата подтверждена получателем</button>
+      </div>
+    </td>
+  </ng-container>
+</app-table>
