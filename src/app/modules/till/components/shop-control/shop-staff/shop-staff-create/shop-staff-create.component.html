@@ -1,28 +1,31 @@
+<div [formGroup]="form">
 <h1 mat-dialog-title>Новый пользователь</h1>
 <div mat-dialog-content>
   <div fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="space-between stretch">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Логин</mat-label>
-        <input matInput>
+        <input matInput formControlName="login">
       </mat-form-field>
       <mat-form-field appearance="outline" class="full-width ml-10">
         <mat-label>Пароль</mat-label>
-        <input matInput>
+        <input matInput type="password" formControlName="password">
       </mat-form-field>
     </div>
   </div>
   <mat-form-field appearance="outline"class="full-width">
     <mat-label>Ф.И.О.</mat-label>
-    <input matInput>
+    <input matInput formControlName="fio">
   </mat-form-field>
   <mat-form-field appearance="outline"class="full-width">
     <mat-label>Роль</mat-label>
-    <mat-select>
-      <mat-option value="option">Option</mat-option>
+    <mat-select formControlName="roleId">
+      <mat-option *ngFor="let role of roles"  [value]="role.id">{{role.name}}</mat-option>
     </mat-select>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button [disabled]="form.invalid" (click)="createStaff()">Создать</button>
+</div>
 </div>

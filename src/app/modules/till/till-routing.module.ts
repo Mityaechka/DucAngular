@@ -5,9 +5,6 @@ import { SupplyDebtsComponent } from './components/cash/supply-debt/supply-debts
 import { MoneyTransfersComponent } from './components/cash/money-transfer/money-transfers/money-transfers.component';
 import { CashPeriodsComponent } from './components/cash/cash-period/cash-periods/cash-periods.component';
 import { SaleFormsComponent } from './components/special-terms/sale-forms/sale-forms/sale-forms.component';
-import { ShopLeftsComponent } from './components/shop/shop-lefts/shop-lefts.component';
-import { ShopProductsComponent } from './components/shop/shop-products/shop-products.component';
-import { ShopLeftsSellComponent } from './components/shop/shop-lefts-sell/shop-lefts-sell.component';
 import { SellerCreateRequestComponent } from './components/seller/seller-create-request/seller-create-request.component';
 import { SellerRequestsComponent } from './components/seller/seller-requests/seller-requests.component';
 import { ProviderRequestsComponent } from './components/provider/provider-requests/provider-requests.component';
@@ -16,6 +13,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { LogisticRequestsComponent } from './components/logistic/logistic-requests/logistic-requests.component';
 import { CashPeriodCurrentComponent } from './components/cash/cash-period/cash-period-current/cash-period-current.component';
 import { ShopStaffsComponent } from './components/shop-control/shop-staff/shop-staffs/shop-staffs.component';
+import { ProductAttributesComponent } from './components/shop/product-attribute/product-attributes/product-attributes.component';
+import { ShopLeftsSellComponent } from './components/shop/shop-left/shop-lefts-sell/shop-lefts-sell.component';
+import { ShopLeftsComponent } from './components/shop/shop-left/shop-lefts/shop-lefts.component';
+import { ShopProductsComponent } from './components/shop/shop-product/shop-products/shop-products.component';
 
 export const tillRoutes: Routes = [
   { path: 'provider/requests', component: ProviderRequestsComponent },
@@ -48,6 +49,7 @@ export const tillRoutes: Routes = [
       { path: 'lefts', component: ShopLeftsComponent },
       { path: 'lefts/sell', component: ShopLeftsSellComponent },
       { path: 'products', component: ShopProductsComponent },
+      { path: 'attributes', component: ProductAttributesComponent },
     ],
   },
 ];

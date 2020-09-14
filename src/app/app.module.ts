@@ -33,6 +33,7 @@ import { PipesModule } from './modules/pipes/pipes.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +71,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     CommonComponentsModule,
     PipesModule,
     FlexLayoutModule,
-    MatStepperModule
+    MatStepperModule,
+    MaterialFileInputModule
   ],
   providers: [],
   bootstrap: [AppComponent],

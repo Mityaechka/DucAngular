@@ -1,10 +1,10 @@
 import { FormControl, Validators } from '@angular/forms';
-import { LeftsService } from './../../../../../services/lefts.service';
-import { DialogsService } from './../../../../../services/dialogs.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ProductLeft } from '../../../../../entities/product-left.entity';
 import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { inherits } from 'util';
+import { ProductLeft } from 'src/app/entities/product-left.entity';
+import { DialogsService } from 'src/app/services/dialogs.service';
+import { LeftsService } from 'src/app/services/lefts.service';
 
 @Component({
   selector: 'app-shop-left-change-price',

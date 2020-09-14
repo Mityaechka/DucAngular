@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="select()" >
+  <h1 mat-dialog-title>Выбрать атрибут</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Атрибут</mat-label>
+      <mat-select formControlName="attribute">
+        <mat-option *ngFor="let attrribute of attributes" [value]="attrribute.id">
+          {{attrribute.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Закрыть</button>
+    <button mat-button [disabled]="form.invalid" type="submit">Выбрать</button>
+  </div>
+</form>

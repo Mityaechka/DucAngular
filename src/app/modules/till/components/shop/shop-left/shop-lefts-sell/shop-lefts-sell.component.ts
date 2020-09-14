@@ -1,13 +1,9 @@
-import { TableComponent } from './../../../../table/table/table.component';
-
-
-import { ShopLeftSellComponent } from '../shop-left-sell/shop-left-sell.component';
-import { ProductLeft } from '../../../../../entities/product-left.entity';
-import { LeftsService } from '../../../../../services/lefts.service';
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { ProductLeft } from 'src/app/entities/product-left.entity';
+import { TableComponent } from 'src/app/modules/table/table/table.component';
 import { DialogsService } from 'src/app/services/dialogs.service';
-import { ProductRequest } from 'src/app/entities/product-request.entity';
-import { SellerRequestInfoComponent } from '../../seller/seller-request-info/seller-request-info.component';
+import { LeftsService } from 'src/app/services/lefts.service';
+import { ShopLeftSellComponent } from '../shop-left-sell/shop-left-sell.component';
 
 @Component({
   selector: 'app-shop-lefts',

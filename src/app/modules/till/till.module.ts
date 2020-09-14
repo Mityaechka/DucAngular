@@ -1,4 +1,3 @@
-
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PipesModule } from './../pipes/pipes.module';
 import { CommonComponentsModule } from './../common-components/common-components.module';
@@ -36,18 +35,11 @@ import { SellerRequestInfoComponent } from './components/seller/seller-request-i
 import { LogisticRequestsComponent } from './components/logistic/logistic-requests/logistic-requests.component';
 import { LogisticRequestInfoComponent } from './components/logistic/logistic-request-info/logistic-request-info.component';
 import { SellerCreateRequestComponent } from './components/seller/seller-create-request/seller-create-request.component';
-import { SellerCreateRequestDialogComponent } from './components/seller/seller-create-request-dialog/seller-create-request-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SellerRequestShowCodeComponent } from './components/seller/seller-request-show-code/seller-request-show-code.component';
 import { LogisticRequestConfirmComponent } from './components/logistic/logistic-request-confirm/logistic-request-confirm.component';
 import { LogisticRequestShippComponent } from './components/logistic/logistic-request-shipp/logistic-request-shipp.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ShopLeftsSellComponent } from './components/shop/shop-lefts-sell/shop-lefts-sell.component';
-import { ShopProductsComponent } from './components/shop/shop-products/shop-products.component';
-import { ShopLeftSellComponent } from './components/shop/shop-left-sell/shop-left-sell.component';
-import { ShopLeftsComponent } from './components/shop/shop-lefts/shop-lefts.component';
-import { ShopLeftInfoComponent } from './components/shop/shop-left-info/shop-left-info.component';
-import { ShopLeftChangePriceComponent } from './components/shop/shop-left-change-price/shop-left-change-price.component';
 import { SaleFormsComponent } from './components/special-terms/sale-forms/sale-forms/sale-forms.component';
 import { SaleFormCreateComponent } from './components/special-terms/sale-forms/sale-form-create/sale-form-create.component';
 import { SaleFormInfoComponent } from './components/special-terms/sale-forms/sale-form-info/sale-form-info.component';
@@ -77,7 +69,22 @@ import { ShopDepartamentInfoComponent } from './components/shop-control/shop-dep
 import { ShopStaffsComponent } from './components/shop-control/shop-staff/shop-staffs/shop-staffs.component';
 import { ShopStaffCreateComponent } from './components/shop-control/shop-staff/shop-staff-create/shop-staff-create.component';
 import { MatStepperModule } from '@angular/material/stepper';
-
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { ProductAttributeSelectComponent } from './components/shop/product-attribute/product-attribute-select/product-attribute-select.component';
+import { ShopProductArrivingComponent } from './components/shop/shop-product/shop-product-arriving/shop-product-arriving.component';
+import { ProductAttributesComponent } from './components/shop/product-attribute/product-attributes/product-attributes.component';
+import { ProductAttributeCreateComponent } from './components/shop/product-attribute/product-attribute-create/product-attribute-create.component';
+import { ProductAttributeInfoComponent } from './components/shop/product-attribute/product-attribute-info/product-attribute-info.component';
+import { ShopProductCreateComponent } from './components/shop/shop-product/shop-product-create/shop-product-create.component';
+import { ShopProductEditComponent } from './components/shop/shop-product/shop-product-edit/shop-product-edit.component';
+import { ShopProductInfoComponent } from './components/shop/shop-product/shop-product-info/shop-product-info.component';
+import { SellerCreateRequestDialogComponent } from './components/seller/seller-create-request-dialog/seller-create-request-dialog.component';
+import { ShopLeftChangePriceComponent } from './components/shop/shop-left/shop-left-change-price/shop-left-change-price.component';
+import { ShopLeftInfoComponent } from './components/shop/shop-left/shop-left-info/shop-left-info.component';
+import { ShopLeftSellComponent } from './components/shop/shop-left/shop-left-sell/shop-left-sell.component';
+import { ShopLeftsSellComponent } from './components/shop/shop-left/shop-lefts-sell/shop-lefts-sell.component';
+import { ShopLeftsComponent } from './components/shop/shop-left/shop-lefts/shop-lefts.component';
+import { ShopProductsComponent } from './components/shop/shop-product/shop-products/shop-products.component';
 @NgModule({
   declarations: [
     MainTillComponent,
@@ -127,6 +134,14 @@ import { MatStepperModule } from '@angular/material/stepper';
     ShopDepartamentInfoComponent,
     ShopStaffsComponent,
     ShopStaffCreateComponent,
+    ShopProductCreateComponent,
+    ProductAttributeSelectComponent,
+    ShopProductArrivingComponent,
+    ShopProductInfoComponent,
+    ShopProductEditComponent,
+    ProductAttributesComponent,
+    ProductAttributeCreateComponent,
+    ProductAttributeInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -165,6 +180,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     PipesModule,
     FlexLayoutModule,
     MatStepperModule,
+    MaterialFileInputModule,
   ],
   exports: [MainTillComponent],
   entryComponents: [
@@ -200,7 +216,14 @@ import { MatStepperModule } from '@angular/material/stepper';
     CasherPlaceCreateComponent,
     CasherPlaceInfoComponent,
     ShopDepartamentCreateComponent,
-    ShopStaffCreateComponent
+    ShopStaffCreateComponent,
+    ShopProductCreateComponent,
+    ProductAttributeSelectComponent,
+    ShopProductArrivingComponent,
+    ShopProductInfoComponent,
+    ShopProductEditComponent,
+    ProductAttributeCreateComponent,
+    ProductAttributeInfoComponent,
   ],
 })
 export class TillModule {}

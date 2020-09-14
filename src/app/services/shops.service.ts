@@ -71,4 +71,12 @@ export class ShopsService {
   }) {
     return await this.http.post<any>(`shop/children/create`, data);
   }
+  async createShopStaff(data: {
+    fio: string;
+    login: string;
+    password: string;
+    roleId: number;
+  }) {
+    return await this.http.post<any>(`shop/users/create`, data);
+  }
 }

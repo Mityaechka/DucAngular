@@ -1,7 +1,7 @@
-import { DialogsService } from './../../../../../services/dialogs.service';
-import { ProductLeft } from '../../../../../entities/product-left.entity';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
+import { ProductLeft } from 'src/app/entities/product-left.entity';
+import { DialogsService } from 'src/app/services/dialogs.service';
 
 @Component({
   selector: 'app-shop-left-sell',

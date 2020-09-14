@@ -6,10 +6,9 @@ import { TableService } from 'src/app/services/table.service';
 
 @Component({
   templateUrl: './shop-staffs.component.html',
-  styleUrls: ['./shop-staffs.component.css']
+  styleUrls: ['./shop-staffs.component.css'],
 })
 export class ShopStaffsComponent implements OnInit {
-
   constructor(
     private shopsService: ShopsService,
     private dialogs: DialogsService,
@@ -20,7 +19,14 @@ export class ShopStaffsComponent implements OnInit {
   async loadData() {
     return this.shopsService.getShopUsers();
   }
-  createStaff(){
-    this.dialogs.push({component:ShopStaffCreateComponent});
+  createStaff() {
+    this.dialogs.push({
+      component: ShopStaffCreateComponent,
+      onInstance: (i) => {
+        i.created.subscribe(async () => {
+          this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+        });
+      },
+    });
   }
 }

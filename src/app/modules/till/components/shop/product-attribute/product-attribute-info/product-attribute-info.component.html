@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Информация о атрибуте "{{attribute.name}}"</h1>
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <div>
+      <p>Название: {{attribute.name}}</p>
+    </div>
+    <div>
+      <p>Создан магазином: {{attribute.shop|yesNo}}</p>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button *ngIf="attribute.shop">Редактировать</button>
+</div>
