@@ -1,3 +1,4 @@
+import { ShopPromotionsComponent } from './components/shop/shop-promotion/shop-promotions/shop-promotions.component';
 import { ShopAboutComponent } from './components/shop-control/shop-about/shop-about.component';
 import { ShopDepartamentsComponent } from './components/shop-control/shop-departament/shop-departaments/shop-departaments.component';
 import { CasherPlacesComponent } from './components/shop-control/casher-place/casher-places/casher-places.component';
@@ -50,6 +51,7 @@ export const tillRoutes: Routes = [
       { path: 'lefts/sell', component: ShopLeftsSellComponent },
       { path: 'products', component: ShopProductsComponent },
       { path: 'attributes', component: ProductAttributesComponent },
+      { path: 'promotions', component: ShopPromotionsComponent },
     ],
   },
 ];

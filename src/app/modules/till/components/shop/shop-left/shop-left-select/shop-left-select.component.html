@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="select()" >
+  <h1 mat-dialog-title>Выбор остатков</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Остаток</mat-label>
+      <mat-select formControlName="productLeft">
+        <mat-option *ngFor="let productLeft of productLefts" [value]="productLeft.id">
+          {{productLeft.product.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Закрыть</button>
+    <button mat-button type="submit" [disabled]="form.invalid">Выбрать</button>
+  </div>
+</form>

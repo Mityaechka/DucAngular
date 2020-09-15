@@ -1,3 +1,6 @@
+import { TableService } from './../../../../../../services/table.service';
+import { async } from '@angular/core/testing';
+import { ProductAttributeEditComponent } from './../product-attribute-edit/product-attribute-edit.component';
 import { DialogsService } from './../../../../../../services/dialogs.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ProductAttribute } from './../../../../../../entities/attribute.entity';
@@ -14,7 +17,8 @@ export class ProductAttributeInfoComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public attribute: ProductAttribute,
     private productsService: ProductsService,
-    private dialogs: DialogsService
+    private dialogs: DialogsService,
+    private tableService: TableService
   ) {}
 
   ngOnInit(): void {}
@@ -26,7 +30,16 @@ export class ProductAttributeInfoComponent implements OnInit {
       this.attribute = response.result;
     }
   }
-  editAttribute(){
-    
+  editAttribute() {
+    this.dialogs.push({
+      component: ProductAttributeEditComponent,
+      data: this.attribute,
+      onInstance: (i) => {
+        i.edited.subscribe(async () => {
+          this.loadData();
+          this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+        });
+      },
+    });
   }
 }

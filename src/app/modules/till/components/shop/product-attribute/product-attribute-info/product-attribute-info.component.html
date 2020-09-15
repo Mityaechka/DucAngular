@@ -11,5 +11,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Закрыть</button>
-  <button mat-button *ngIf="attribute.shop">Редактировать</button>
+  <button mat-button *ngIf="attribute.shop" (click)="editAttribute()">Редактировать</button>
 </div>

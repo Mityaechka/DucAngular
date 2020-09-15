@@ -1,0 +1,18 @@
+<div class="m-10">
+  <button mat-raised-button (click)="createProduct()">Создать акцию</button>
+</div>
+
+<app-table [loadData]="loadData.bind(this)" [columns]="['type','productLeft','isActive']" (rowClick)="promotionInfo($event)">
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Тип акции</th>
+    <td mat-cell *matCellDef="let element"> {{PromotionTypeDisplay[element.promotionType]}} </td>
+  </ng-container>
+  <ng-container matColumnDef="productLeft">
+    <th mat-header-cell *matHeaderCellDef>Продукт</th>
+    <td mat-cell *matCellDef="let element"> {{element.productLeft?.product?.name|absent}} </td>
+  </ng-container>
+  <ng-container matColumnDef="isActive">
+    <th mat-header-cell *matHeaderCellDef>Активен</th>
+    <td mat-cell *matCellDef="let element"> {{element.isActive|yesNo}} </td>
+  </ng-container>
+</app-table>

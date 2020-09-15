@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Акция на "{{promotion.productLeft.product.name}}"</h1>
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <div fxLayout="row">
+      <p fxFlex="50">Тип акции: {{EnumDisplayCollection.PromotionTypeDisplay[promotion.promotionType]}}</p>
+      <p fxFlex="50">Назначение акции: {{EnumDisplayCollection.PurposeTypeDisplay[promotion.purposeType]}}</p>
+    </div>
+    <div fxLayout="row">
+      <p fxFlex="50">Условаия отключения: {{EnumDisplayCollection.ActiveConditionDisplay[promotion.activeCondition]}}</p>
+      <div [ngSwitch]="promotion.activeCondition" fxFlex="50">
+        <div *ngSwitchCase="EnumCollection.ActiveCondition.Date">
+          <p>Дата: {{promotion.activeDate|date:'HH:mm dd.MM.yyyy'}}</p>
+        </div>
+        <div *ngSwitchCase="EnumCollection.ActiveCondition.SoldCount">
+          <p>Количество: {{promotion.activeCount}}</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p>Активен: {{promotion.isActive|yesNo}}</p>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button (click)="edit()">Редактировать</button>
+</div>

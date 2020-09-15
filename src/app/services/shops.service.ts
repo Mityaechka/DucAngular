@@ -1,3 +1,5 @@
+import { PurposeType } from './../enums/purpose-type.enum';
+import { ActiveCondition } from './../enums/active-condition.enum';
 import { ShopType } from './../enums/shop-type.enum';
 import { HttpService } from './http.service';
 import { Injectable } from '@angular/core';
@@ -7,6 +9,8 @@ import { CashPeriod } from '../entities/cash-period.entity';
 import { Receipt } from '../entities/receipt.entity';
 import { CasherPlace } from '../entities/casher-place.entity';
 import { User } from '../entities/user.entity';
+import { Promotion } from '../entities/promotion.entity';
+import { PromotionType } from '../enums/promotion-type.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -78,5 +82,43 @@ export class ShopsService {
     roleId: number;
   }) {
     return await this.http.post<any>(`shop/users/create`, data);
+  }
+  async getPromotions() {
+    return await this.http.post<List<Promotion>>(`shop/promotions`, null);
+  }
+  async getPromotion(id: number) {
+    return await this.http.get<Promotion>(`shop/promotions/${id}`);
+  }
+  async createPromotion(data: {
+    activeCondition;
+    ActiveCondition;
+    activeCount: number;
+    crossPromotionCrossCount: number;
+    crossPromotionProductLeftId: number;
+    crossPromotionSellCount: number;
+    nPromotionNCount: number;
+    nPromotionSellCount: number;
+    productLeftId: number;
+    promotionType: PromotionType;
+    purposeType: PurposeType;
+  }) {
+    return await this.http.post<any>(`shop/promotions/create`, data);
+  }
+  async editPromotion(
+    id: number,
+    data: {
+      activeCondition;
+      activeCount: number;
+      crossPromotionCrossCount: number;
+      crossPromotionProductLeftId: number;
+      crossPromotionSellCount: number;
+      nPromotionNCount: number;
+      nPromotionSellCount: number;
+      productLeftId: number;
+      promotionType: PromotionType;
+      purposeType: PurposeType;
+    }
+  ) {
+    return await this.http.post<any>(`shop/promotions/${id}/edit`, data);
   }
 }

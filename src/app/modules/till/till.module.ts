@@ -1,3 +1,4 @@
+import { ShopLeftSelectComponent } from './components/shop/shop-left/shop-left-select/shop-left-select.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PipesModule } from './../pipes/pipes.module';
 import { CommonComponentsModule } from './../common-components/common-components.module';
@@ -78,13 +79,18 @@ import { ProductAttributeInfoComponent } from './components/shop/product-attribu
 import { ShopProductCreateComponent } from './components/shop/shop-product/shop-product-create/shop-product-create.component';
 import { ShopProductEditComponent } from './components/shop/shop-product/shop-product-edit/shop-product-edit.component';
 import { ShopProductInfoComponent } from './components/shop/shop-product/shop-product-info/shop-product-info.component';
-import { SellerCreateRequestDialogComponent } from './components/seller/seller-create-request-dialog/seller-create-request-dialog.component';
 import { ShopLeftChangePriceComponent } from './components/shop/shop-left/shop-left-change-price/shop-left-change-price.component';
 import { ShopLeftInfoComponent } from './components/shop/shop-left/shop-left-info/shop-left-info.component';
 import { ShopLeftSellComponent } from './components/shop/shop-left/shop-left-sell/shop-left-sell.component';
 import { ShopLeftsSellComponent } from './components/shop/shop-left/shop-lefts-sell/shop-lefts-sell.component';
 import { ShopLeftsComponent } from './components/shop/shop-left/shop-lefts/shop-lefts.component';
 import { ShopProductsComponent } from './components/shop/shop-product/shop-products/shop-products.component';
+import { ProductAttributeEditComponent } from './components/shop/product-attribute/product-attribute-edit/product-attribute-edit.component';
+import { ShopPromotionsComponent } from './components/shop/shop-promotion/shop-promotions/shop-promotions.component';
+import { ShopPromotionCreateComponent } from './components/shop/shop-promotion/shop-promotion-create/shop-promotion-create.component';
+import { SellerCreateRequestDialogComponent } from './components/seller/seller-create-request-dialog/seller-create-request-dialog.component';
+import { ShopPromotionInfoComponent } from './components/shop/shop-promotion/shop-promotion-info/shop-promotion-info.component';
+import { ShopPromotionEditComponent } from './components/shop/shop-promotion/shop-promotion-edit/shop-promotion-edit.component';
 @NgModule({
   declarations: [
     MainTillComponent,
@@ -142,6 +148,12 @@ import { ShopProductsComponent } from './components/shop/shop-product/shop-produ
     ProductAttributesComponent,
     ProductAttributeCreateComponent,
     ProductAttributeInfoComponent,
+    ProductAttributeEditComponent,
+    ShopPromotionsComponent,
+    ShopPromotionCreateComponent,
+    ShopLeftSelectComponent,
+    ShopPromotionInfoComponent,
+    ShopPromotionEditComponent,
   ],
   imports: [
     CommonModule,
@@ -224,6 +236,12 @@ import { ShopProductsComponent } from './components/shop/shop-product/shop-produ
     ShopProductEditComponent,
     ProductAttributeCreateComponent,
     ProductAttributeInfoComponent,
+    ProductAttributeEditComponent,
+    ShopPromotionCreateComponent,
+    ShopLeftSelectComponent,
+    ShopPromotionInfoComponent,
+    ShopProductEditComponent,
+    ShopPromotionEditComponent
   ],
 })
 export class TillModule {}

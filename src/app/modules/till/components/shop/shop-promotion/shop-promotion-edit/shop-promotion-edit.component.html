@@ -1,0 +1,104 @@
+<form [formGroup]="form" (ngSubmit)="edit()" >
+  <h1 mat-dialog-title>Создать новую акцию</h1>
+  <div mat-dialog-content>
+    <div fxLayout="column">
+      <div fxLayout="row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Назначение акции</mat-label>
+          <mat-select formControlName="purposeType">
+            <mat-option [value]="PurposeType.Provider">
+              {{PurposeTypeDisplay[PurposeType.Provider]}}
+            </mat-option>
+            <mat-option [value]="PurposeType.Shop">
+              {{PurposeTypeDisplay[PurposeType.Shop]}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width ml-10">
+          <mat-label>Условие отключения</mat-label>
+          <mat-select formControlName="activeCondition">
+            <mat-option [value]="ActiveCondition.Date">
+              {{ActiveConditionDisaplay[ActiveCondition.Date]}}
+            </mat-option>
+            <mat-option [value]="ActiveCondition.SoldCount">
+              {{ActiveConditionDisaplay[ActiveCondition.SoldCount]}}
+            </mat-option>
+            <mat-option [value]="ActiveCondition.Manual">
+              {{ActiveConditionDisaplay[ActiveCondition.Manual]}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div [ngSwitch]="activeCondition.value">
+        <div *ngSwitchCase="ActiveCondition.Date">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Активен до даты</mat-label>
+            <input matInput formControlName="activeDate" type="datetime-local">
+          </mat-form-field>
+        </div>
+        <div *ngSwitchCase="ActiveCondition.SoldCount">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Активен до проданного товара</mat-label>
+            <input matInput formControlName="activeCount" type="number" min="0">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="mb-10">
+        <div>
+          <p>Выбранный отстаток: {{productLeft.value?.product?.name|absent}}</p>
+        </div>
+        <div>
+          <button mat-raised-button (click)="selectProductLeft()" type="button">Выбрать</button>
+        </div>
+      </div>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Тип акции</mat-label>
+        <mat-select formControlName="promotionType">
+          <mat-option [value]="PromotionType.Cross">
+            {{PromotionTypeDisplay[PromotionType.Cross]}}
+          </mat-option>
+          <mat-option [value]="PromotionType.N">
+            {{PromotionTypeDisplay[PromotionType.N]}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div [ngSwitch]="promotionType.value">
+        <div *ngSwitchCase="PromotionType.Cross">
+          <div fxLayout="row" fxLayoutAlign="space-between center" class="mb-10">
+            <div>
+              <p>Выбранный отстаток: {{crossPromotionProductLeft.value?.product?.name|absent}}</p>
+            </div>
+            <div>
+              <button mat-raised-button (click)="selectCrossProductLeft()" type="button">Выбрать</button>
+            </div>
+          </div>
+          <div fxLayout="row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Кол-во товара </mat-label>
+              <input matInput formControlName="crossPromotionSellCount" type="number" min="0">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width ml-10">
+              <mat-label>Кол-во доп товара</mat-label>
+              <input matInput formControlName="crossPromotionCrossCount" type="number" min="0">
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngSwitchCase="PromotionType.N" fxLayout="row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Кол-во товара </mat-label>
+            <input matInput formControlName="nPromotionSellCount" type="number" min="0">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width ml-10">
+            <mat-label>Кол-во доп товара</mat-label>
+            <input matInput formControlName="nPromotionNCount" type="number" min="0">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Закрыть</button>
+    <button mat-button [disabled]="form.invalid" type="submit">Создать</button>
+  </div>
+</form>

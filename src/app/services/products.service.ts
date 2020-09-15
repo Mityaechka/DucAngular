@@ -37,6 +37,12 @@ export class ProductsService {
       data
     );
   }
+  async editeAttribute(id: number, data: { name: string }) {
+    return await this.http.post<ProductAttribute>(
+      `product/attributes/${id}/edit`,
+      data
+    );
+  }
   async productArriving(data: {
     productId: number;
     count: number;
