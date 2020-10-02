@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="createGroup()" >
+<h1 mat-dialog-title>Создание новой группы магазинов</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Название группы</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Магазины</mat-label>
+    <mat-select formControlName="list" [multiple]="true" >
+      <mat-option>
+        <ngx-mat-select-search placeholderLabel="Поиск магазина ..." [formControl]="filterControl" ></ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let shop of filteredShops|async " [value]="shop.id">
+        {{shop.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button [disabled]="form.invalid" type="submit">Создать</button>
+</div>
+
+</form>

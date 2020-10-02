@@ -1,5 +1,4 @@
-<app-table [loadData]="loadData.bind(this)"
-  [columns]="['ownerShop','saleFormType','currentBalance','paid','consigmentDate','implementSum','action']">
+<app-table [loadData]="loadData.bind(this)">
   <ng-container matColumnDef="ownerShop">
     <th mat-header-cell *matHeaderCellDef>Поставщик</th>
     <td mat-cell *matCellDef="let element"> {{element.ownerShop?.name|absent}}</td>

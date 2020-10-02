@@ -17,10 +17,10 @@ export class ProductsService {
     return await this.http.get<Product>(`product/${id}`);
   }
   async createProduct(data: FormData) {
-    return await this.http.post(`product/add`, data);
+    return await this.http.post(`product/add`, data, { isJson: false });
   }
   async editProduct(id: number, data: FormData) {
-    return await this.http.post(`product/${id}/edit`, data);
+    return await this.http.post(`product/${id}/edit`, data, { isJson: false });
   }
   async getAttributes() {
     return await this.http.post<List<ProductAttribute>>(
@@ -46,8 +46,7 @@ export class ProductsService {
   async productArriving(data: {
     productId: number;
     count: number;
-    barcode: string;
-    price: number;
+    markup: number;
   }) {
     return await this.http.post(`product/arriving`, data);
   }

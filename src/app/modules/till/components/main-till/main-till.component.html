@@ -1,95 +1,47 @@
 <mat-drawer-container class="full-page">
   <mat-drawer #drawer class="example-sidenav" mode="side" opened="true">
     <mat-list>
-      <mat-list-item>
-        <p>Остатки</p>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/shop/lefts/sell">Продажа товаров</a>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/shop/lefts">Остатки продуктов</a>
-      </mat-list-item>
-      <mat-list-item>
-        <p>Заказы</p>
-      </mat-list-item>
-      <mat-list-item> <a class="nav" mat-button color="primary"
-          routerLink="/till/provider/requests">Поставщика</a>
-      </mat-list-item>
-      <mat-list-item> <a class="nav" mat-button color="primary" routerLink="/till/seller/requests">Магазина</a>
-      </mat-list-item>
-      <mat-list-item> <a class="nav" mat-button color="primary" routerLink="/till/logistic/requests">Логиста</a>
-      </mat-list-item>
-      <mat-list-item>
-        <p>Продукты</p>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/shop/products">
-          Эксклюзивные продукты
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/shop/attributes">
-          Эксклюзивные атрибуты
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <p>Магазин</p>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/shop/about">
-          Информация
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/shop/casher-places">
-          Кассы
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/shop/staff">
-          Сотрудники
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/shop/departaments">
-          Отделы
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/shop/promotions">
-          Акции
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <p>Специальные условия</p>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/special-terms/sale-forms">Формы продажи и взаиморасчетов</a>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/shop/products">Прямые скидки</a>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="nav" mat-button color="primary" routerLink="/till/shop/products">Ретро бонусы</a>
-      </mat-list-item>
-    </mat-list>
+      <app-nav-title title="Остатки"></app-nav-title>
+      <app-nav title="Продажа товаров" path="/till/shop/lefts/sell"></app-nav>
+      <app-nav title="Остатки продуктов" path="/till/shop/lefts"></app-nav>
 
-    <mat-list-item>
-      <p>Финансы</p>
-    </mat-list-item>
-    <mat-list-item>
-      <a class="nav" mat-button color="primary" routerLink="/till/cash/cash-periods/current">Касса</a>
-    </mat-list-item>
-    <mat-list-item>
-      <a class="nav" mat-button color="primary" routerLink="/till/cash/cash-periods">Периоды расчета</a>
-    </mat-list-item>
-    <mat-list-item>
-      <a class="nav" mat-button color="primary" routerLink="/till/cash/money-transfers">Фин. обязательства</a>
-    </mat-list-item>
-    <mat-list-item>
-      <a class="nav" mat-button color="primary" routerLink="/till/cash/supply-debts">Долги по поставкам</a>
-    </mat-list-item>
+      <app-nav-title title="Заказы"></app-nav-title>
+
+      <app-nav title="Поставщик" path="/till/provider/requests"></app-nav>
+      <app-nav title="Магазин" path="/till/seller/requests"></app-nav>
+      <app-nav title="Логист" path="/till/logistic/requests"></app-nav>
+
+      <app-nav-title title="Продукты"></app-nav-title>
+
+      <app-nav title="Эксклюзивные продукты" path="/till/shop/products"></app-nav>
+      <app-nav title="Эксклюзивные атрибуты" path="/till/shop/attributes"></app-nav>
+
+      <app-nav-title title="Магазин"></app-nav-title>
+
+      <app-nav title="Информация" path="/till/shop/about"></app-nav>
+      <app-nav title="Кассы" path="/till/shop/casher-places"></app-nav>
+      <app-nav title="Сотрудники" path="/till/shop/staff"></app-nav>
+      <app-nav title="Отделы" path="/till/shop/departaments"></app-nav>
+      <app-nav title="Акции" path="/till/shop/promotions"></app-nav>
+
+      <app-nav-title title="Специальные условия"></app-nav-title>
+
+      <app-nav title="Формы продажи и взаиморасчетов" path="/till/special-terms/sale-forms"></app-nav>
+      <app-nav title="Прямые скидки" path="/till/shop/products"></app-nav>
+      <app-nav title="Ретро бонусы" path="/till/shop/products"></app-nav>
+
+      <app-nav-title title="Финансы"></app-nav-title>
+
+      <app-nav title="Касса" path="/till/cash/cash-periods/current"></app-nav>
+      <app-nav title="Периоды расчета" path="till/cash/cash-periods"></app-nav>
+      <app-nav title="Фин. обязательства" path="/till/cash/money-transfers"></app-nav>
+      <app-nav title="Долги по поставкам" path="/till/cash/supply-debts"></app-nav>
+
+      <app-nav-title title="Группы"></app-nav-title>
+
+      <app-nav title="Магазины" path="/till/groups/shops"></app-nav>
+      <app-nav title="Продукты" path="/till/groups/products"></app-nav>
+    </mat-list>
   </mat-drawer>
 
   <div class="example-sidenav-content">
@@ -97,9 +49,12 @@
       <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>DUK</span>
+      <span>{{title}}</span>
 
       <span class="spacer"></span>
+      <div class="mr-10">
+        <a (click)="selectShopclick()">Текущий магазин: {{currentShop?currentShop.name:'Отсуствует'}}</a>
+      </div>
       <div *ngIf="user">
         <span>{{user.fio}}</span>
       </div>

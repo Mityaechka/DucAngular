@@ -1,0 +1,16 @@
+<app-table [loadData]="loadData.bind(this)" (rowClick)="showGroup($event)" >
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Название </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.name}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="count">
+    <th mat-header-cell *matHeaderCellDef> Кол-во элементов </th>
+    <td mat-cell *matCellDef="let element">
+      <p [matTooltip]="element.list|listToString:'name'" matTooltipPosition="before">{{element.list.length}}</p>
+    </td>
+  </ng-container>
+</app-table>
+<button mat-raised-button (click)="createGroup()">Создать новую группу</button>
+

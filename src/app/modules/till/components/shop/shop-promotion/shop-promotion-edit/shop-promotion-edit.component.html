@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="edit()" >
-  <h1 mat-dialog-title>Создать новую акцию</h1>
+  <h1 mat-dialog-title>редактирование акции</h1>
   <div mat-dialog-content>
     <div fxLayout="column">
       <div fxLayout="row">
@@ -99,6 +99,6 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Закрыть</button>
-    <button mat-button [disabled]="form.invalid" type="submit">Создать</button>
+    <button mat-button [disabled]="form.invalid" type="submit">Сохранить</button>
   </div>
 </form>

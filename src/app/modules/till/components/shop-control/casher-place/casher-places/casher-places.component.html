@@ -1,7 +1,7 @@
 <div class="m-10">
   <button mat-raised-button (click)="createCasherPlace()">Создать новую</button>
 </div>
-<app-table [loadData]="loadData.bind(this)" [columns]="['name','status','user','active']" (rowClick)="showCasherPlace($event)">
+<app-table [loadData]="loadData.bind(this)"  (rowClick)="showCasherPlace($event)">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Название </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>

@@ -1,32 +1,22 @@
 <form [formGroup]="form" mat-dialog-content (ngSubmit)="saveSaleForm()">
   <h1 mat-dialog-title>Редактирование формы продажи</h1>
 
-  <div fxLayout="row">
-    <div fxFlex>
-      <mat-form-field appearance="outline">
-        <mat-label>Магазин</mat-label>
-        <mat-select formControlName="shopId">
-          <mat-option value="-1">
-            Все
-          </mat-option>
-          <mat-option *ngFor="let shop of shops" value="{{shop.id}}">
-            {{shop.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+  <div fxLayout="column">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="mb-10">
+      <div>
+        <mat-label [matTooltip]="selectedShops?.value|listToString:'name'">Магазины: {{!selectedShops.value||!selectedShops.value.length?'Все':selectedShops.value.length}}</mat-label>
+      </div>
+      <div>
+        <button mat-raised-button (click)="selectShops()" type="button">Выбрать магазины</button>
+      </div>
     </div>
-    <div fxFlex>
-      <mat-form-field appearance="outline">
-        <mat-label>Продукт</mat-label>
-        <mat-select formControlName="productId">
-          <mat-option value="-1">
-            Все
-          </mat-option>
-          <mat-option *ngFor="let product of products" value="{{product.id}}">
-            {{product.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+      <div>
+        <mat-label [matTooltip]="selectedProducts?.value|listToString:'name'">Продукты: {{!selectedProducts.value||!selectedProducts.value.length?'Все':selectedProducts.value.length}}</mat-label>
+      </div>
+      <div>
+        <button mat-raised-button (click)="selectProducts()" type="button">Выбрать продукты</button>
+      </div>
     </div>
   </div>
   <div fxLayout="column">

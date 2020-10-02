@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Выбор магазинов</h1>
+<div mat-dialog-content>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Магазины">
+      <mat-form-field class="full-width">
+        <mat-label>Магазины</mat-label>
+        <mat-select [formControl]="shopsControl" [multiple]="true"  >
+          <mat-option>
+            <ngx-mat-select-search placeholderLabel="Поиск магазинов..." [formControl]="shopsFilterControl"></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let shop of filteredShopsReplay|async " [value]="shop">
+            {{shop.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-tab>
+    <mat-tab label="Группы">
+      <mat-form-field class="full-width">
+        <mat-label>Группы</mat-label>
+        <mat-select [formControl]="groupsControl" [multiple]="true"  >
+          <mat-option>
+            <ngx-mat-select-search placeholderLabel="Поиск групп..." [formControl]="groupsFilterControl"></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let group of filteredGroupsReplay|async " [value]="group">
+            {{group.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-tab>
+  </mat-tab-group>
+  <div *ngIf="selectedShops&& selectedShops.length;else empty">
+    <p>Выбранные магазины</p>
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let shop of selectedShops" >
+        <p>{{shop.name}}</p>
+      <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <ng-template #empty>
+    <p>Вы еще не выбрали магазины</p>
+  </ng-template>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button  (click)="selectShop()">Выбрать</button>
+</div>

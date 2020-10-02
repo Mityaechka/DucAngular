@@ -16,11 +16,19 @@ import {
 export class NumpadComponent implements OnInit {
   @Output() countEvent = new EventEmitter<number>();
   @Input() count = 0;
-
+  @Input() delta = 0;
+  lastclickTime = new Date();
   constructor() {}
 
   ngOnInit(): void {}
   numberClick(value: number) {
+    if (this.delta !== 0) {
+      const now = new Date();
+      if (now.getTime() - this.lastclickTime.getTime() >= this.delta) {
+        this.count = 0;
+      }
+      this.lastclickTime = now;
+    }
     if (this.count === 0) {
       this.count = value;
     } else {

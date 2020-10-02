@@ -2,7 +2,7 @@ import { PurposeType } from './../enums/purpose-type.enum';
 import { ActiveCondition } from './../enums/active-condition.enum';
 import { ShopType } from './../enums/shop-type.enum';
 import { HttpService } from './http.service';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { List } from '../models/list.model';
 import { Shop } from '../entities/shop.entity';
 import { CashPeriod } from '../entities/cash-period.entity';
@@ -16,9 +16,31 @@ import { PromotionType } from '../enums/promotion-type.enum';
   providedIn: 'root',
 })
 export class ShopsService {
+  private currentShopChange = new EventEmitter<Shop>();
+
   constructor(private http: HttpService) {}
+
+  async selectShop(shopId: number) {
+    const response = await this.http.post(`shop/select`, shopId);
+    this.getCurrentShop().then((x) => {
+      this.currentShopChange.emit(x.result);
+    });
+    return response;
+  }
+  reloadCurrenShop(){
+    this.getCurrentShop().then((x) => {
+      this.currentShopChange.emit(x.result);
+    });
+  }
+  currentShopChangeSubscribe(event: (shop: Shop) => void) {
+    this.currentShopChange.subscribe(event);
+  }
+
   async getShopUsers() {
     return await this.http.get<List<User>>(`shop/users`);
+  }
+  async getCurrentShop() {
+    return await this.http.post<Shop>(`shop`, null);
   }
   async getAllShops() {
     return await this.http.post<List<Shop>>(`shops`, null);
@@ -85,6 +107,12 @@ export class ShopsService {
   }
   async getPromotions() {
     return await this.http.post<List<Promotion>>(`shop/promotions`, null);
+  }
+  async getPromotionsByPurpose(purposeType: PurposeType, productLeft: number) {
+    return await this.http.post<List<Promotion>>(
+      `shop/promotions/purpose?purpose=${purposeType}&productLeft=${productLeft}`,
+      null
+    );
   }
   async getPromotion(id: number) {
     return await this.http.get<Promotion>(`shop/promotions/${id}`);

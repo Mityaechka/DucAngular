@@ -6,16 +6,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class HttpService {
   private path = 'https://localhost:44327/api';
-
+  // private path = 'https://duc.kz/api';
   constructor(private http: HttpClient) {}
-  public get<T>(url: string): Promise<ApiResult<T>> {
+  public get<T>(url: string, c?: new () => T): Promise<ApiResult<T>> {
     const promise = new Promise<ApiResult<T>>((resolve, reject) => {
       const req = this.http
         .get(`${this.path}/${url}`, { withCredentials: true })
         .toPromise();
       req.then(
         (data: any) => {
-          resolve(data);
+          resolve(Object.assign(new ApiResult<T>(), data));
         },
         (error) => {
           resolve(new ApiResult(false, 'Ошибка сервера', null));
@@ -24,24 +24,29 @@ export class HttpService {
     });
     return promise;
   }
-  public post<T>(url: string, content: any): Promise<ApiResult<T>> {
-    let dataContent: any;
+  public post<T>(
+    url: string,
+    content: any,
+    options?: { isJson: boolean }
+  ): Promise<ApiResult<T>> {
+    const o = Object.assign({ isJson: true }, options ?? {});
+    let data;
     let headers = new HttpHeaders();
-
-    if (content instanceof FormData) {
-      dataContent = content;
-    } else {
+    if (o.isJson) {
+      data = JSON.stringify(content);
       headers = headers.append('content-type', 'application/json');
-      dataContent = JSON.stringify(content);
+    } else {
+      data = content;
     }
 
     const promise = new Promise<ApiResult<T>>((resolve, reject) => {
       const req = this.http
-        .post(`${this.path}/${url}`, dataContent, { withCredentials: true, headers })
+        .post(`${this.path}/${url}`, data, { withCredentials: true, headers })
         .toPromise();
       req.then(
+        // tslint:disable-next-line: no-shadowed-variable
         (data: any) => {
-          resolve(data);
+          resolve(Object.assign(new ApiResult<T>(), data));
         },
         (error) => {
           resolve(new ApiResult(false, 'Ошибка сервера', null));
@@ -49,5 +54,38 @@ export class HttpService {
       );
     });
     return promise;
+  }
+
+  public postForm<T>(url: string, content: any): Promise<ApiResult<T>> {
+    const data = this.jsonToFormData(content);
+    return this.post<T>(url, data, { isJson: false });
+  }
+  private buildFormData(formData, data, parentKey?) {
+    if (
+      data &&
+      typeof data === 'object' &&
+      !(data instanceof Date) &&
+      !(data instanceof File)
+    ) {
+      Object.keys(data).forEach((key) => {
+        this.buildFormData(
+          formData,
+          data[key],
+          parentKey ? `${parentKey}[${key}]` : key
+        );
+      });
+    } else {
+      const value = data == null ? '' : data;
+
+      formData.append(parentKey, value);
+    }
+  }
+
+  private jsonToFormData(data) {
+    const formData = new FormData();
+
+    this.buildFormData(formData, data);
+
+    return formData;
   }
 }

@@ -5,7 +5,7 @@ export class ProductLeft {
     public id: number,
     public shop: Shop,
     public product: Product,
-    public myShopPrice: number,
+    public price: number,
     public currentLeft: number
   ) {}
 }

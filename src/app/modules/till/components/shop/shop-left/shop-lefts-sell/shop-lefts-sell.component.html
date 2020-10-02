@@ -1,5 +1,5 @@
 <div class="flex flex-row full-page">
-  <app-table [loadData]="loadData.bind(this)" [columns]="displayedColumns" (rowClick)="sellProductClick($event)" #productLeftsTable
+  <app-table [loadData]="loadData.bind(this)"  (rowClick)="sellProductClick($event)" #productLeftsTable
     class="full-page">
     <ng-container matColumnDef="product">
       <th mat-header-cell *matHeaderCellDef>Продукт</th>

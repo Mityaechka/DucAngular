@@ -1,4 +1,4 @@
-<app-table [loadData]="loadData.bind(this)" [columns]="displayedColumns" (rowClick)="selectRequest($event)">
+<app-table [loadData]="loadData.bind(this)"(rowClick)="selectRequest($event)">
   <ng-container matColumnDef="toShop">
     <th mat-header-cell *matHeaderCellDef> Получатель </th>
     <td mat-cell *matCellDef="let element"> {{element.fromShop.name}} </td>

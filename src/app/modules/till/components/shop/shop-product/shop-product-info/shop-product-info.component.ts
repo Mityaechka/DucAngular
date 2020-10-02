@@ -1,3 +1,4 @@
+import { EnumDisplayCollection } from './../../../../../../enums/enum-display.collection';
 import { ShopProductEditComponent } from './../shop-product-edit/shop-product-edit.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductsService } from 'src/app/services/products.service';
@@ -18,6 +19,7 @@ import { DialogsService } from 'src/app/services/dialogs.service';
   styleUrls: ['./shop-product-info.component.css'],
 })
 export class ShopProductInfoComponent implements OnInit {
+  EnumDisplayCollection = EnumDisplayCollection;
   @Output() edited = new EventEmitter();
   constructor(
     @Inject(MAT_DIALOG_DATA) public product: Product,
@@ -34,7 +36,7 @@ export class ShopProductInfoComponent implements OnInit {
     const response = await this.productsService.getProduct(this.product.id);
     this.dialogs.stopLoading();
     if (response.isSuccess) {
-      this.product = response.result;
+      this.product = Object.assign(new Product(), response.result);
     }
     this.detector.detectChanges();
   }

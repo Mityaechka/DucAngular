@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Информация о группе магазинов "{{shopGroup.name}}"</h1>
+<div mat-dialog-content>
+  <div *ngIf="shopGroup&&shopGroup.list&&shopGroup.list.length!=0;else empty">
+    <p>Магазины групп</p>
+    <mat-list role="list">
+      <mat-list-item role="listitem" *ngFor="let shop of shopGroup.list">
+        <p>
+          {{shop.name}}
+        </p>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <ng-template #empty>
+    <p>Магазины отсуствуют</p>
+  </ng-template>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+</div>

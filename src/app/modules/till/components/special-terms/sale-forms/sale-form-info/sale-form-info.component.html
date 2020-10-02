@@ -3,10 +3,10 @@
   <div fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div>
-        <p>Магазин: {{saleForm.shopDisplay()}}</p>
+        <p [matTooltip]="saleForm?.shops|listToString:'name'">Магазин: {{!saleForm.shops?'Все':saleForm.shops.length}}</p>
       </div>
       <div>
-        <p>Продукт: {{saleForm.productDisplay()}}</p>
+        <p [matTooltip]="saleForm?.products|listToString:'name'">Продукт: {{!saleForm.products?'Все':saleForm.products.length}}</p>
       </div>
     </div>
   </div>

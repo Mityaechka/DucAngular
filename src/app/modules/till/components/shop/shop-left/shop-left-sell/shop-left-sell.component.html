@@ -1,18 +1,20 @@
-<h1 mat-dialog-title>Продукт "{{productLeft.product.name}}"</h1>
-<div mat-dialog-content>
-  <div class="flex   full-page flex-row">
-    <div>
-      <p>{{productLeft.product.name}}</p>
-      <p>Цена за 1шт.:{{productLeft.myShopPrice}}</p>
-      <p>Текущее количество: {{count}}</p>
-      <p>Итого: {{count*productLeft.myShopPrice}}</p>
-    </div>
-    <div>
-      <app-numpad  (countEvent)="getCount($event)"></app-numpad>
+<form (submit)="sellProductClick()">
+  <h1 mat-dialog-title>Продукт "{{productLeft.product.name}}"</h1>
+  <div mat-dialog-content>
+    <div fxLayout="row">
+      <div fxFlex="50">
+        <p>{{productLeft.product.name}}</p>
+        <p>Цена за 1шт.:{{productLeft.price}}</p>
+        <p>Текущее количество: {{form.controls.count.value}}</p>
+        <p>Итого: {{form.controls.count.value*productLeft.price}}</p>
+      </div>
+      <div fxFlex="50">
+        <app-numpad (countEvent)="getCount($event)" [delta]="1000"></app-numpad>
+      </div>
     </div>
   </div>
-</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Закрыть</button>
-  <button mat-raised-button color="warn" [disabled]="!canSell" (click)="sellProductClick()" >Продать</button>
-</div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Закрыть</button>
+    <button mat-raised-button color="warn" [disabled]="form.invalid">Продать</button>
+  </div>
+</form>

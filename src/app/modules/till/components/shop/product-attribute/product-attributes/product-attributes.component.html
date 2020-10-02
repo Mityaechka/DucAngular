@@ -2,7 +2,7 @@
   <button mat-raised-button (click)="createAttribute()">Создать арибут</button>
 </div>
 
-<app-table [loadData]="loadData.bind(this)" [columns]="['name','isShop']" (rowClick)="attributeInfo($event)">
+<app-table [loadData]="loadData.bind(this)" (rowClick)="attributeInfo($event)">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Продукт</th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>

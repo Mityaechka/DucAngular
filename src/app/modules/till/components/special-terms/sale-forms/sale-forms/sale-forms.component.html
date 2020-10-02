@@ -1,27 +1,17 @@
 <div class="m-10">
   <button mat-raised-button color="primary" (click)="createSaleForm()">Создать новую форму продажи</button>
 </div>
-<app-table [loadData]="loadData.bind(this)" [columns]="displayedColumns" (rowClick)="saleFormRowClick($event)">
+<app-table [loadData]="loadData.bind(this)" (rowClick)="saleFormRowClick($event)">
   <ng-container matColumnDef="shop">
     <th mat-header-cell *matHeaderCellDef> Магазин </th>
     <td mat-cell *matCellDef="let element">
-      <ng-container *ngIf="element.shopSelectionForm==1">
-        {{element.shop.name}}
-      </ng-container>
-      <ng-container *ngIf="element.shopSelectionForm==0">
-        Все
-      </ng-container>
+      <p [matTooltip]="element.shops|listToString:'name'">{{!element.shops?'Все':element.shops.length}}</p>
     </td>
   </ng-container>
   <ng-container matColumnDef="product">
     <th mat-header-cell *matHeaderCellDef> Товар </th>
     <td mat-cell *matCellDef="let element">
-      <ng-container *ngIf="element.productSelectionForm==1">
-        {{element.product.name}}
-      </ng-container>
-      <ng-container *ngIf="element.productSelectionForm==0">
-        Все
-      </ng-container>
+      <p [matTooltip]="element.products|listToString:'name'">{{!element.products?'Все':element.products.length}}</p>
     </td>
   </ng-container>
   <ng-container matColumnDef="canConsignment">

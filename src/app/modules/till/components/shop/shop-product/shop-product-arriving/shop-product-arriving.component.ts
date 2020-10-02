@@ -21,15 +21,20 @@ export class ShopProductArrivingComponent implements OnInit {
   @Output() arrived = new EventEmitter();
   form = new FormGroup({
     productId: new FormControl(-1),
-    count: new FormControl(0, [Validators.required]),
-    price: new FormControl(0, [Validators.required]),
-    barcode: new FormControl(''),
+    count: new FormControl('', [Validators.required, Validators.min(0)]),
+    markup: new FormControl(0, [Validators.required]),
   });
   get count() {
     return this.form.controls.count.value;
   }
   get total() {
     return this.count * this.product.price;
+  }
+  get retailPrice() {
+    return (
+      this.product.price +
+      this.product.price * (this.form.controls.markup.value / 100)
+    );
   }
   constructor(
     @Inject(MAT_DIALOG_DATA) public product: Product,
@@ -43,11 +48,11 @@ export class ShopProductArrivingComponent implements OnInit {
     const response = await this.productsService.getProduct(this.product.id);
     this.dialogs.stopLoading();
     if (response.isSuccess) {
-      this.product = response.result;
+      this.product = Product.Assign(response.result);
     }
     this.form.patchValue({
-      name: this.product.name,
-      price: this.product.price,
+      //price: this.product.retailPrice,
+      markup: this.product.markup,
       productId: this.product.id,
     });
     this.detector.detectChanges();

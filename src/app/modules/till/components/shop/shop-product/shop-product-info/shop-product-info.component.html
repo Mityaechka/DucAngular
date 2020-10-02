@@ -9,8 +9,22 @@
         <div>
           <p>Описание: {{product.description}}</p>
         </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center" >
+          <div>
+            <p>Закупочная цена: {{product.price}} тг.</p>
+          </div>
+          <div>
+            <p>Наценка: {{product.markup}} %</p>
+          </div>
+        </div>
         <div>
-          <p>Цена: {{product.price}} тг.</p>
+          <p>Цена продажи: {{product.retailPrice}} тг.</p>
+        </div>
+        <div>
+          <p>Мера измерения: {{EnumDisplayCollection.MeasureDisplay[product.measure]}}</p>
+        </div>
+        <div>
+          <p>Шрих-код: {{product.barcode}}</p>
         </div>
         <div>
           <p>Тип продукта: {{product.productType.name}}</p>
@@ -18,7 +32,7 @@
       </div>
     </mat-tab>
     <mat-tab label="Атрибуты">
-      <app-table [loadData]="loadParametrs.bind(this)" [columns]="['attribute','value']">
+      <app-table [loadData]="loadParametrs.bind(this)">
         <ng-container matColumnDef="attribute">
           <th mat-header-cell *matHeaderCellDef> Атрибут </th>
           <td mat-cell *matCellDef="let element"> {{element.productAttribute.name}} </td>

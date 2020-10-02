@@ -1,6 +1,7 @@
+import { ShopsSelectComponent } from './../../../shop/shops-select/shops-select.component';
 import { ProductsService } from './../../../../../../services/products.service';
 import { DialogsService } from 'src/app/services/dialogs.service';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormArray } from '@angular/forms';
 import {
   Component,
   OnInit,
@@ -12,6 +13,7 @@ import { SaleFormsService } from 'src/app/services/sale-forms.service';
 import { ShopsService } from 'src/app/services/shops.service';
 import { Shop } from 'src/app/entities/shop.entity';
 import { Product } from 'src/app/entities/product';
+import { ShopProductSelectComponent } from '../../../shop/shop-product/shop-product-select/shop-product-select.component';
 
 @Component({
   templateUrl: './sale-form-create.component.html',
@@ -20,6 +22,7 @@ import { Product } from 'src/app/entities/product';
 export class SaleFormCreateComponent implements OnInit {
   @Output() saleFormCreated = new EventEmitter<number>();
   shops: Shop[];
+
   products: Product[];
   form: FormGroup;
   get canConsigment() {
@@ -35,6 +38,20 @@ export class SaleFormCreateComponent implements OnInit {
   get maxTermConsigment() {
     return this.form.controls.maxTermConsigment as FormControl;
   }
+  get selectedShops() {
+    return this.form.controls.shopsValue as FormArray;
+  }
+  get selectedProducts() {
+    return this.form.controls.productsValue as FormArray;
+  }
+  get otherShops() {
+    let other = '';
+    if (this.selectedShops.value.length > 1) {
+      this.selectedShops.value.slice(1).forEach((x) => (other += `\n${x.name}`));
+    }
+    return other;
+  }
+
   constructor(
     private dialogs: DialogsService,
     private saleFormsService: SaleFormsService,
@@ -45,9 +62,11 @@ export class SaleFormCreateComponent implements OnInit {
 
   async ngOnInit() {
     this.form = new FormGroup({
-      productId: new FormControl(null, [Validators.required]),
-      shopId: new FormControl(null, [Validators.required]),
-      canConsigment: new FormControl(),
+      shops: new FormControl(),
+      shopsValue: new FormControl(),
+      products: new FormControl(),
+      productsValue: new FormControl(),
+      canConsigment: new FormControl(false),
       canImplement: new FormControl(false),
       maxTermConsigment: new FormControl(0, [
         Validators.required,
@@ -83,5 +102,31 @@ export class SaleFormCreateComponent implements OnInit {
       this.dialogs.pushAlert(respose.errorMessage);
     }
     this.detector.markForCheck();
+  }
+  selectShops() {
+    this.dialogs.push({
+      component: ShopsSelectComponent,
+      onInstance: (i) => {
+        i.selected.subscribe((values: Shop[]) => {
+          this.form.patchValue({
+            shops: values.map((x) => x.id),
+            shopsValue: values,
+          });
+        });
+      },
+    });
+  }
+  selectProducts() {
+    this.dialogs.push({
+      component: ShopProductSelectComponent,
+      onInstance: (i) => {
+        i.selected.subscribe((values: Product[]) => {
+          this.form.patchValue({
+            products: values?.map((x) => x.id),
+            productsValue: values,
+          });
+        });
+      },
+    });
   }
 }

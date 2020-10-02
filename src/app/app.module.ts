@@ -34,13 +34,17 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { ReceiptEditorModule } from './modules/receipt-editor/receipt-editor.module';
+import { MatTreeModule } from '@angular/material/tree';
 @NgModule({
   declarations: [
     AppComponent,
     LoadingComponent,
     AlertComponent,
     IntroComponent,
-    ConfirmComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +76,11 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     PipesModule,
     FlexLayoutModule,
     MatStepperModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    NgxMatSelectSearchModule,
+    MatTooltipModule,
+    ReceiptEditorModule,
+    MatTreeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

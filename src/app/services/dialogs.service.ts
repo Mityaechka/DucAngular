@@ -18,6 +18,7 @@ export class DialogsService {
     const data = Object.assign(dialogData.config ?? {}, {
       disableClose: false,
       data: dialogData.data,
+      width: '500px',
     });
     const ref = this.dialog.open(dialogData.component, data);
     if (dialogData.onInstance) {
@@ -29,6 +30,12 @@ export class DialogsService {
   pop(): void {
     const ref = this.dialogs.pop();
     ref.close();
+  }
+  popAll(): void {
+    while (this.dialogs.length > 0) {
+      const ref = this.dialogs.pop();
+      ref.close();
+    }
   }
   pushAlert(message: string, title = 'Внимание!'): void {
     this.push({ component: AlertComponent, data: { message, title } });

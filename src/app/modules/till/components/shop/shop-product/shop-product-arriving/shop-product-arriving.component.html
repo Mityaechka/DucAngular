@@ -7,17 +7,19 @@
         <input matInput type="number" min="0" formControlName="count">
       </mat-form-field>
       <div>
-        <p>Цена за шт.: {{product.price}} тг.</p>
-        <p>Всего.: {{total}} тг.</p>
+        <p>Закупочная цена: {{product.price}} тг.</p>
+        <mat-form-field appearance="outline">
+          <mat-label>Наценка</mat-label>
+          <input matInput type="number" min="0" formControlName="markup">
+          <p matSuffix>%</p>
+        </mat-form-field>
+        <p>Цена продажи: {{retailPrice}} тг.</p>
+        <p>Всего: {{total}} тг.</p>
       </div>
-      <mat-form-field appearance="outline">
+      <!-- <mat-form-field appearance="outline">
         <mat-label>Отпускная цена</mat-label>
         <input matInput formControlName="price">
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Штрих-код</mat-label>
-        <input matInput formControlName="barcode">
-      </mat-form-field>
+      </mat-form-field> -->
     </div>
   </div>
   <div mat-dialog-actions>

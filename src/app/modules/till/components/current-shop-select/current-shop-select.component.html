@@ -1,0 +1,17 @@
+<form [formGroup]="form" (submit)="select()">
+  <h1 mat-dialog-title>Изменнение выбранного магазина</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Магазин</mat-label>
+      <mat-select formControlName="shop">
+        <mat-option *ngFor="let shop of shops" [value]="shop.id">
+          {{shop.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Закрыть</button>
+    <button mat-button  [disabled]="form.invalid">Выбрать</button>
+  </div>
+</form>

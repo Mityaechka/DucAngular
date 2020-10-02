@@ -1,3 +1,7 @@
+import {
+  EnumCollection,
+  EnumDisplayCollection,
+} from './../../../../../../enums/enum-display.collection';
 
 import { Product } from 'src/app/entities/product';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -21,6 +25,8 @@ import { ProductAttributeSelectComponent } from '../../product-attribute/product
   styleUrls: ['./shop-product-edit.component.css'],
 })
 export class ShopProductEditComponent implements OnInit {
+  EnumCollection = EnumCollection;
+  EnumDisplayCollection = EnumDisplayCollection;
   @Output() edited = new EventEmitter();
   get productParametrs() {
     console.log(this.form);
@@ -29,7 +35,12 @@ export class ShopProductEditComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required]),
+    price: new FormControl('', [Validators.required, Validators.min(0)]),
+    //retailPrice: new FormControl('', [Validators.required, Validators.min(0)]),
+    markup: new FormControl('', [Validators.required, Validators.min(0)]),
+    measure: new FormControl(0, [Validators.required]),
+    barcode: new FormControl('', [Validators.required]),
+    productTypeId: new FormControl(undefined, [Validators.required]),
     photo: new FormControl(''),
     productParametrs: new FormArray([]),
   });
@@ -50,11 +61,21 @@ export class ShopProductEditComponent implements OnInit {
     const parametrsResponse = await this.productService.getProductParametrs(
       this.product.id
     );
-    this.form.patchValue({
-      name: productResponse.result.name,
-      description: productResponse.result.description,
-      price: productResponse.result.price,
-    });
+
+    debugger;
+    this.form.patchValue(
+      {
+        name: productResponse.result.name,
+        description: productResponse.result.description,
+        price: productResponse.result.price,
+        //retailPrice: productResponse.result.retailPrice,
+        markup: productResponse.result.markup,
+        measure: productResponse.result.measure,
+        barcode: productResponse.result.barcode,
+        productTypeId: productResponse.result.productType.id,
+      },
+      { emitEvent: false, onlySelf: true }
+    );
     parametrsResponse.result.list.forEach((x) => {
       this.productParametrs.push(
         new FormGroup({
@@ -100,8 +121,17 @@ export class ShopProductEditComponent implements OnInit {
     data.append('name', this.form.controls.name.value);
     data.append('description', this.form.controls.description.value);
     data.append('price', this.form.controls.price.value);
-    if (this.form.controls.photo.value&&this.form.controls.photo.value.files?.length!==0) {
-      data.append('photo', this.form.controls.photo?.value?.files[0]);
+    data.append('productTypeId', this.form.controls.productTypeId.value);
+
+    //data.append('retailPrice', this.form.controls.retailPrice.value);
+    data.append('markup', this.form.controls.markup.value);
+    data.append('measure', this.form.controls.measure.value);
+    data.append('barcode', this.form.controls.barcode.value);
+    if (
+      this.form.controls.photo.value.files &&
+      this.form.controls.photo.value.files.length === 1
+    ) {
+      data.append('photo', this.form.controls.photo.value.files[0]);
     }
     data.append(
       'parametrsRaw',

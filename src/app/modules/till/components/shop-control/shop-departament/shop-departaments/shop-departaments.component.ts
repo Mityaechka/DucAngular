@@ -32,4 +32,14 @@ export class ShopDepartamentsComponent implements OnInit {
       },
     });
   }
+  async selectDepartament(shopId: number) {
+    this.dialogs.startLoading();
+    const response = await this.shopsService.selectShop(shopId);
+    this.dialogs.stopLoading();
+    if (response.isSuccess) {
+      location.reload();
+    } else {
+      this.dialogs.pushAlert(response.errorMessage);
+    }
+  }
 }

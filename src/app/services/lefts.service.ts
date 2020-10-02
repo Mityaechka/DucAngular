@@ -15,6 +15,9 @@ export class LeftsService {
   async getProductsLeft(id: number) {
     return await this.http.get<ProductLeft>(`product/lefts/${id}`);
   }
+  async getProductsLeftByBarcode(barcode: string) {
+    return await this.http.get<ProductLeft>(`product/lefts/barcode?barcode=${barcode}`);
+  }
   async getProviderProductsLefts() {
     return await this.http.post<List<ProductLeft>>(
       `product/lefts/provider`,

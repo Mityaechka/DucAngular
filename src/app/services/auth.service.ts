@@ -2,6 +2,7 @@ import { User } from './../entities/user.entity';
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpService } from './http.service';
 import { LoginViewModel } from './../view-models/login.view-model';
+import { Shop } from '../entities/shop.entity';
 
 
 @Injectable({
@@ -27,5 +28,8 @@ export class AuthService {
   }
   async getUser() {
     return await this.http.get<User>('auth/user');
+  }
+  async getUserShops() {
+    return await this.http.get<Shop[]>('auth/user/shops');
   }
 }

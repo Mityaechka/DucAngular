@@ -1,7 +1,7 @@
 <div class="m-10">
   <button mat-raised-button (click)="createDepartament()">Создать новый отдел</button>
 </div>
-<app-table [loadData]="loadData.bind(this)" [columns]="['name','type']">
+<app-table [loadData]="loadData.bind(this)" >
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Название </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
@@ -10,5 +10,11 @@
   <ng-container matColumnDef="type">
     <th mat-header-cell *matHeaderCellDef> Тип </th>
     <td mat-cell *matCellDef="let element"> {{ShopTypeDisplay[element.shopType]}} </td>
+  </ng-container>
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button (click)="selectDepartament(element.id)">Выбрать</button>
+    </td>
   </ng-container>
 </app-table>

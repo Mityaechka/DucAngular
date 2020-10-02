@@ -1,3 +1,5 @@
+import { TillNotFoundComponent } from './components/till-not-found/till-not-found.component';
+import { TillWelcomeComponent } from './components/till-welcome/till-welcome.component';
 import { ShopPromotionsComponent } from './components/shop/shop-promotion/shop-promotions/shop-promotions.component';
 import { ShopAboutComponent } from './components/shop-control/shop-about/shop-about.component';
 import { ShopDepartamentsComponent } from './components/shop-control/shop-departament/shop-departaments/shop-departaments.component';
@@ -18,8 +20,11 @@ import { ProductAttributesComponent } from './components/shop/product-attribute/
 import { ShopLeftsSellComponent } from './components/shop/shop-left/shop-lefts-sell/shop-lefts-sell.component';
 import { ShopLeftsComponent } from './components/shop/shop-left/shop-lefts/shop-lefts.component';
 import { ShopProductsComponent } from './components/shop/shop-product/shop-products/shop-products.component';
+import { ShopGroupsComponent } from './components/groups/shops/shop-groups/shop-groups.component';
+import { ProductGroupsComponent } from './components/groups/products/product-groups/product-groups.component';
 
 export const tillRoutes: Routes = [
+  { path: '', component: TillWelcomeComponent },
   { path: 'provider/requests', component: ProviderRequestsComponent },
   { path: 'seller/requests', component: SellerRequestsComponent },
   { path: 'seller/requests/create', component: SellerCreateRequestComponent },
@@ -54,6 +59,20 @@ export const tillRoutes: Routes = [
       { path: 'promotions', component: ShopPromotionsComponent },
     ],
   },
+  {
+    path: 'groups',
+    children: [
+      {
+        path: 'shops',
+        children: [{ path: '', component: ShopGroupsComponent }],
+      },
+      {
+        path: 'products',
+        children: [{ path: '', component: ProductGroupsComponent }],
+      },
+    ],
+  },
+  { path:'**', component: TillNotFoundComponent },
 ];
 
 @NgModule({

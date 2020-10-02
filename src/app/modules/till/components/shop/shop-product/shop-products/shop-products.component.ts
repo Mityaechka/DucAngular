@@ -1,7 +1,8 @@
+import { TableComponent } from './../../../../../table/table/table.component';
 
 import { ShopProductInfoComponent } from './../shop-product-info/shop-product-info.component';
 import { ShopProductCreateComponent } from './../shop-product-create/shop-product-create.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DialogsService } from 'src/app/services/dialogs.service';
 import { ShopProductArrivingComponent } from '../shop-product-arriving/shop-product-arriving.component';
 import { Product } from 'src/app/entities/product';
@@ -14,6 +15,9 @@ import { TableService } from 'src/app/services/table.service';
   styleUrls: ['./shop-products.component.css'],
 })
 export class ShopProductsComponent implements OnInit {
+  Product = Product;
+  @ViewChild('table')
+  productsTable: TableComponent<Product>;
   displayedColumns: string[] = ['product', 'type', 'price', 'action'];
   constructor(
     private productsService: ProductsService,
@@ -28,25 +32,26 @@ export class ShopProductsComponent implements OnInit {
   createProduct() {
     this.dialogs.push({
       component: ShopProductCreateComponent,
-      config: { width: '600px' },
+      onInstance: (i) => {
+        i.created.subscribe(() => this.productsTable.loadDataEvent());
+      },
     });
   }
   productArriving(product: Product) {
     this.dialogs.push({
       component: ShopProductArrivingComponent,
-      config: { width: '500px' },
       data: product,
+      onInstance: (i) => {
+        i.created.subscribe(() => this.productsTable.loadDataEvent());
+      },
     });
   }
   productInfo(product: Product) {
     this.dialogs.push({
       component: ShopProductInfoComponent,
-      config: { width: '500px' },
       data: product,
       onInstance: (i) => {
-        i.edited.subscribe(() =>
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent())
-        );
+        i.edited.subscribe(() => this.productsTable.loadDataEvent());
       },
     });
   }

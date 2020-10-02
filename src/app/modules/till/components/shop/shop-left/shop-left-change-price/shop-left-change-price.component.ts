@@ -21,7 +21,7 @@ export class ShopLeftChangePriceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.price = new FormControl(this.productLeft.myShopPrice, [
+    this.price = new FormControl(this.productLeft.price, [
       Validators.min(0),
       Validators.required
     ]);

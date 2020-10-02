@@ -26,7 +26,8 @@ import { List } from 'src/app/models/list.model';
 })
 export class TableComponent<T> implements OnInit, AfterContentInit, OnDestroy {
   @Input() loadData: Function;
-  @Input() columns: string[];
+  @Input() assign: Function;
+  columns: string[] = [];
 
   @Output() rowClick = new EventEmitter<T>();
 
@@ -45,7 +46,10 @@ export class TableComponent<T> implements OnInit, AfterContentInit, OnDestroy {
   }
 
   ngAfterContentInit() {
-    this.columnDefs.forEach((columnDef) => this.table.addColumnDef(columnDef));
+    this.columnDefs.forEach((columnDef) => {
+      this.table.addColumnDef(columnDef);
+      this.columns.push(columnDef.name);
+    });
   }
 
   async ngOnInit() {
@@ -57,6 +61,11 @@ export class TableComponent<T> implements OnInit, AfterContentInit, OnDestroy {
     const response = await this.loadData();
     this.isLoading = false;
     if (response.isSuccess) {
+      if (this.assign) {
+        response.result.list = response.result.list.map((x) => {
+          return this.assign(x);
+        });
+      }
       this.data = response.result;
     } else {
       this.dialogs.pushAlert(response.errorMessage);

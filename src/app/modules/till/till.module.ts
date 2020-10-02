@@ -1,3 +1,4 @@
+import { ShopsService } from './../../services/shops.service';
 import { ShopLeftSelectComponent } from './components/shop/shop-left/shop-left-select/shop-left-select.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PipesModule } from './../pipes/pipes.module';
@@ -91,6 +92,23 @@ import { ShopPromotionCreateComponent } from './components/shop/shop-promotion/s
 import { SellerCreateRequestDialogComponent } from './components/seller/seller-create-request-dialog/seller-create-request-dialog.component';
 import { ShopPromotionInfoComponent } from './components/shop/shop-promotion/shop-promotion-info/shop-promotion-info.component';
 import { ShopPromotionEditComponent } from './components/shop/shop-promotion/shop-promotion-edit/shop-promotion-edit.component';
+import { ShopGroupsComponent } from './components/groups/shops/shop-groups/shop-groups.component';
+import { ShopGroupCreateComponent } from './components/groups/shops/shop-group-create/shop-group-create.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { ShopGroupInfoComponent } from './components/groups/shops/shop-group-info/shop-group-info.component';
+import { ShopsSelectComponent } from './components/shop/shops-select/shops-select.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ProductGroupsComponent } from './components/groups/products/product-groups/product-groups.component';
+import { ProductGroupInfoComponent } from './components/groups/products/product-group-info/product-group-info.component';
+import { ProductGroupCreateComponent } from './components/groups/products/product-group-create/product-group-create.component';
+import { ShopProductSelectComponent } from './components/shop/shop-product/shop-product-select/shop-product-select.component';
+import { CurrentShopSelectComponent } from './components/current-shop-select/current-shop-select.component';
+import { TillWelcomeComponent } from './components/till-welcome/till-welcome.component';
+import { TillNotFoundComponent } from './components/till-not-found/till-not-found.component';
+import { ProductTypeTreeComponent } from './components/product-type/product-type-tree/product-type-tree.component';
+import {MatTreeModule} from '@angular/material/tree';
+import { ProductTypeCreateComponent } from './components/product-type/product-type-create/product-type-create.component';
+
 @NgModule({
   declarations: [
     MainTillComponent,
@@ -154,6 +172,19 @@ import { ShopPromotionEditComponent } from './components/shop/shop-promotion/sho
     ShopLeftSelectComponent,
     ShopPromotionInfoComponent,
     ShopPromotionEditComponent,
+    ShopGroupsComponent,
+    ShopGroupCreateComponent,
+    ShopGroupInfoComponent,
+    ShopsSelectComponent,
+    ProductGroupsComponent,
+    ProductGroupInfoComponent,
+    ProductGroupCreateComponent,
+    ShopProductSelectComponent,
+    CurrentShopSelectComponent,
+    TillWelcomeComponent,
+    TillNotFoundComponent,
+    ProductTypeTreeComponent,
+    ProductTypeCreateComponent,
   ],
   imports: [
     CommonModule,
@@ -193,6 +224,9 @@ import { ShopPromotionEditComponent } from './components/shop/shop-promotion/sho
     FlexLayoutModule,
     MatStepperModule,
     MaterialFileInputModule,
+    NgxMatSelectSearchModule,
+    MatTooltipModule,
+    MatTreeModule
   ],
   exports: [MainTillComponent],
   entryComponents: [
@@ -241,7 +275,17 @@ import { ShopPromotionEditComponent } from './components/shop/shop-promotion/sho
     ShopLeftSelectComponent,
     ShopPromotionInfoComponent,
     ShopProductEditComponent,
-    ShopPromotionEditComponent
+    ShopPromotionEditComponent,
+    ShopGroupCreateComponent,
+    ShopGroupInfoComponent,
+    ShopsSelectComponent,
+    ProductGroupCreateComponent,
+    ProductGroupInfoComponent,
+    ShopProductSelectComponent,
+    CurrentShopSelectComponent,
+    ProductTypeCreateComponent,
   ],
 })
-export class TillModule {}
+export class TillModule {
+
+}

@@ -10,20 +10,7 @@ export class SaleForm {
   maxTermConsignment: number;
   orderOnDelayConsignment: boolean;
   ownerShop: Shop;
-  shopSelectionForm: SelecеtionForm;
-  shop: Shop;
-  productSelectionForm: SelecеtionForm;
-  product: Product;
+  shops: Shop[];
+  products: Product[];
   constructor() {}
-
-  shopDisplay() {
-    return this.shopSelectionForm === SelecеtionForm.All
-      ? 'Все'
-      : this.shop.name;
-  }
-  productDisplay() {
-    return this.productSelectionForm === SelecеtionForm.All
-      ? 'Все'
-      : this.product.name;
-  }
 }

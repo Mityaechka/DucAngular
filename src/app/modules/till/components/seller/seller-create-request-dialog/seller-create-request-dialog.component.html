@@ -10,7 +10,7 @@
       <input matInput placeholder="Дата доставки" type="date" [min]="today" formControlName="planeDeliveryDate">
     </mat-form-field>
     <mat-form-field appearance="outline" *ngIf="saleForm">
-      <mat-label>Желаемая дата доставки</mat-label>
+      <mat-label>Форма продажи</mat-label>
       <mat-select formControlName="saleFormType" (valueChange)="changeSaleForm($event)">
         <mat-option value="0">
           Нет
@@ -31,7 +31,7 @@
       <p>Срок консигнации: {{saleForm.maxTermConsignment}}</p>
     </ng-container>
     <p>Скидка: {{directDiscount}} %</p>
-    <p>Цена: {{productLeft.myShopPrice}}</p>
+    <p>Цена: {{productLeft.price}}</p>
     <p>Текущая стоимость: {{totalSum}}</p>
     <p>С учетом скидки: {{totalDiscountSum}}</p>
 

@@ -1,3 +1,4 @@
+import { ShopsSelectComponent } from './../../../shop/shops-select/shops-select.component';
 import { SaleForm } from './../../../../../../entities/sale-form.entity';
 import { SaleFormInfoComponent } from './../sale-form-info/sale-form-info.component';
 import { TableService } from './../../../../../../services/table.service';
@@ -18,21 +19,15 @@ import {
 export class SaleFormsComponent implements OnInit {
   public selecеtionForm: typeof SelecеtionForm;
   SelecеtionFormDisplay = SelecеtionFormDisplay;
-  displayedColumns: string[] = [
-    'shop',
-    'product',
-    'canConsignment',
-    'canImplement',
-    'cash',
-    'cashless',
-  ];
+
   constructor(
     private saleformsService: SaleFormsService,
     private dialogs: DialogsService,
     private tableService: TableService
   ) {}
 
-  async ngOnInit() {}
+  async ngOnInit() {
+  }
   async loadData() {
     return await this.saleformsService.getSaleForms();
   }

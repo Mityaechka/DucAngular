@@ -1,0 +1,8 @@
+<mat-select  placeholder="Магазины" [multiple]="true" [formControl]="dataMultiCtrl">
+  <mat-option>
+    <ngx-mat-select-search placeholderLabel="Поиск..." [formControl]="dataMultiFilterCtrl"></ngx-mat-select-search>
+  </mat-option>
+  <mat-option *ngFor="let value of data " [value]="value">
+    {{display(value)}}
+  </mat-option>
+</mat-select>

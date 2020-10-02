@@ -5,6 +5,12 @@
       <mat-tab label="Основная информация">
         <div fxLayout="column">
           <div fxLayout="row" fxLayoutAlign="space-between stretch">
+            <div class="full-width">
+              <mat-label>Категория продукта</mat-label>
+              <app-product-type-tree formControlName="productTypeId"></app-product-type-tree>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between stretch">
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Наименование</mat-label>
               <input matInput formControlName="name">
@@ -17,15 +23,44 @@
             </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutAlign="space-between stretch">
-            <mat-form-field appearance="outline" class="full-width " >
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Штрих-код</mat-label>
+              <input matInput formControlName="barcode">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between stretch">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Мера</mat-label>
+              <mat-select formControlName="measure">
+                <mat-option *ngFor="let measure of EnumCollection.Measure|enumArray" [value]="measure ">
+                  {{EnumDisplayCollection.MeasureDisplay[measure]}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row">
+            <mat-form-field appearance="outline" class="full-width mr-10">
               <mat-label>Закупочная цена</mat-label>
-              <input matInput formControlName="price" type="number" min="0" >
+              <input matInput formControlName="price" type="number" min="0">
+            </mat-form-field>
+            <!-- <mat-form-field appearance="outline" class="full-width ">
+              <mat-label>Цена продажи</mat-label>
+              <input matInput formControlName="retailPrice" type="number" min="0">
+            </mat-form-field> -->
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between stretch">
+            <mat-form-field appearance="outline" class="full-width ">
+              <mat-label>Наценка</mat-label>
+              <input matInput formControlName="markup" type="number" min="0" max="100">
+              <p matSuffix>%</p>
             </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutAlign="space-between stretch">
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Изображение</mat-label>
-              <ngx-mat-file-input formControlName="photo"></ngx-mat-file-input>
+              <ngx-mat-file-input formControlName="photo" accept="image/*"></ngx-mat-file-input>
+              <mat-icon matSuffix>attachment</mat-icon>
             </mat-form-field>
           </div>
         </div>

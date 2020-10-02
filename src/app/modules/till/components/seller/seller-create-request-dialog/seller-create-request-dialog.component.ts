@@ -67,7 +67,7 @@ export class SellerCreateRequestDialogComponent implements OnInit {
   }
   calcSum(event) {
     this.currentCount = event.target.value;
-    this.totalSum = this.currentCount * this.productLeft.myShopPrice;
+    this.totalSum = this.currentCount * this.productLeft.price;
     this.totalDiscountSum =
       this.totalSum - this.totalSum * (this.directDiscount / 100);
   }
