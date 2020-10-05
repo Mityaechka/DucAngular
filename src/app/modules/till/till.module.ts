@@ -1,12 +1,11 @@
-import { ShopsService } from './../../services/shops.service';
+import { DirectDiscountsComponent } from './components/special-terms/direct-discounts/direct-discounts/direct-discounts.component';
+
 import { ShopLeftSelectComponent } from './components/shop/shop-left/shop-left-select/shop-left-select.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PipesModule } from './../pipes/pipes.module';
 import { CommonComponentsModule } from './../common-components/common-components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { TillRoutingModule } from './till-routing.module';
 import { MainTillComponent } from './components/main-till/main-till.component';
 import { ProviderRequestsComponent } from './components/provider/provider-requests/provider-requests.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -31,7 +30,6 @@ import { TableModule } from '../table/table.module';
 import { ProviderRequestInfoComponent } from './components/provider/provider-request-info/provider-request-info.component';
 import { ProviderRequestConfirmComponent } from './components/provider/provider-request-confirm/provider-request-confirm.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { SellerRequestsComponent } from './components/seller/seller-requests/seller-requests.component';
 import { SellerRequestInfoComponent } from './components/seller/seller-request-info/seller-request-info.component';
 import { LogisticRequestsComponent } from './components/logistic/logistic-requests/logistic-requests.component';
@@ -105,9 +103,16 @@ import { ShopProductSelectComponent } from './components/shop/shop-product/shop-
 import { CurrentShopSelectComponent } from './components/current-shop-select/current-shop-select.component';
 import { TillWelcomeComponent } from './components/till-welcome/till-welcome.component';
 import { TillNotFoundComponent } from './components/till-not-found/till-not-found.component';
-import { ProductTypeTreeComponent } from './components/product-type/product-type-tree/product-type-tree.component';
+import { ProductTypeSelectComponent } from './components/product-type/product-type-select/product-type-select.component';
 import {MatTreeModule} from '@angular/material/tree';
 import { ProductTypeCreateComponent } from './components/product-type/product-type-create/product-type-create.component';
+import { ProductTypeTreeComponent } from './components/product-type/product-type-tree/product-type-tree.component';
+import { ShopSelectInputComponent } from './components/shop/shop-select-input/shop-select-input.component';
+import { ShopProductSelectInputComponent } from './components/shop/shop-product/shop-product-select-input/shop-product-select-input.component';
+import { DirectDiscountCreateComponent } from './components/special-terms/direct-discounts/direct-discount-create/direct-discount-create.component';
+import { MatSelectModule } from '@angular/material/select';
+import { DirectDiscountInfoComponent } from './components/special-terms/direct-discounts/direct-discount-info/direct-discount-info.component';
+import { DirectDiscountEditComponent } from './components/special-terms/direct-discounts/direct-discount-edit/direct-discount-edit.component';
 
 @NgModule({
   declarations: [
@@ -183,8 +188,15 @@ import { ProductTypeCreateComponent } from './components/product-type/product-ty
     CurrentShopSelectComponent,
     TillWelcomeComponent,
     TillNotFoundComponent,
-    ProductTypeTreeComponent,
+    ProductTypeSelectComponent,
     ProductTypeCreateComponent,
+    ProductTypeTreeComponent,
+    ShopSelectInputComponent,
+    DirectDiscountCreateComponent,
+    DirectDiscountsComponent,
+    ShopProductSelectInputComponent,
+    DirectDiscountInfoComponent,
+    DirectDiscountEditComponent
   ],
   imports: [
     CommonModule,
@@ -214,7 +226,6 @@ import { ProductTypeCreateComponent } from './components/product-type/product-ty
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
     MatTabsModule,
@@ -284,6 +295,9 @@ import { ProductTypeCreateComponent } from './components/product-type/product-ty
     ShopProductSelectComponent,
     CurrentShopSelectComponent,
     ProductTypeCreateComponent,
+    DirectDiscountCreateComponent,
+    DirectDiscountInfoComponent,
+    DirectDiscountEditComponent
   ],
 })
 export class TillModule {

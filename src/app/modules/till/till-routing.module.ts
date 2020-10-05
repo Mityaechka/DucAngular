@@ -22,6 +22,8 @@ import { ShopLeftsComponent } from './components/shop/shop-left/shop-lefts/shop-
 import { ShopProductsComponent } from './components/shop/shop-product/shop-products/shop-products.component';
 import { ShopGroupsComponent } from './components/groups/shops/shop-groups/shop-groups.component';
 import { ProductGroupsComponent } from './components/groups/products/product-groups/product-groups.component';
+import { ProductTypeTreeComponent } from './components/product-type/product-type-tree/product-type-tree.component';
+import { DirectDiscountsComponent } from './components/special-terms/direct-discounts/direct-discounts/direct-discounts.component';
 
 export const tillRoutes: Routes = [
   { path: '', component: TillWelcomeComponent },
@@ -31,7 +33,10 @@ export const tillRoutes: Routes = [
   { path: 'logistic/requests', component: LogisticRequestsComponent },
   {
     path: 'special-terms',
-    children: [{ path: 'sale-forms', component: SaleFormsComponent }],
+    children: [
+      { path: 'sale-forms', component: SaleFormsComponent },
+      { path: 'direct-discounts', component: DirectDiscountsComponent },
+    ],
   },
   {
     path: 'cash',
@@ -57,6 +62,7 @@ export const tillRoutes: Routes = [
       { path: 'products', component: ShopProductsComponent },
       { path: 'attributes', component: ProductAttributesComponent },
       { path: 'promotions', component: ShopPromotionsComponent },
+      { path: 'product-types', component: ProductTypeTreeComponent },
     ],
   },
   {
@@ -72,7 +78,7 @@ export const tillRoutes: Routes = [
       },
     ],
   },
-  { path:'**', component: TillNotFoundComponent },
+  { path: '**', component: TillNotFoundComponent },
 ];
 
 @NgModule({

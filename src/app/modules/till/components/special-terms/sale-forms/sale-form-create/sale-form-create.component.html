@@ -1,48 +1,49 @@
-<form [formGroup]="form" mat-dialog-content (ngSubmit)="createSaleForm()">
+<form [formGroup]="form" (ngSubmit)="createSaleForm()">
   <h1 mat-dialog-title>Создание формы продажи </h1>
-
-  <div fxLayout="column">
-    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="mb-10">
-      <div>
-        <mat-label [matTooltip]="selectedShops?.value|listToString:'name'">Магазины: {{!selectedShops.value||!selectedShops.value.length?'Все':selectedShops.value.length}}</mat-label>
+  <div mat-dialog-content>
+    <div fxLayout="column">
+      <div fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="mb-10">
+        <div>
+          <mat-label [matTooltip]="selectedShops?.value|listToString:'name'">Магазины:
+            {{!selectedShops.value||!selectedShops.value.length?'Все':selectedShops.value.length}}</mat-label>
+        </div>
+        <div>
+          <button mat-raised-button (click)="selectShops()" type="button">Выбрать магазины</button>
+        </div>
       </div>
-      <div>
-        <button mat-raised-button (click)="selectShops()" type="button">Выбрать магазины</button>
+      <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <mat-label [matTooltip]="selectedProducts?.value|listToString:'name'">Продукты:
+            {{!selectedProducts.value||!selectedProducts.value.length?'Все':selectedProducts.value.length}}</mat-label>
+        </div>
+        <div>
+          <button mat-raised-button (click)="selectProducts()" type="button">Выбрать продукты</button>
+        </div>
       </div>
     </div>
-    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
-      <div>
-        <mat-label [matTooltip]="selectedProducts?.value|listToString:'name'">Продукты: {{!selectedProducts.value||!selectedProducts.value.length?'Все':selectedProducts.value.length}}</mat-label>
+    <div fxLayout="column">
+      <div fxFlex>
+        <mat-checkbox formControlName="canConsigment">Возможность консигнации</mat-checkbox>
       </div>
-      <div>
-        <button mat-raised-button (click)="selectProducts()" type="button">Выбрать продукты</button>
+      <div fxFlex fxLayout="row" fxLayoutAlign="space-between"
+        [style.visibility]="canConsigment.value?'visible':'hidden'">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Макс. срок консигнации</mat-label>
+            <input matInput placeholder="Скрок" type="number" min="1" formControlName="maxTermConsigment">
+          </mat-form-field>
+        </div>
+        <mat-checkbox class="m-10" fxFlex formControlName="orderOnDelayConsignment">Заказы при просрочке</mat-checkbox>
+      </div>
+      <div fxFlex>
+        <mat-checkbox formControlName="canImplement">Возможность реализации</mat-checkbox>
+      </div>
+      <div fxFlex fxLayout="row">
+        <mat-checkbox formControlName="cash">Нал. расчет</mat-checkbox>
+        <mat-checkbox class="ml-10" formControlName="cashless">Безнал. расчет</mat-checkbox>
       </div>
     </div>
   </div>
-  <div fxLayout="column">
-    <div fxFlex>
-      <mat-checkbox formControlName="canConsigment">Возможность консигнации</mat-checkbox>
-    </div>
-    <div fxFlex fxLayout="row" fxLayoutAlign="space-between"
-      [style.visibility]="canConsigment.value?'visible':'hidden'">
-      <div>
-        <mat-form-field appearance="outline">
-          <mat-label>Макс. срок консигнации</mat-label>
-          <input matInput placeholder="Скрок" type="number" min="1" formControlName="maxTermConsigment">
-        </mat-form-field>
-      </div>
-      <mat-checkbox class="m-10" fxFlex formControlName="orderOnDelayConsignment">Заказы при просрочке</mat-checkbox>
-    </div>
-    <div fxFlex>
-      <mat-checkbox formControlName="canImplement">Возможность реализации</mat-checkbox>
-    </div>
-    <div fxFlex fxLayout="row">
-      <mat-checkbox formControlName="cash">Нал. расчет</mat-checkbox>
-      <mat-checkbox class="ml-10" formControlName="cashless">Безнал. расчет</mat-checkbox>
-    </div>
-  </div>
-
-
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Закрыть</button>
     <button mat-button type="submit" [disabled]="form.invalid">Создать</button>

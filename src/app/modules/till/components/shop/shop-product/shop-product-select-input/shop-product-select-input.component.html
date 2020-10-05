@@ -1,0 +1,9 @@
+<div fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="mb-10">
+  <div>
+    <mat-label [matTooltip]="selectedProducts|listToString:'name'">Продукты:
+      {{!selectedProducts||!selectedProducts.length?'Все':selectedProducts.length}}</mat-label>
+  </div>
+  <div>
+    <button mat-raised-button (click)="selectProducts()" type="button">Выбрать продукты</button>
+  </div>
+</div>

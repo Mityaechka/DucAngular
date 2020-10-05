@@ -3,7 +3,7 @@
   <div mat-dialog-content>
     <div class="full-width">
       <mat-label>Родительская категория</mat-label>
-      <app-product-type-tree formControlName="parentTypeId" [canAdd]="false"></app-product-type-tree>
+      <app-product-type-select formControlName="parentTypeId" [canAdd]="false"></app-product-type-select>
     </div>
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Название новой категории</mat-label>
@@ -12,6 +12,6 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Закрыть</button>
-    <button mat-button [disabled]="form.invalid">Редактировать</button>
+    <button mat-button [disabled]="form.invalid">Созать</button>
   </div>
 </form>

@@ -1,0 +1,21 @@
+<div *ngIf="hierarchy">
+  <ng-container *ngFor="let type of hierarchy.parents">
+    <a mat-stroked-button color="warn" (click)="selectType(type.id)">
+      {{type.name}}
+    </a>
+    /
+  </ng-container>
+  <a mat-stroked-button disabled>
+    {{hierarchy.type.name}}
+  </a>
+  <button *ngIf="canAdd" (click)="createCategory()" id="m-2" mat-mini-fab color="primary" >
+    <mat-icon>add</mat-icon>
+  </button>
+  <div class="mt-2">
+    <ng-container *ngFor="let type of hierarchy.children">
+      <a id="m-2" mat-stroked-button color="primary" (click)="selectType(type.id)">
+        [{{type.name}}]
+      </a>
+    </ng-container>
+  </div>
+</div>

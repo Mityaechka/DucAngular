@@ -1,104 +1,58 @@
-import { DialogsService } from 'src/app/services/dialogs.service';
 import { ProductTypesService } from './../../../../../services/product-types.service';
+import { DialogsService } from 'src/app/services/dialogs.service';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { ProductType } from 'src/app/entities/product-type';
+import { FlatTreeControl } from '@angular/cdk/tree';
 import {
-  ProductType,
-  ProductTypeFullHierarchy,
-} from './../../../../../entities/product-type';
-import {
-  Component,
-  OnInit,
-  ChangeDetectorRef,
-  Output,
-  EventEmitter,
-  forwardRef,
-} from '@angular/core';
-import { Input } from '@angular/core';
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { HostBinding } from '@angular/core';
-import { ProductTypeCreateComponent } from '../product-type-create/product-type-create.component';
-
+  MatTreeFlattener,
+  MatTreeFlatDataSource,
+} from '@angular/material/tree';
+interface ExampleFlatNode {
+  expandable: boolean;
+  name: string;
+  level: number;
+}
 @Component({
   selector: 'app-product-type-tree',
   templateUrl: './product-type-tree.component.html',
   styleUrls: ['./product-type-tree.component.css'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ProductTypeTreeComponent),
-      multi: true,
-    },
-  ],
 })
-export class ProductTypeTreeComponent implements OnInit, ControlValueAccessor {
-  @HostBinding('style.opacity')
-  get opacity() {
-    return this.disabled ? 0.25 : 1;
-  }
+export class ProductTypeTreeComponent implements OnInit {
   constructor(
+    private dialogs: DialogsService,
     private productTypesService: ProductTypesService,
-    private detector: ChangeDetectorRef,
-    private dialogs: DialogsService
+    private detector: ChangeDetectorRef
   ) {}
-  @Input() canAdd = true;
-  @Input() disabled = false;
-
-  rootId?: number;
-
-  hierarchy: ProductTypeFullHierarchy;
-  onChange = (typeId: number) => {};
-  onTouched = () => {};
-  writeValue(obj: any): void {
-    if (Number.isInteger(obj)) {
-      this.rootId = obj;
-    }
-    this.load();
-  }
-
-  registerOnChange(fn: (rating: number) => void): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
+  @Input() rootType: ProductType;
+  isLoading = false;
+  isExpanded = false;
+  isChildrenLoaded = false;
   async ngOnInit() {
-    //this.load();
-  }
-  async load() {
-    if (!this.rootId) {
+    this.isLoading = true;
+    if (!this.rootType) {
       const rootResponse = await this.productTypesService.getRootType();
+
       if (rootResponse.isSuccess) {
-        this.rootId = rootResponse.result.id;
+        this.rootType = rootResponse.result;
       }
+      await this.expand();
     }
-    const hierarchyResponse = await this.productTypesService.getTypeFullHierarchy(
-      this.rootId
-    );
-    if (hierarchyResponse.isSuccess) {
-      this.hierarchy = hierarchyResponse.result;
-    }
+    this.isLoading = false;
     this.detector.detectChanges();
-    this.onChange(this.hierarchy.type.id);
   }
-  selectType(typeId: number) {
-    this.rootId = typeId;
-    this.load();
-  }
-  createCategory() {
-    this.dialogs.push({
-      component: ProductTypeCreateComponent,
-      data: this.rootId,
-      onInstance: (i) => {
-        i.created.subscribe((newCategoryId) => {
-          this.rootId = newCategoryId;
-          this.load();
-        });
-      },
-    });
+  async expand() {
+    if (!this.isChildrenLoaded) {
+      const childrenResponse = await this.productTypesService.getChildrenTypes(
+        this.rootType.id
+      );
+      this.isLoading = true;
+      if (childrenResponse.isSuccess) {
+        this.rootType.childrenTypes = childrenResponse.result;
+      }
+      this.isLoading = false;
+      this.isChildrenLoaded = true;
+    }
+    this.isExpanded = !this.isExpanded;
+    this.detector.detectChanges();
   }
 }

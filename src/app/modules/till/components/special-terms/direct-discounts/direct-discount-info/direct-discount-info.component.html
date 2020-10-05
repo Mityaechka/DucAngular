@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Прямая скидка</h1>
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div>
+        <p [matTooltip]="discount?.shops|listToString:'name'">Магазины: {{!discount.shops?'Все':discount.shops.length}}</p>
+      </div>
+      <div>
+        <p [matTooltip]="discount?.products|listToString:'name'">Продукты: {{!discount.products?'Все':discount.products.length}}</p>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div>
+      <p>Скидка: {{discount.amount}} %</p>
+    </div>
+    <div>
+      <p>Активна: {{discount.isActive|yesNo}}</p>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button (click)="edit()" >Редактировать</button>
+
+</div>

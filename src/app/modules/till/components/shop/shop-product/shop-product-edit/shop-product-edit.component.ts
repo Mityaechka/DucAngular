@@ -61,8 +61,6 @@ export class ShopProductEditComponent implements OnInit {
     const parametrsResponse = await this.productService.getProductParametrs(
       this.product.id
     );
-
-    debugger;
     this.form.patchValue(
       {
         name: productResponse.result.name,

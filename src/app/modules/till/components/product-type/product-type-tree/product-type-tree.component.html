@@ -1,21 +1,28 @@
-<div *ngIf="hierarchy">
-  <ng-container *ngFor="let type of hierarchy.parents">
-    <a mat-stroked-button color="warn" (click)="selectType(type.id)">
-      {{type.name}}
-    </a>
-    /
-  </ng-container>
-  <a mat-stroked-button disabled>
-    {{hierarchy.type.name}}
-  </a>
-  <button *ngIf="canAdd" (click)="createCategory()" id="m-2" mat-mini-fab color="primary" >
-    <mat-icon>add</mat-icon>
-  </button>
-  <div class="mt-2">
-    <ng-container *ngFor="let type of hierarchy.children">
-      <a id="m-2" mat-stroked-button color="primary" (click)="selectType(type.id)">
-        [{{type.name}}]
-      </a>
-    </ng-container>
-  </div>
-</div>
+<ul>
+  <li>
+    <div (click)="expand()" fxLayout="row">
+      <mat-icon *ngIf="isExpanded">expand_more</mat-icon>
+      <mat-icon *ngIf="!isExpanded">expand_less</mat-icon>
+      <p>
+        {{rootType?.name}}
+      </p>
+      <!-- <button id="m-2" mat-mini-fab color="primary" >
+        <mat-icon>add</mat-icon>
+      </button> -->
+    </div>
+
+    <ul class="nested" *ngIf="rootType && isChildrenLoaded">
+
+      <ng-container *ngIf="isExpanded">
+        <ng-container *ngIf="rootType.childrenTypes&&rootType.childrenTypes.length!=0;else empty">
+          <app-product-type-tree *ngFor="let type of rootType.childrenTypes" [rootType]="type"></app-product-type-tree>
+        </ng-container>
+        <ng-template #empty>
+          <li>
+            <p>Категории отсуствуют</p>
+          </li>
+        </ng-template>
+      </ng-container>
+    </ul>
+  </li>
+</ul>
