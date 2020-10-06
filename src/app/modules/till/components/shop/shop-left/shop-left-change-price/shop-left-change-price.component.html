@@ -1,11 +1,13 @@
 <h1 mat-dialog-title>Измнеие цены для "{{productLeft.product.name}}"</h1>
 <div mat-dialog-content>
+  <p>Цена: {{productLeft.price}}</p>
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Введите новую цену</mat-label>
-    <input matInput placeholder="Новая цена" type="number" [formControl]="price">
+    <input matInput placeholder="Новая цена" type="number" [formControl]="markup">
   </mat-form-field>
+  <p>Цена с наценкой: {{productLeft.price+productLeft.price*(markup.value/100)}}</p>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Закрыть</button>
-  <button mat-button (click)="changePrice()" [disabled]="price.invalid">Изменить цену</button>
+  <button mat-button (click)="changePrice()" [disabled]="markup.invalid">Изменить цену</button>
 </div>

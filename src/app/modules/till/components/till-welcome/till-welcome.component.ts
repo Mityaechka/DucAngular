@@ -7,9 +7,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./till-welcome.component.css'],
 })
 export class TillWelcomeComponent implements OnInit {
-  _selected: ProductType;
-   selected(p: ProductType) {
-    this._selected = p;
-  }
   ngOnInit(): void {}
 }

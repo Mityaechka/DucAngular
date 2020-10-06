@@ -3,7 +3,7 @@ import { SelecеtionForm } from '../enums/selection-form.enum';
 import { Product } from './product';
 export class SaleForm {
   id: number;
-  canConsigment: boolean;
+  canConsignment: boolean;
   canImplement: boolean;
   cash: boolean;
   cashless: boolean;

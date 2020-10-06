@@ -15,12 +15,12 @@
         <mat-option value="0">
           Нет
         </mat-option>
-        <ng-container *ngIf="!saleForm.canConsigment">
+        <ng-container *ngIf="saleForm.canConsignment">
           <mat-option value="1">
             Консигнация
           </mat-option>
         </ng-container>
-        <ng-container *ngIf="!saleForm.canImplement">
+        <ng-container *ngIf="saleForm.canImplement">
           <mat-option value="2">
             Реализация
           </mat-option>

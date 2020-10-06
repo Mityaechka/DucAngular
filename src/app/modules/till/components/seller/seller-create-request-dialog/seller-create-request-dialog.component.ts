@@ -24,7 +24,7 @@ export class SellerCreateRequestDialogComponent implements OnInit {
   form = new FormGroup({
     count: new FormControl('0', [Validators.required, Validators.min(1)]),
     planeDeliveryDate: new FormControl('', [Validators.required]),
-    saleFormType: new FormControl('', [Validators.required]),
+    saleFormType: new FormControl(0),
   });
   constructor(
     @Inject(MAT_DIALOG_DATA) public productLeft: ProductLeft,

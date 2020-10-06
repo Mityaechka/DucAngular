@@ -1,9 +1,34 @@
 <h1 mat-dialog-title>Продукт "{{productLeft.product.name}}"</h1>
-<div mat-dialog-content>
-  <p>Цена за 1 шт.: {{productLeft.price}}</p>
-  <button mat-raised-button (click)="changePrice()">Изменить цену</button>
-  <p>Остаток: {{productLeft.currentLeft}}</p>
-
+<div mat-dialog-content fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div>
+      <p>Цена за 1 шт.: {{productLeft.retailPrice}}</p>
+    </div>
+    <div>
+      <button mat-raised-button (click)="changePrice()">Изменить цену</button>
+    </div>
+  </div>
+  <div>
+    <p>Остаток: {{productLeft.currentLeft}}</p>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="mb-10">
+    <div>
+      <p>Доступно для заказа: {{productLeft.isProvider|yesNo}}
+    </div>
+    <div>
+      <button mat-mini-fab color="primary" (click)="chageProvider()">
+      </button>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="mb-10">
+    <div>
+      <p>Доступно для продажи: {{productLeft.isSell|yesNo}}
+    </div>
+    <div>
+      <button mat-mini-fab color="primary" (click)="chageSell()">
+      </button>
+    </div>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Закрыть</button>

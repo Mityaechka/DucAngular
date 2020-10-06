@@ -19,8 +19,6 @@ export class LogisticRequestShippComponent implements OnInit {
   accept: FormControl;
   sum: FormControl;
   get canConfirm() {
-
-    debugger;
     return (
       (this.accept.value == false ||
         this.productRequest.logisticProductRequest.isShipped) &&

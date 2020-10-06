@@ -43,4 +43,17 @@ export class DirectDiscountsComponent implements OnInit {
       },
     });
   }
+  async changeStateDirectDiscount(id: number, state: boolean) {
+    this.dialogs.startLoading();
+    const response = await this.directDiscountsService.changeStateDirectDiscount(
+      id,
+      state
+    );
+    this.dialogs.stopLoading();
+    if (response.isSuccess) {
+      this.table.loadDataEvent();
+    } else {
+      this.dialogs.pushAlert(response.errorMessage);
+    }
+  }
 }

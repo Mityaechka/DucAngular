@@ -50,4 +50,28 @@ export class ShopLeftInfoComponent implements OnInit {
       },
     });
   }
+  async chageProvider() {
+    const response = await this.leftsService.setProductLeftIsProvider(
+      this.productLeft.id,
+      !this.productLeft.isProvider
+    );
+
+    if (response.isSuccess) {
+      this.loadData();
+    } else {
+      this.dialogs.pushAlert(response.errorMessage);
+    }
+  }
+  async chageSell() {
+    const response = await this.leftsService.setProductLeftIsSell(
+      this.productLeft.id,
+      !this.productLeft.isProvider
+    );
+
+    if (response.isSuccess) {
+      this.loadData();
+    } else {
+      this.dialogs.pushAlert(response.errorMessage);
+    }
+  }
 }

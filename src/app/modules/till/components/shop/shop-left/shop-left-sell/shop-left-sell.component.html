@@ -4,9 +4,9 @@
     <div fxLayout="row">
       <div fxFlex="50">
         <p>{{productLeft.product.name}}</p>
-        <p>Цена за 1шт.:{{productLeft.price}}</p>
+        <p>Цена за 1шт.:{{productLeft.retailPrice}}</p>
         <p>Текущее количество: {{form.controls.count.value}}</p>
-        <p>Итого: {{form.controls.count.value*productLeft.price}}</p>
+        <p>Итого: {{form.controls.count.value*productLeft.retailPrice}}</p>
       </div>
       <div fxFlex="50">
         <app-numpad (countEvent)="getCount($event)" [delta]="1000"></app-numpad>

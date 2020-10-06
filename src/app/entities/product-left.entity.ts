@@ -6,6 +6,10 @@ export class ProductLeft {
     public shop: Shop,
     public product: Product,
     public price: number,
-    public currentLeft: number
+    public retailPrice: number,
+    public currentLeft: number,
+    public markup: number,
+    public isProvider: boolean,
+    public isSell: boolean
   ) {}
 }

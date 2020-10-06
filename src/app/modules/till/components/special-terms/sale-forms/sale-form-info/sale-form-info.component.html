@@ -12,12 +12,12 @@
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div>
-      <p>Возможность консигнации: {{saleForm.canConsigment|yesNo}}</p>
+      <p>Возможность консигнации: {{saleForm.canConsignment|yesNo}}</p>
     </div>
-    <div *ngIf="saleForm.canConsigment">
+    <div *ngIf="saleForm.canConsignment">
       <p>Макс. срок консигнации: {{saleForm.maxTermConsignment}}</p>
     </div>
-    <div *ngIf="saleForm.canConsigment">
+    <div *ngIf="saleForm.canConsignment">
       <p>Заказы при просрочке: {{saleForm.orderOnDelayConsignment|yesNo}}</p>
     </div>
   </div>

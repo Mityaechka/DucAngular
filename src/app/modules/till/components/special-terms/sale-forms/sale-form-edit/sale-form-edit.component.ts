@@ -91,7 +91,7 @@ export class SaleFormEditComponent implements OnInit {
         shopsValue: new FormControl(saleFormResponse.result.shops),
         products: new FormControl(saleFormResponse.result.products?.map((x) => x.id)),
         productsValue: new FormControl(saleFormResponse.result.products),
-        canConsigment: new FormControl(saleFormResponse.result.canConsigment),
+        canConsigment: new FormControl(saleFormResponse.result.canConsignment),
         canImplement: new FormControl(saleFormResponse.result.canImplement),
         maxTermConsigment: new FormControl(
           saleFormResponse.result.maxTermConsignment,

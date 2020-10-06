@@ -26,7 +26,7 @@ export class ShopLeftsSellComponent implements OnInit, OnDestroy {
   scanSubscription: Subscription;
   get total() {
     let sum = 0;
-    this.products.forEach((x) => (sum += x.count * x.product.price));
+    this.products.forEach((x) => (sum += x.count * x.product.retailPrice));
     return sum;
   }
 

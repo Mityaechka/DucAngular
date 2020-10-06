@@ -43,4 +43,10 @@ export class DirectDiscountsService {
       data
     );
   }
+  async changeStateDirectDiscount(id: number, state: boolean) {
+    return await this.http.post<number>(
+      `specialTerms/directDiscounts/${id}/state`,
+      state
+    );
+  }
 }

@@ -13,7 +13,7 @@ import { LeftsService } from 'src/app/services/lefts.service';
 })
 export class ShopLeftChangePriceComponent implements OnInit {
   @Output() priceChange = new EventEmitter();
-  price: FormControl;
+  markup: FormControl;
   constructor(
     @Inject(MAT_DIALOG_DATA) public productLeft: ProductLeft,
     private dialogs: DialogsService,
@@ -21,7 +21,7 @@ export class ShopLeftChangePriceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.price = new FormControl(this.productLeft.price, [
+    this.markup = new FormControl(this.productLeft.markup, [
       Validators.min(0),
       Validators.required
     ]);
@@ -30,7 +30,7 @@ export class ShopLeftChangePriceComponent implements OnInit {
     this.dialogs.startLoading();
     const response = await this.leftsService.changePrice(
       this.productLeft.id,
-      this.price.value
+      this.markup.value
     );
     this.dialogs.stopLoading();
     if(response.isSuccess){
