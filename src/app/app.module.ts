@@ -38,6 +38,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ReceiptEditorModule } from './modules/receipt-editor/receipt-editor.module';
 import { MatTreeModule } from '@angular/material/tree';
+import { DirectivesModule } from './modules/directives/directives.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +81,8 @@ import { MatTreeModule } from '@angular/material/tree';
     NgxMatSelectSearchModule,
     MatTooltipModule,
     ReceiptEditorModule,
-    MatTreeModule
+    MatTreeModule,
+    DirectivesModule
   ],
   providers: [],
   bootstrap: [AppComponent],

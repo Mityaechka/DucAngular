@@ -13,7 +13,7 @@
       </div>
       <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
         <div>
-          <mat-label [matTooltip]="selectedProducts?.value|listToString:'name'">Продукты:
+          <mat-label [matTooltip]="selectedProducts?.value|listToString:'product.name'">Продукты:
             {{!selectedProducts.value||!selectedProducts.value.length?'Все':selectedProducts.value.length}}</mat-label>
         </div>
         <div>

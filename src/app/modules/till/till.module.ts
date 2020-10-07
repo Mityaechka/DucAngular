@@ -1,3 +1,4 @@
+import { DirectivesModule } from './../directives/directives.module';
 import { DirectDiscountsComponent } from './components/special-terms/direct-discounts/direct-discounts/direct-discounts.component';
 
 import { ShopLeftSelectComponent } from './components/shop/shop-left/shop-left-select/shop-left-select.component';
@@ -113,6 +114,10 @@ import { DirectDiscountCreateComponent } from './components/special-terms/direct
 import { MatSelectModule } from '@angular/material/select';
 import { DirectDiscountInfoComponent } from './components/special-terms/direct-discounts/direct-discount-info/direct-discount-info.component';
 import { DirectDiscountEditComponent } from './components/special-terms/direct-discounts/direct-discount-edit/direct-discount-edit.component';
+import { RetroBonusesComponent } from './components/special-terms/retro-bonuses/retro-bonuses/retro-bonuses.component';
+import { RetroBonusCreateComponent } from './components/special-terms/retro-bonuses/retro-bonus-create/retro-bonus-create.component';
+import { RetroBonusInfoComponent } from './components/special-terms/retro-bonuses/retro-bonus-info/retro-bonus-info.component';
+import { RetroBonusEditComponent } from './components/special-terms/retro-bonuses/retro-bonus-edit/retro-bonus-edit.component';
 
 @NgModule({
   declarations: [
@@ -196,7 +201,11 @@ import { DirectDiscountEditComponent } from './components/special-terms/direct-d
     DirectDiscountsComponent,
     ShopProductSelectInputComponent,
     DirectDiscountInfoComponent,
-    DirectDiscountEditComponent
+    DirectDiscountEditComponent,
+    RetroBonusesComponent,
+    RetroBonusCreateComponent,
+    RetroBonusInfoComponent,
+    RetroBonusEditComponent
   ],
   imports: [
     CommonModule,
@@ -237,7 +246,8 @@ import { DirectDiscountEditComponent } from './components/special-terms/direct-d
     MaterialFileInputModule,
     NgxMatSelectSearchModule,
     MatTooltipModule,
-    MatTreeModule
+    MatTreeModule,
+    DirectivesModule
   ],
   exports: [MainTillComponent],
   entryComponents: [
@@ -297,7 +307,10 @@ import { DirectDiscountEditComponent } from './components/special-terms/direct-d
     ProductTypeCreateComponent,
     DirectDiscountCreateComponent,
     DirectDiscountInfoComponent,
-    DirectDiscountEditComponent
+    DirectDiscountEditComponent,
+    RetroBonusCreateComponent,
+    RetroBonusInfoComponent,
+    RetroBonusEditComponent
   ],
 })
 export class TillModule {

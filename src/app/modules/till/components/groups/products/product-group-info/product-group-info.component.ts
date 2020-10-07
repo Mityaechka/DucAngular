@@ -1,3 +1,4 @@
+import { ProductLeft } from './../../../../../../entities/product-left.entity';
 import { Product } from './../../../../../../entities/product';
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { Group } from 'src/app/entities/group.entity';
@@ -13,7 +14,7 @@ import { ProductGroupsService } from 'src/app/services/product-groups.service';
 export class ProductGroupInfoComponent implements OnInit {
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public productGroup: Group<Product>,
+    @Inject(MAT_DIALOG_DATA) public productGroup: Group<ProductLeft>,
     private dialogs: DialogsService,
     private detector: ChangeDetectorRef,
     private productGroupsService: ProductGroupsService

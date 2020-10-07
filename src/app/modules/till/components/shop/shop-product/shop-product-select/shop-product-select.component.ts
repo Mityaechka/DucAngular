@@ -1,3 +1,5 @@
+import { LeftsService } from './../../../../../../services/lefts.service';
+import { ProductLeft } from './../../../../../../entities/product-left.entity';
 import { ProductsService } from './../../../../../../services/products.service';
 import { ProductGroupsService } from './../../../../../../services/product-groups.service';
 import { Product } from './../../../../../../entities/product';
@@ -19,21 +21,21 @@ import { DialogsService } from 'src/app/services/dialogs.service';
   styleUrls: ['./shop-product-select.component.css'],
 })
 export class ShopProductSelectComponent implements OnInit {
-  @Output() selected = new EventEmitter<Product[]>();
+  @Output() selected = new EventEmitter<ProductLeft[]>();
 
   groupsFilterControl = new FormControl();
   groupsControl = new FormControl();
-  groups: Group<Product>[] = [];
-  filteredGroupsReplay = new ReplaySubject<Group<Product>[]>(1);
+  groups: Group<ProductLeft>[] = [];
+  filteredGroupsReplay = new ReplaySubject<Group<ProductLeft>[]>(1);
 
   productsFilterControl = new FormControl();
   productsControl = new FormControl();
-  product: Product[] = [];
-  filteredProdcutsReplay = new ReplaySubject<Product[]>(1);
+  product: ProductLeft[] = [];
+  filteredProdcutsReplay = new ReplaySubject<ProductLeft[]>(1);
 
   get selectedProducts() {
-    const products: Product[] = [];
-    const groups = this.groupsControl.value as Group<Product>[];
+    const products: ProductLeft[] = [];
+    const groups = this.groupsControl.value as Group<ProductLeft>[];
     if (groups && groups.length > 0) {
       products.push(...[].concat(...groups.map((x) => x.list)));
     }
@@ -48,7 +50,7 @@ export class ShopProductSelectComponent implements OnInit {
     private dialogs: DialogsService,
     private detector: ChangeDetectorRef,
     private productGroupsService: ProductGroupsService,
-    private productsService: ProductsService
+    private leftsService: LeftsService
   ) {}
 
   async ngOnInit() {
@@ -62,7 +64,7 @@ export class ShopProductSelectComponent implements OnInit {
       this.groups = groupsResponse.result.list;
       this.filteredGroupsReplay.next(this.groups.slice());
     }
-    const shopsResponse = await this.productsService.getProducts();
+    const shopsResponse = await this.leftsService.getProductsLefts();
     this.dialogs.stopLoading();
     if (shopsResponse.isSuccess) {
       this.product = shopsResponse.result.list;
@@ -101,7 +103,7 @@ export class ShopProductSelectComponent implements OnInit {
     }
     this.filteredProdcutsReplay.next(
       this.product.filter(
-        (shop) => shop.name.toLowerCase().indexOf(search) > -1
+        (shop) => shop.product.name.toLowerCase().indexOf(search) > -1
       )
     );
   }

@@ -1,0 +1,126 @@
+<form [formGroup]="form" (submit)="create()">
+  <h1 mat-dialog-title>Создание ретро бонуса</h1>
+
+  <div mat-dialog-content class="height-small">
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab label="Назначение">
+        <div class="full-width">
+          <mat-label>Выбор магазинов</mat-label>
+          <app-shop-select-input formControlName="shops"></app-shop-select-input>
+        </div>
+        <div class="full-width">
+          <mat-label>Выбор продуктов</mat-label>
+          <app-shop-product-select-input formControlName="products"></app-shop-product-select-input>
+        </div>
+      </mat-tab>
+      <mat-tab label="Условия">
+        <div formArrayName="types">
+          <div class="m-10">
+              <button type="button" mat-raised-button (click)="addType()">Добавить</button>
+          </div>
+          <div *ngFor="let type of types.controls;let i = index" [formGroupName]="i">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div>
+                <p>{{i+1}}</p>
+              </div>
+              <mat-form-field appearance="outline">
+                <mat-label>Тип</mat-label>
+                <mat-select formControlName="type" (selectionChange)="onChangeType(types.controls[i])">
+                  <mat-option value="0">
+                    SellIn
+                  </mat-option>
+                  <mat-option value="1">
+                    SellOut
+                  </mat-option>
+                  <mat-option value="2">
+                    Marketing
+                  </mat-option>
+                  <mat-option value="3">
+                    Debit
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div>
+                <button type="button" mat-raised-button (click)="removeType(i)">Удалить</button>
+              </div>
+            </div>
+
+            <div *ngIf="getType(i).controls.sellIn" formGroupName="sellIn">
+              <div fxLayout="row">
+                <mat-form-field appearance="outline" class="full-width mr-10">
+                  <mat-label>От</mat-label>
+                  <input matInput formControlName="from" type="number" min="0">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>До</mat-label>
+                  <input matInput formControlName="to" type="number">
+                </mat-form-field>
+              </div>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Значение</mat-label>
+                <input matInput formControlName="value" type="number" min="0" step="0.1">
+                <p matSuffix>%</p>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="getType(i).controls.sellOut" formGroupName="sellOut">
+              <div fxLayout="row">
+                <mat-form-field appearance="outline" class="full-width mr-10">
+                  <mat-label>От</mat-label>
+                  <input matInput formControlName="from" type="number" min="0">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>До</mat-label>
+                  <input matInput formControlName="to" type="number">
+                </mat-form-field>
+              </div>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Значение</mat-label>
+                <input matInput formControlName="value" type="number" min="0" step="0.1">
+                <p matSuffix>%</p>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="getType(i).controls.marketing" formGroupName="marketing">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Пояснение</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Значение</mat-label>
+                <input matInput formControlName="value" type="number" min="0" step="0.1">
+                <p matSuffix>%</p>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="getType(i).controls.debit" formGroupName="debit">
+              <div fxLayout="row">
+                <mat-form-field appearance="outline" class="full-width mr-10">
+                  <mat-label>От</mat-label>
+                  <input matInput formControlName="fromDays" type="number" min="0">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>До</mat-label>
+                  <input matInput formControlName="toDays" type="number">
+                </mat-form-field>
+              </div>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Значение</mat-label>
+                <input matInput formControlName="value" type="number" min="0" step="0.1">
+                <p matSuffix>%</p>
+              </mat-form-field>
+            </div>
+
+            <mat-divider></mat-divider>
+          </div>
+
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Закрыть</button>
+    <button mat-button [disabled]="form.invalid" type="submit">Создать</button>
+  </div>
+</form>

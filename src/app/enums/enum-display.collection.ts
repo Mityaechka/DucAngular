@@ -5,11 +5,17 @@ import {
   ActiveConditionDisplay,
   ActiveCondition,
 } from './active-condition.enum';
+import {
+  RetroBonusTypeEnum,
+  RetroBonusTypeDisplay,
+} from './retro-bonus-type.enum';
+
 export const EnumDisplayCollection = {
   ActiveConditionDisplay,
   PromotionTypeDisplay,
   PurposeTypeDisplay,
   MeasureDisplay,
+  RetroBonusTypeDisplay,
 };
 
 export const EnumCollection = {
@@ -17,4 +23,9 @@ export const EnumCollection = {
   PromotionType: PromotionType,
   PurposeType: PurposeType,
   Measure: Measure,
+  RetroBonusTypeEnum: RetroBonusTypeEnum,
+};
+
+export const IEnumDisplayCollection = {
+  ActiveCondition: ActiveConditionDisplay,
 };

@@ -1,3 +1,5 @@
+import { RetroBonusesComponent } from './components/special-terms/retro-bonuses/retro-bonuses/retro-bonuses.component';
+import { RetroBonusCreateComponent } from './components/special-terms/retro-bonuses/retro-bonus-create/retro-bonus-create.component';
 import { TillNotFoundComponent } from './components/till-not-found/till-not-found.component';
 import { TillWelcomeComponent } from './components/till-welcome/till-welcome.component';
 import { ShopPromotionsComponent } from './components/shop/shop-promotion/shop-promotions/shop-promotions.component';
@@ -36,6 +38,7 @@ export const tillRoutes: Routes = [
     children: [
       { path: 'sale-forms', component: SaleFormsComponent },
       { path: 'direct-discounts', component: DirectDiscountsComponent },
+      { path: 'retro-bonuses', component: RetroBonusesComponent },
     ],
   },
   {

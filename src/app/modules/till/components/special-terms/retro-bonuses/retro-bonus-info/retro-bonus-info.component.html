@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Прямая скидка</h1>
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div>
+        <p [matTooltip]="bonus?.shops|listToString:'name'">Магазины: {{!bonus.shops?'Все':bonus.shops.length}}</p>
+      </div>
+      <div>
+        <p [matTooltip]="bonus?.products|listToString:'name'">Продукты: {{!bonus.products?'Все':bonus.products.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <p>Условия</p>
+  <div *ngFor="let type of bonus.types" fxLayout="row" fxLayoutAlign="space-between center">
+    <div>
+      <p>Тип: {{EnumDisplayCollection.RetroBonusTypeDisplay[type.type]}}</p>
+    </div>
+    <div>
+        <ng-container [ngSwitch]="type.type">
+          <ng-container *ngSwitchCase="EnumCollection.RetroBonusTypeEnum.sellIn">
+            <p>От (кол-во): {{type.sellIn.from}}. До (кол-во): {{type.sellIn.to}}. Возврат: {{type.sellIn.value}} %</p>
+          </ng-container>
+          <ng-container *ngSwitchCase="EnumCollection.RetroBonusTypeEnum.sellOut">
+            <p>От (кол-во): {{type.sellOut.from}}. До (кол-во): {{type.sellOut.to}}. Возврат: {{type.sellOut.value}} %</p>
+          </ng-container>
+          <ng-container *ngSwitchCase="EnumCollection.RetroBonusTypeEnum.marketing">
+            <p>Пояснение: {{type.marketing.description}}</p>
+            <p>Возврат: {{type.marketing.value}} %</p>
+          </ng-container>
+          <ng-container *ngSwitchCase="EnumCollection.RetroBonusTypeEnum.debit">
+            <p>От (дни): {{type.debit.fromDays}}. До (дни): {{type.debit.toDays}}. Возврат: {{type.debit.value}} %</p>
+          </ng-container>
+        </ng-container>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button (click)="edit()">Редактировать</button>
+
+</div>

@@ -11,7 +11,7 @@
   <ng-container matColumnDef="product">
     <th mat-header-cell *matHeaderCellDef> Товар </th>
     <td mat-cell *matCellDef="let element">
-      <p [matTooltip]="element.products|listToString:'name'">{{!element.products?'Все':element.products.length}}</p>
+      <p [matTooltip]="element.products|listToString:'product.name'">{{!element.products?'Все':element.products.length}}</p>
     </td>
   </ng-container>
   <ng-container matColumnDef="canConsignment">

@@ -1,0 +1,24 @@
+<div class="m-10">
+  <button mat-raised-button (click)="createDiscount()">Создать новуый бонус</button>
+</div>
+<app-table #table [loadData]="loadData.bind(this)" (rowClick)="selectRetrobonus($event)">
+  <ng-container matColumnDef="shop">
+    <th mat-header-cell *matHeaderCellDef> Магазин </th>
+    <td mat-cell *matCellDef="let element">
+      <p [matTooltip]="element.shops|listToString:'name'">{{!element.shops?'Все':element.shops.length}}</p>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="product">
+    <th mat-header-cell *matHeaderCellDef> Товар </th>
+    <td mat-cell *matCellDef="let element">
+      <p [matTooltip]="element.products|listToString:'product.name'">{{!element.products?'Все':element.products.length}}</p>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="types">
+    <th mat-header-cell *matHeaderCellDef> Кол-во условий </th>
+    <td mat-cell *matCellDef="let element">
+      <p>{{element.types.length}}</p>
+    </td>
+  </ng-container>
+
+</app-table>

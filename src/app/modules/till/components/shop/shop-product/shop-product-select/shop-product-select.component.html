@@ -9,7 +9,7 @@
             <ngx-mat-select-search placeholderLabel="Поиск продуктов..." [formControl]="productsFilterControl"></ngx-mat-select-search>
           </mat-option>
           <mat-option *ngFor="let product of filteredProdcutsReplay|async " [value]="product">
-            {{product.name}}
+            {{product.product.name}} - {{product.retailPrice}} тг.
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -32,7 +32,7 @@
     <p>Выбранные продукты</p>
     <mat-list role="list">
       <mat-list-item role="listitem" *ngFor="let product of selectedProducts" >
-        <p>{{product.name}}</p>
+        <p>{{product.product.name}}</p>
       <mat-divider></mat-divider>
       </mat-list-item>
     </mat-list>

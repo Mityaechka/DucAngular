@@ -1,3 +1,4 @@
+import { ProductLeft } from './product-left.entity';
 import { Shop } from './shop.entity';
 import { SelecеtionForm } from '../enums/selection-form.enum';
 import { Product } from './product';
@@ -11,6 +12,6 @@ export class SaleForm {
   orderOnDelayConsignment: boolean;
   ownerShop: Shop;
   shops: Shop[];
-  products: Product[];
+  products: ProductLeft[];
   constructor() {}
 }

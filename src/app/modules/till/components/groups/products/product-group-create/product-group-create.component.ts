@@ -1,21 +1,28 @@
+import { LeftsService } from './../../../../../../services/lefts.service';
 import { Product } from './../../../../../../entities/product';
 import { ProductsService } from './../../../../../../services/products.service';
 import { ProductGroupsService } from './../../../../../../services/product-groups.service';
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReplaySubject } from 'rxjs';
 import { Shop } from 'src/app/entities/shop.entity';
 import { DialogsService } from 'src/app/services/dialogs.service';
+import { ProductLeft } from 'src/app/entities/product-left.entity';
 
 @Component({
   selector: 'app-product-group-create',
   templateUrl: './product-group-create.component.html',
-  styleUrls: ['./product-group-create.component.css']
+  styleUrls: ['./product-group-create.component.css'],
 })
 export class ProductGroupCreateComponent implements OnInit {
-
   @Output() created = new EventEmitter();
-  products: Product[] = [];
+  productLefts: ProductLeft[] = [];
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -24,10 +31,11 @@ export class ProductGroupCreateComponent implements OnInit {
 
   filterControl = new FormControl();
 
-  filteredProducts = new ReplaySubject<Product[]>(1);
+  filteredProducts = new ReplaySubject<ProductLeft[]>(1);
   constructor(
     private productGroupsService: ProductGroupsService,
     private productsService: ProductsService,
+    private leftsService: LeftsService,
     private dialogs: DialogsService,
     private detector: ChangeDetectorRef
   ) {}
@@ -38,13 +46,13 @@ export class ProductGroupCreateComponent implements OnInit {
     });
 
     this.dialogs.startLoading();
-    const response = await this.productsService.getProducts();
+    const response = await this.leftsService.getProductsLefts();
     this.dialogs.stopLoading();
     if (response.isSuccess) {
-      this.products = response.result.list;
+      this.productLefts = response.result.list;
     }
     this.detector.detectChanges();
-    this.filteredProducts.next(this.products.slice());
+    this.filteredProducts.next(this.productLefts.slice());
   }
   async createGroup() {
     this.dialogs.startLoading();
@@ -62,19 +70,20 @@ export class ProductGroupCreateComponent implements OnInit {
   }
 
   filterShops() {
-    if (!this.products) {
+    if (!this.productLefts) {
       return;
     }
     let search = this.filterControl.value;
     if (!search) {
-      this.filteredProducts.next(this.products.slice());
+      this.filteredProducts.next(this.productLefts.slice());
       return;
     } else {
       search = search.toLowerCase();
     }
     this.filteredProducts.next(
-      this.products.filter((product) => product.name.toLowerCase().indexOf(search) > -1)
+      this.productLefts.filter(
+        (product) => product.product.name.toLowerCase().indexOf(search) > -1
+      )
     );
   }
-
 }

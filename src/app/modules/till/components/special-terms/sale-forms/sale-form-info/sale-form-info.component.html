@@ -6,7 +6,7 @@
         <p [matTooltip]="saleForm?.shops|listToString:'name'">Магазин: {{!saleForm.shops?'Все':saleForm.shops.length}}</p>
       </div>
       <div>
-        <p [matTooltip]="saleForm?.products|listToString:'name'">Продукт: {{!saleForm.products?'Все':saleForm.products.length}}</p>
+        <p [matTooltip]="saleForm?.products|listToString:'product.name'">Продукт: {{!saleForm.products?'Все':saleForm.products.length}}</p>
       </div>
     </div>
   </div>

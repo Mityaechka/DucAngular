@@ -5,11 +5,12 @@ import { VisiblePipe } from './visible.pipe';
 import { AbsentPipe } from './absent.pipe';
 import { ListToStringPipe } from './list-to-string.pipe';
 import { EnumArrayPipe } from './enum-array.pipe';
+import { EnumDisplayPipe } from './enum-display.pipe';
 
 
 
 @NgModule({
-  declarations: [YesNoPipe, VisiblePipe, AbsentPipe, ListToStringPipe, EnumArrayPipe],
+  declarations: [YesNoPipe, VisiblePipe, AbsentPipe, ListToStringPipe, EnumArrayPipe, EnumDisplayPipe],
   imports: [
     CommonModule
   ],

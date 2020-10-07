@@ -108,3 +108,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mr-2 {
   margin-right: 2px;
 }
+
+
+.height-small{
+  height: 400px;
+}
