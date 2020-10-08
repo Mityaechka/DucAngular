@@ -1,0 +1,22 @@
+<app-table [loadData]="loadData.bind(this)" (rowClick)="ownerInfo($event)">
+  <ng-container matColumnDef="receiver">
+    <th mat-header-cell *matHeaderCellDef>Получатель</th>
+    <td mat-cell *matCellDef="let element"> {{element.productLeft.shop.name|absent}}</td>
+  </ng-container>
+  <ng-container matColumnDef="prodcut">
+    <th mat-header-cell *matHeaderCellDef>Продукт</th>
+    <td mat-cell *matCellDef="let element"> {{element.productLeft.product.name|absent}}</td>
+  </ng-container>
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Тип</th>
+    <td mat-cell *matCellDef="let element"> {{EnumDisplayCollection.RetroBonusTypeDisplay[element.retroBonusType.type]}}</td>
+  </ng-container>
+  <ng-container matColumnDef="sellInCount" >
+    <th mat-header-cell *matHeaderCellDef>Разргужено товара</th>
+    <td mat-cell *matCellDef="let element"> {{element.sellInCount}}</td>
+  </ng-container>
+  <ng-container matColumnDef="sellOutCount">
+    <th mat-header-cell *matHeaderCellDef>Реализовано товара</th>
+    <td mat-cell *matCellDef="let element"> {{element.sellOutCount}}</td>
+  </ng-container>
+</app-table>

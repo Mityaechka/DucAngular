@@ -1,3 +1,5 @@
+import { EnumCollection } from './../../../../../../enums/enum-display.collection';
+import { RetroBonusTypeEnum } from './../../../../../../enums/retro-bonus-type.enum';
 import { RetroBonusService } from './../../../../../../services/retro-bonus.service';
 import { DialogsService } from './../../../../../../services/dialogs.service';
 import { Group } from './../../../../../../entities/group.entity';
@@ -17,6 +19,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { arrayMinValidators } from 'src/app/validators/number.validator';
+import { retroBonusTypeControls } from 'src/app/other/retro-bonus-type-control';
 
 @Component({
   selector: 'app-retro-bonus-create',
@@ -25,7 +28,7 @@ import { arrayMinValidators } from 'src/app/validators/number.validator';
 })
 export class RetroBonusCreateComponent implements OnInit {
   @Output() created = new EventEmitter<number>();
-
+  EnumCollection = EnumCollection;
   form = new FormGroup({
     shops: new FormControl(undefined),
     products: new FormControl(undefined),
@@ -84,7 +87,10 @@ export class RetroBonusCreateComponent implements OnInit {
     typeGroup.removeControl('marketing');
     typeGroup.removeControl('debit');
 
-    typeGroup.addControl(RetroBonusTypeDisplay[value], typeControls[value]());
+    typeGroup.addControl(
+      RetroBonusTypeEnum[value],
+      retroBonusTypeControls[value]()
+    );
 
     this.detector.detectChanges();
   }
@@ -103,36 +109,3 @@ export class RetroBonusCreateComponent implements OnInit {
     }
   }
 }
-
-const RetroBonusTypeDisplay: { [index: number]: string } = [
-  'sellIn',
-  'sellOut',
-  'marketing',
-  'debit',
-];
-
-const typeControls = [
-  () =>
-    new FormGroup({
-      from: new FormControl(0, [Validators.required]),
-      to: new FormControl(0, [Validators.required]),
-      value: new FormControl(0, [Validators.required]),
-    }),
-  () =>
-    new FormGroup({
-      from: new FormControl(0, [Validators.required]),
-      to: new FormControl(0, [Validators.required]),
-      value: new FormControl(0, [Validators.required]),
-    }),
-  () =>
-    new FormGroup({
-      value: new FormControl(0, [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-    }),
-  () =>
-    new FormGroup({
-      fromDays: new FormControl(0, [Validators.required]),
-      toDays: new FormControl(0, [Validators.required]),
-      value: new FormControl(0, [Validators.required]),
-    }),
-];

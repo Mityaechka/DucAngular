@@ -6,14 +6,16 @@ import { AbsentPipe } from './absent.pipe';
 import { ListToStringPipe } from './list-to-string.pipe';
 import { EnumArrayPipe } from './enum-array.pipe';
 import { EnumDisplayPipe } from './enum-display.pipe';
+import { SumPipe } from './sum.pipe';
+import { WherePipe } from './where.pipe';
 
 
 
 @NgModule({
-  declarations: [YesNoPipe, VisiblePipe, AbsentPipe, ListToStringPipe, EnumArrayPipe, EnumDisplayPipe],
+  declarations: [YesNoPipe, VisiblePipe, AbsentPipe, ListToStringPipe, EnumArrayPipe, EnumDisplayPipe, SumPipe, WherePipe],
   imports: [
     CommonModule
   ],
-  exports:[YesNoPipe,AbsentPipe, ListToStringPipe,EnumArrayPipe]
+  exports:[YesNoPipe,AbsentPipe, ListToStringPipe,EnumArrayPipe, SumPipe, WherePipe]
 })
 export class PipesModule { }

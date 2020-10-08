@@ -2,11 +2,11 @@ import { RetroBonusTypeEnum } from './../../enums/retro-bonus-type.enum';
 import { Shop } from './../shop.entity';
 import { Product } from '../product';
 export class RetroBonus {
-  id:number;
+  id: number;
   ownerShop: Shop;
   shops: Shop[];
   products: Product[];
-  types: RetroBonusType;
+  types: RetroBonusType[];
 }
 export class RetroBonusType {
   type: RetroBonusTypeEnum;

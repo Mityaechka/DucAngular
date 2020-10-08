@@ -1,5 +1,5 @@
+import { ApiResult } from './../models/api-result.model';
 import { Injectable } from '@angular/core';
-import { ApiResult } from '../models/api-result.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
@@ -9,6 +9,7 @@ export class HttpService {
   // private path = 'https://duc.kz/api';
   constructor(private http: HttpClient) {}
   public get<T>(url: string, c?: new () => T): Promise<ApiResult<T>> {
+
     const promise = new Promise<ApiResult<T>>((resolve, reject) => {
       const req = this.http
         .get(`${this.path}/${url}`, { withCredentials: true })

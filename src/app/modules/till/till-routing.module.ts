@@ -1,3 +1,4 @@
+import { RetroBonusObligationsComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligations/retro-bonus-obligations.component';
 import { RetroBonusesComponent } from './components/special-terms/retro-bonuses/retro-bonuses/retro-bonuses.component';
 import { RetroBonusCreateComponent } from './components/special-terms/retro-bonuses/retro-bonus-create/retro-bonus-create.component';
 import { TillNotFoundComponent } from './components/till-not-found/till-not-found.component';
@@ -51,6 +52,7 @@ export const tillRoutes: Routes = [
       },
       { path: 'money-transfers', component: MoneyTransfersComponent },
       { path: 'supply-debts', component: SupplyDebtsComponent },
+      { path: 'retro-bonuses', component: RetroBonusObligationsComponent },
     ],
   },
   {

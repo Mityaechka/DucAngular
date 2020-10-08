@@ -1,3 +1,4 @@
+import { RetroBonusEditComponent } from './../retro-bonus-edit/retro-bonus-edit.component';
 import { RetroBonusTypeEnum } from './../../../../../../enums/retro-bonus-type.enum';
 import { RetroBonusType } from './../../../../../../entities/retro-bonus/retro-bonus.entity';
 import { EnumDisplayCollection, EnumCollection } from './../../../../../../enums/enum-display.collection';
@@ -39,15 +40,15 @@ export class RetroBonusInfoComponent implements OnInit {
     this.detector.detectChanges();
   }
   edit() {
-    // this.dialogs.push({
-    //   component: DirectDiscountEditComponent,
-    //   data: this.bonus,
-    //   onInstance: (i) => {
-    //     i.edited.subscribe(() => {
-    //       this.edited.emit();
-    //       this.load();
-    //     });
-    //   },
-    // });
+    this.dialogs.push({
+      component: RetroBonusEditComponent,
+      data: this.bonus,
+      onInstance: (i) => {
+        i.edited.subscribe(() => {
+          this.edited.emit();
+          this.load();
+        });
+      },
+    });
   }
 }

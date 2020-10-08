@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>
+  Информация об обязательстве
+</h1>
+<div mat-dialog-content fxLayout="column">
+  <div>
+    <app-retro-bonus-condition [type]="retroBonusObligation.retroBonusType"></app-retro-bonus-condition>
+  </div>
+  <div>
+    <ng-container [ngSwitch]="retroBonusObligation.retroBonusType.type">
+      <ng-container *ngSwitchCase="EnumCollection.RetroBonusTypeEnum.sellIn">
+        <div>
+          <p>Разргужено товара: {{count}}</p>
+        </div>
+        <div>
+
+          <p>Сумма возврата: {{sum*(retroBonusObligation.retroBonusType.sellIn.value/100)}}
+          </p>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Закрыть</button>
+</div>

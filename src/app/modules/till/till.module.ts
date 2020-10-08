@@ -118,6 +118,12 @@ import { RetroBonusesComponent } from './components/special-terms/retro-bonuses/
 import { RetroBonusCreateComponent } from './components/special-terms/retro-bonuses/retro-bonus-create/retro-bonus-create.component';
 import { RetroBonusInfoComponent } from './components/special-terms/retro-bonuses/retro-bonus-info/retro-bonus-info.component';
 import { RetroBonusEditComponent } from './components/special-terms/retro-bonuses/retro-bonus-edit/retro-bonus-edit.component';
+import { RetroBonusObligationsComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligations/retro-bonus-obligations.component';
+import { RetroBonusObligationsOwnerComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligations-owner/retro-bonus-obligations-owner.component';
+import { RetroBonusObligationsReceiverComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligations-receiver/retro-bonus-obligations-receiver.component';
+import { RetroBonusConditionComponent } from './components/special-terms/retro-bonuses/retro-bonus-condition/retro-bonus-condition.component';
+import { RetroBonusObligationOwnerInfoComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligation-owner-info/retro-bonus-obligation-owner-info.component';
+
 
 @NgModule({
   declarations: [
@@ -205,7 +211,12 @@ import { RetroBonusEditComponent } from './components/special-terms/retro-bonuse
     RetroBonusesComponent,
     RetroBonusCreateComponent,
     RetroBonusInfoComponent,
-    RetroBonusEditComponent
+    RetroBonusEditComponent,
+    RetroBonusObligationsComponent,
+    RetroBonusObligationsOwnerComponent,
+    RetroBonusObligationsReceiverComponent,
+    RetroBonusConditionComponent,
+    RetroBonusObligationOwnerInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -310,7 +321,8 @@ import { RetroBonusEditComponent } from './components/special-terms/retro-bonuse
     DirectDiscountEditComponent,
     RetroBonusCreateComponent,
     RetroBonusInfoComponent,
-    RetroBonusEditComponent
+    RetroBonusEditComponent,
+    RetroBonusObligationOwnerInfoComponent
   ],
 })
 export class TillModule {

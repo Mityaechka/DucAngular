@@ -9,12 +9,18 @@ import { RetroBonus } from '../entities/retro-bonus/retro-bonus.entity';
 export class RetroBonusService {
   constructor(private http: HttpService) {}
   async getRetroBonuses() {
-    return await this.http.post<List<RetroBonus>>(`specialTerms/retroBonuses`, null);
+    return await this.http.post<List<RetroBonus>>(
+      `specialTerms/retroBonuses`,
+      null
+    );
   }
-  async getRetroBonus(id:number) {
+  async getRetroBonus(id: number) {
     return await this.http.get<RetroBonus>(`specialTerms/retroBonuses/${id}`);
   }
   async createRetroBonus(data: any) {
     return await this.http.post(`specialTerms/retroBonuses/create`, data);
+  }
+  async editRetroBonus(id: number, data: any) {
+    return await this.http.post(`specialTerms/retroBonuses/${id}/edit`, data);
   }
 }
