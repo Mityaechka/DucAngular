@@ -23,4 +23,9 @@ export class RetroBonusService {
   async editRetroBonus(id: number, data: any) {
     return await this.http.post(`specialTerms/retroBonuses/${id}/edit`, data);
   }
+  async changeStateRetroBonus(id: number, state: boolean) {
+    return await this.http.get<number>(
+      `specialTerms/retroBonuses/${id}/state?state=${state}`
+    );
+  }
 }

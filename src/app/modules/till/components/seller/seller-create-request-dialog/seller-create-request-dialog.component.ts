@@ -1,5 +1,5 @@
+import { SaleForm } from 'src/app/entities/sale-form.entity';
 import { RequestService } from 'src/app/services/request.service';
-import { SaleForm } from '../../../../../entities/sale-form.entity';
 import { DialogsService } from './../../../../../services/dialogs.service';
 import { LeftsService } from './../../../../../services/lefts.service';
 import { ProductLeft } from '../../../../../entities/product-left.entity';
@@ -13,16 +13,28 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class SellerCreateRequestDialogComponent implements OnInit {
   today = new Date().toJSON().split('T')[0];
-
   saleForm: SaleForm;
+
   directDiscount: number;
 
-  currentCount = 0;
-  totalSum = 0;
-  totalDiscountSum = 0;
-  currentSaleForm = 0;
+  get totalSum() {
+    return this.currentCount * this.productLeft.price;
+  }
+  get markup() {
+    return this.form.controls.markup.value;
+  }
+  get currentCount() {
+    return this.form.controls.count.value;
+  }
+  get saleFormType() {
+    return this.form.controls.saleFormType.value;
+  }
+  get totalDiscountSum() {
+    return this.totalSum + this.totalSum * (this.directDiscount / 100);
+  }
   form = new FormGroup({
-    count: new FormControl('0', [Validators.required, Validators.min(1)]),
+    count: new FormControl(0, [Validators.required, Validators.min(1)]),
+    markup: new FormControl(0, [Validators.required, Validators.min(0)]),
     planeDeliveryDate: new FormControl('', [Validators.required]),
     saleFormType: new FormControl(0),
   });
@@ -44,6 +56,9 @@ export class SellerCreateRequestDialogComponent implements OnInit {
     );
 
     if (leftResponse.isSuccess) {
+      this.form.patchValue({
+        markup: leftResponse.result.markup,
+      });
       this.productLeft = leftResponse.result;
       const amountResponse = await this.leftsService.getDirectDiscount(
         this.productLeft.id
@@ -65,15 +80,7 @@ export class SellerCreateRequestDialogComponent implements OnInit {
     }
     this.detector.markForCheck();
   }
-  calcSum(event) {
-    this.currentCount = event.target.value;
-    this.totalSum = this.currentCount * this.productLeft.price;
-    this.totalDiscountSum =
-      this.totalSum - this.totalSum * (this.directDiscount / 100);
-  }
-  changeSaleForm(event) {
-    this.currentSaleForm = event;
-  }
+
   async createrRequest() {
     this.dialogs.startLoading();
     const request = await this.requestService.createRequest(

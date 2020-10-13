@@ -1,0 +1,77 @@
+<div fxLayout="row" class="m-10">
+  <div [formGroup]="form" fxFlex="50">
+    <div class="m-10">
+      <button mat-raised-button (click)="addField()">Добавить поле</button>
+    </div>
+    <mat-accordion formArrayName="fields" class="full-hi" style="height: 100vh;overflow-y: auto;">
+      <mat-expansion-panel *ngFor="let field of fields.controls;let i = index" [formGroupName]="i">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Поле {{i+1}}
+          </mat-panel-title>
+          <mat-panel-description>
+            <button mat-raised-button color="warn" (click)="removeField(i)">Удалить поле</button>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field appearance="outline" class="m-10">
+          <mat-label>Поле</mat-label>
+          <mat-select formControlName="type" (valueChange)=" redrawCanvas()" [compareWith]="compareCategoryObjects">
+            <mat-option value="0">Обычное</mat-option>
+            <mat-option value="1">Двойное</mat-option>
+            <mat-option value="2">Сложное</mat-option>
+            <mat-option value="3">Отступ</mat-option>
+            <mat-option value="4">Линия</mat-option>
+            <mat-option value="5">Таблица</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container [ngSwitch]="field.controls.type.value">
+          <app-simple-text-area *ngSwitchCase="0" #field (changeEvent)="redrawCanvas()"></app-simple-text-area>
+          <app-double-text-area *ngSwitchCase="1" #field (changeEvent)="redrawCanvas()"></app-double-text-area>
+          <app-complex-text-area *ngSwitchCase="2" #field (changeEvent)="redrawCanvas()"></app-complex-text-area>
+          <app-indent-area *ngSwitchCase="3" #field (changeEvent)="redrawCanvas()"></app-indent-area>
+          <app-line-area *ngSwitchCase="4" #field (changeEvent)="redrawCanvas()"></app-line-area>
+          <app-table-area *ngSwitchCase="5" #field (changeEvent)="redrawCanvas()"></app-table-area>
+        </ng-container>
+        <div class="m-10">
+
+
+        </div>
+        <mat-action-row>
+          <button mat-raised-button (click)="move(1, i)">Вниз</button>
+          <button mat-raised-button (click)="move(-1, i)">Вверх</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      <!-- <div *ngFor="let field of fields.controls;let i = index" [formGroupName]="i">
+        <h1>Поле {{i+1}}</h1>
+        <mat-form-field appearance="outline" class="m-10">
+          <mat-label>Поле</mat-label>
+          <mat-select formControlName="type" (valueChange)=" redrawCanvas()" [compareWith]="compareCategoryObjects" >
+            <mat-option value="0">Обычное</mat-option>
+            <mat-option value="1">Двойное</mat-option>
+            <mat-option value="2">Сложное</mat-option>
+            <mat-option value="3">Отступ</mat-option>
+            <mat-option value="4">Линия</mat-option>
+            <mat-option value="5">Таблица</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container [ngSwitch]="field.controls.type.value">
+          <app-simple-text-area *ngSwitchCase="0" #field (changeEvent)="redrawCanvas()"></app-simple-text-area>
+          <app-double-text-area *ngSwitchCase="1" #field (changeEvent)="redrawCanvas()"></app-double-text-area>
+          <app-complex-text-area *ngSwitchCase="2" #field (changeEvent)="redrawCanvas()"></app-complex-text-area>
+          <app-indent-area *ngSwitchCase="3" #field (changeEvent)="redrawCanvas()"></app-indent-area>
+          <app-line-area *ngSwitchCase="4" #field (changeEvent)="redrawCanvas()"></app-line-area>
+          <app-table-area *ngSwitchCase="5" #field (changeEvent)="redrawCanvas()"></app-table-area>
+        </ng-container>
+        <div class="m-10">
+          <button mat-raised-button (click)="removeField(i)">Удалить поле</button>
+          <button mat-raised-button (click)="move(1, i)">Вниз</button>
+          <button mat-raised-button (click)="move(-1, i)">Вверх</button>
+        </div>
+      </div> -->
+    </mat-accordion>
+  </div>
+  <div fxFlex="50" fxLayout="column" fxLayoutAlign="start center">
+    <h1>Предпросмотр</h1>
+    <app-receipt-preview #preview [onDataCahnge]="getData.bind(this)"></app-receipt-preview>
+  </div>
+</div>

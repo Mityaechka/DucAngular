@@ -13,5 +13,6 @@ export class SaleForm {
   ownerShop: Shop;
   shops: Shop[];
   products: ProductLeft[];
+  iisActive: boolean;
   constructor() {}
 }

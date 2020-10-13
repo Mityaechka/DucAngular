@@ -1,5 +1,5 @@
 <form [formGroup]="form" (submit)="edit()">
-  <h1 mat-dialog-title>Создание ретро бонуса</h1>
+  <h1 mat-dialog-title>Редактирование ретро бонуса</h1>
 
   <div mat-dialog-content class="height-small">
     <mat-tab-group animationDuration="0ms">
@@ -121,6 +121,6 @@
 
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Закрыть</button>
-    <button mat-button [disabled]="form.invalid" type="submit">Создать</button>
+    <button mat-button [disabled]="form.invalid" type="submit">Сохранить</button>
   </div>
 </form>

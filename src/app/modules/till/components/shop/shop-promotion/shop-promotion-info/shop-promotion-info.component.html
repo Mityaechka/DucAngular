@@ -5,8 +5,13 @@
       <p fxFlex="50">Тип акции: {{EnumDisplayCollection.PromotionTypeDisplay[promotion.promotionType]}}</p>
       <p fxFlex="50">Назначение акции: {{EnumDisplayCollection.PurposeTypeDisplay[promotion.purposeType]}}</p>
     </div>
+    <div *ngIf="promotion.purposeType==EnumCollection.PurposeType.Provider">
+      <p [matTooltip]="promotion.shops|listToString:'name'">Магазины:
+        {{!promotion.shops?'Все':promotion.shops.length}}</p>
+    </div>
     <div fxLayout="row">
-      <p fxFlex="50">Условаия отключения: {{EnumDisplayCollection.ActiveConditionDisplay[promotion.activeCondition]}}</p>
+      <p fxFlex="50">Условаия отключения: {{EnumDisplayCollection.ActiveConditionDisplay[promotion.activeCondition]}}
+      </p>
       <div [ngSwitch]="promotion.activeCondition" fxFlex="50">
         <div *ngSwitchCase="EnumCollection.ActiveCondition.Date">
           <p>Дата: {{promotion.activeDate|date:'HH:mm dd.MM.yyyy'}}</p>

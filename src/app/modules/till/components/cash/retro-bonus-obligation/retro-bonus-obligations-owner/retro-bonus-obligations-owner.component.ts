@@ -29,4 +29,5 @@ export class RetroBonusObligationsOwnerComponent implements OnInit {
       data: obligation,
     });
   }
+
 }

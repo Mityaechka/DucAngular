@@ -10,3 +10,15 @@ export class YesNoPipe implements PipeTransform {
   }
 
 }
+
+@Pipe({
+  name: 'isActive'
+})
+export class IsActivePipe implements PipeTransform {
+
+  transform(value: any, ...args: any[]): any {
+    return value ? 'Включено' : 'Отключено';
+  }
+
+}
+

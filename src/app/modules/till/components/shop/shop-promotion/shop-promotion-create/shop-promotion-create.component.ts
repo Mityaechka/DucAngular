@@ -31,6 +31,7 @@ export class ShopPromotionCreateComponent implements OnInit {
   created = new EventEmitter();
   form = new FormGroup({
     purposeType: new FormControl(0, [Validators.required]),
+    shops: new FormControl(undefined),
     activeCondition: new FormControl(0, [Validators.required]),
     activeDate: new FormControl(null, [Validators.required]),
     activeCount: new FormControl(0, [Validators.required]),
@@ -44,6 +45,12 @@ export class ShopPromotionCreateComponent implements OnInit {
     crossPromotionSellCount: new FormControl(null, [Validators.required]),
     crossPromotionCrossCount: new FormControl(null, [Validators.required]),
   });
+  get purposeType() {
+    return this.form.controls.purposeType as FormControl;
+  }
+  get shops() {
+    return this.form.controls.shops as FormControl;
+  }
   get activeCondition() {
     return this.form.controls.activeCondition as FormControl;
   }
@@ -104,12 +111,16 @@ export class ShopPromotionCreateComponent implements OnInit {
           this.activeDate.setValidators([Validators.required]);
           break;
         case ActiveCondition.SoldCount:
-          this.activeCount.setValidators([Validators.required]);
+          this.activeCount.setValidators([
+            Validators.required,
+            Validators.min(1),
+          ]);
           break;
       }
       this.activeDate.updateValueAndValidity();
       this.activeCount.updateValueAndValidity();
     });
+
     this.promotionType.valueChanges.subscribe((value) => {
       this.nPromotionNCount.clearValidators();
       this.nPromotionSellCount.clearValidators();

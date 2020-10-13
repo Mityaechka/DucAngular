@@ -6,18 +6,30 @@
     <app-retro-bonus-condition [type]="retroBonusObligation.retroBonusType"></app-retro-bonus-condition>
   </div>
   <div>
+    <p>Разргужено товара: {{countTotal}}</p>
+  </div>
+  <div>
     <ng-container [ngSwitch]="retroBonusObligation.retroBonusType.type">
       <ng-container *ngSwitchCase="EnumCollection.RetroBonusTypeEnum.sellIn">
-        <div>
-          <p>Разргужено товара: {{count}}</p>
+        <div fxLayout="row">
+          <div>
+            <p>Общая cумма возврата: {{sumTotalForRetrun}}</p>
+            <p>Текущая cумма возврата: {{sumCurrentForRetrun}}</p>
+          </div>
         </div>
-        <div>
-
-          <p>Сумма возврата: {{sum*(retroBonusObligation.retroBonusType.sellIn.value/100)}}
-          </p>
+      </ng-container>
+      <ng-container *ngSwitchCase="EnumCollection.RetroBonusTypeEnum.sellOut">
+        <div fxLayout="row">
+          <div>
+            <p>Общая cумма возврата: {{sumTotalForRetrun}}</p>
+            <p>Текущая cумма возврата: {{sumCurrentForRetrun}}</p>
+          </div>
         </div>
       </ng-container>
     </ng-container>
+  </div>
+  <div>
+    <button mat-button type="button" (click)="createTransfer()">Сформировать денежное обязательство</button>
   </div>
 </div>
 <div mat-dialog-actions align="end">

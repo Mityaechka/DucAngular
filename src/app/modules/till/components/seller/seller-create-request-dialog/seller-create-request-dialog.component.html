@@ -3,15 +3,19 @@
   <form [formGroup]="form">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Укажите необходимое количество товара "{{productLeft.product.name}}"</mat-label>
-      <input (input)="calcSum($event)" matInput placeholder="Количество" type="number" min="0" formControlName="count">
+      <input  matInput type="number" min="0" formControlName="count">
     </mat-form-field>
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Желаемая дата доставки</mat-label>
       <input matInput placeholder="Дата доставки" type="date" [min]="today" formControlName="planeDeliveryDate">
     </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Наценка</mat-label>
+      <input  matInput type="number" min="0" formControlName="markup">
+    </mat-form-field>
     <mat-form-field appearance="outline" *ngIf="saleForm">
       <mat-label>Форма продажи</mat-label>
-      <mat-select formControlName="saleFormType" (valueChange)="changeSaleForm($event)">
+      <mat-select formControlName="saleFormType" >
         <mat-option value="0">
           Нет
         </mat-option>
@@ -27,11 +31,12 @@
         </ng-container>
       </mat-select>
     </mat-form-field>
-    <ng-container *ngIf="currentSaleForm==1">
+    <ng-container *ngIf="saleFormType==1">
       <p>Срок консигнации: {{saleForm.maxTermConsignment}}</p>
     </ng-container>
     <p>Скидка: {{directDiscount}} %</p>
     <p>Цена: {{productLeft.price}}</p>
+    <p>Цена с наценкой: {{productLeft.price+productLeft.price*(markup/100)}}</p>
     <p>Текущая стоимость: {{totalSum}}</p>
     <p>С учетом скидки: {{totalDiscountSum}}</p>
 

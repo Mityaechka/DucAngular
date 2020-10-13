@@ -1,9 +1,9 @@
 <div [formGroup]="form">
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="m-10">
     <mat-label>Текст</mat-label>
     <input matInput formControlName="text">
   </mat-form-field>
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="m-10">
     <mat-label>Выравнивание</mat-label>
     <mat-select formControlName="align">
       <mat-option value="left">Лево</mat-option>
@@ -11,7 +11,7 @@
       <mat-option value="right">Право</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="m-10">
     <mat-label>Стиль</mat-label>
     <mat-select formControlName="style">
       <mat-option value="normal">Обычный</mat-option>
@@ -19,8 +19,8 @@
       <mat-option value="bold">Жирный</mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="m-10">
     <mat-label>Размер</mat-label>
-    <input matInput min="1" max="999" formControlName="size">
+    <input matInput min="1" max="999" formControlName="fontSize" type="number" step="1" min="1" max="1000">
   </mat-form-field>
 </div>

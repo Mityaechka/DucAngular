@@ -1,0 +1,76 @@
+<div [formGroup]="form">
+  <div fxLayout="row">
+    <mat-form-field appearance="outline" class="m-10">
+      <mat-label>Размер</mat-label>
+      <input matInput min="1" max="999" formControlName="fontSize" type="number" step="1" min="1" max="1000">
+    </mat-form-field>
+    <mat-checkbox formControlName="showBorder">Показывать границу</mat-checkbox>
+
+  </div>
+  <h2>Загоолвок</h2>
+  <div>
+    <button mat-raised-button (click)="addHeaders()">Добавить заголовок</button>
+  </div>
+  <div formArrayName="headers">
+    <div *ngFor="let header of headers.controls;let i =index" [formGroupName]="i">
+      <h2>Колонка {{i+1}}</h2>
+
+      <mat-form-field appearance="outline" class="m-10">
+        <mat-label>Текст</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="m-10">
+        <mat-label>Размер</mat-label>
+        <input matInput min="1" max="999" formControlName="width" type="number" step="1" min="1" max="1000">
+      </mat-form-field>
+      <div class="m-10">
+        <button mat-raised-button (click)="removeHeader(i)">Удалить заголовок</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div formArrayName="data">
+    <h1>Строки</h1>
+    <div>
+      <button mat-raised-button (click)="addRow()">Добавить строку</button>
+    </div>
+    <div *ngFor="let item of data.controls;let i = index" [formArrayName]="i">
+      <div *ngFor="let row of item.controls;let j = index" [formArrayName]="j" fxLayout="column">
+        <h2>Строка {{j+1}}</h2>
+        <div *ngFor="let column of row.controls;let u = index" [formGroupName]="u">
+          <h2>Колонка {{u+1}}</h2>
+          <div fxLayout="row wrap">
+            <mat-form-field appearance="outline" class="m-10">
+              <mat-label>Текст</mat-label>
+              <input matInput formControlName="value">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="m-10">
+              <mat-label>Выравнивание</mat-label>
+              <mat-select formControlName="align">
+                <mat-option value="left">Лево</mat-option>
+                <mat-option value="center">Центр</mat-option>
+                <mat-option value="right">Право</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="m-10">
+              <mat-label>Размер</mat-label>
+              <input matInput min="1" max="999" formControlName="width" type="number" step="1" min="1" max="1000">
+            </mat-form-field>
+            <div>
+              <button mat-raised-button (click)="removeColumn(j,u)">Удалить колонку</button>
+            </div>
+          </div>
+        </div>
+        <div class="m-10">
+          <button mat-raised-button (click)="addColumn(j)">Добавить колонку</button>
+        </div>
+        <div class="m-10">
+          <button mat-raised-button (click)="removeRow(i)">Удалить строку</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

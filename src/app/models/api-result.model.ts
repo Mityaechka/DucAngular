@@ -1,5 +1,6 @@
-export class ApiResult<T>{
-  constructor(public isSuccess?: boolean, public errorMessage?: string, public result?: T) {
-
-  }
+export class ApiResult<T> {
+  public isSuccess?: boolean;
+  public errorMessage?: string;
+  public result?: T;
+  constructor() {}
 }

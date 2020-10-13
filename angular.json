@@ -28,7 +28,8 @@
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/js/onscan.js"
+              "src/assets/js/onscan.js",
+              "src/assets/js/canvas-text-wrapper.js"
             ]
           },
           "configurations": {

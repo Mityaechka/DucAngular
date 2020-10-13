@@ -1,25 +1,35 @@
+import { User } from './../entities/user.entity';
 import { ApiResult } from './../models/api-result.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { JsonConvert } from 'json2typescript';
+import { RetroBonusObligation } from '../entities/retro-bonus/retro-bonus-obligation.entity';
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
   private path = 'https://localhost:44327/api';
-  // private path = 'https://duc.kz/api';
+  //private path = 'https://duc.kz/api';
   constructor(private http: HttpClient) {}
-  public get<T>(url: string, c?: new () => T): Promise<ApiResult<T>> {
-
+  public get<T>(url: string): Promise<ApiResult<T>> {
     const promise = new Promise<ApiResult<T>>((resolve, reject) => {
       const req = this.http
         .get(`${this.path}/${url}`, { withCredentials: true })
         .toPromise();
       req.then(
         (data: any) => {
-          resolve(Object.assign(new ApiResult<T>(), data));
+          const apiResult = Object.assign(
+            new ApiResult<T>(),
+            data
+          ) as ApiResult<T>;
+          resolve(apiResult);
         },
         (error) => {
-          resolve(new ApiResult(false, 'Ошибка сервера', null));
+          resolve({
+            isSuccess: false,
+            errorMessage: 'Ошибка сервера',
+            result: null,
+          });
         }
       );
     });
@@ -50,7 +60,11 @@ export class HttpService {
           resolve(Object.assign(new ApiResult<T>(), data));
         },
         (error) => {
-          resolve(new ApiResult(false, 'Ошибка сервера', null));
+          resolve({
+            isSuccess: false,
+            errorMessage: 'Ошибка сервера',
+            result: null,
+          });
         }
       );
     });

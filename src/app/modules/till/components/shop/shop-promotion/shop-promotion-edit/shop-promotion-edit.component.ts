@@ -35,6 +35,7 @@ export class ShopPromotionEditComponent implements OnInit {
   @Output() edited = new EventEmitter();
   form = new FormGroup({
     purposeType: new FormControl(0, [Validators.required]),
+    shops: new FormControl(undefined),
     activeCondition: new FormControl(0, [Validators.required]),
     activeDate: new FormControl(null, [Validators.required]),
     activeCount: new FormControl(0, [Validators.required]),
@@ -48,6 +49,12 @@ export class ShopPromotionEditComponent implements OnInit {
     crossPromotionSellCount: new FormControl(null, [Validators.required]),
     crossPromotionCrossCount: new FormControl(null, [Validators.required]),
   });
+  get purposeType() {
+    return this.form.controls.purposeType as FormControl;
+  }
+  get shops() {
+    return this.form.controls.shops as FormControl;
+  }
   get activeCondition() {
     return this.form.controls.activeCondition as FormControl;
   }
@@ -160,6 +167,7 @@ export class ShopPromotionEditComponent implements OnInit {
     }
     this.form.patchValue({
       purposeType: this.promotion.purposeType,
+      shops: this.promotion.shops,
       activeCondition: this.promotion.activeCondition,
       activeDate: this.promotion.activeDate,
       activeCount: this.promotion.activeCount,
@@ -214,7 +222,8 @@ export class ShopPromotionEditComponent implements OnInit {
   }
   async edit() {
     this.dialogs.startLoading();
-    const response = await this.shopsService.editPromotion(this.promotion.id,
+    const response = await this.shopsService.editPromotion(
+      this.promotion.id,
       this.form.getRawValue()
     );
     this.dialogs.stopLoading();

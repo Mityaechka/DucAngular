@@ -1,3 +1,4 @@
+import { ReceiptEditorModule } from './../receipt-editor/receipt-editor.module';
 import { DirectivesModule } from './../directives/directives.module';
 import { DirectDiscountsComponent } from './components/special-terms/direct-discounts/direct-discounts/direct-discounts.component';
 
@@ -123,6 +124,7 @@ import { RetroBonusObligationsOwnerComponent } from './components/cash/retro-bon
 import { RetroBonusObligationsReceiverComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligations-receiver/retro-bonus-obligations-receiver.component';
 import { RetroBonusConditionComponent } from './components/special-terms/retro-bonuses/retro-bonus-condition/retro-bonus-condition.component';
 import { RetroBonusObligationOwnerInfoComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligation-owner-info/retro-bonus-obligation-owner-info.component';
+import { RetroBonusObligationsReceiverInfoComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligations-receiver-info/retro-bonus-obligations-receiver-info.component';
 
 
 @NgModule({
@@ -217,6 +219,7 @@ import { RetroBonusObligationOwnerInfoComponent } from './components/cash/retro-
     RetroBonusObligationsReceiverComponent,
     RetroBonusConditionComponent,
     RetroBonusObligationOwnerInfoComponent,
+    RetroBonusObligationsReceiverInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -258,7 +261,8 @@ import { RetroBonusObligationOwnerInfoComponent } from './components/cash/retro-
     NgxMatSelectSearchModule,
     MatTooltipModule,
     MatTreeModule,
-    DirectivesModule
+    DirectivesModule,
+    ReceiptEditorModule
   ],
   exports: [MainTillComponent],
   entryComponents: [
@@ -322,7 +326,8 @@ import { RetroBonusObligationOwnerInfoComponent } from './components/cash/retro-
     RetroBonusCreateComponent,
     RetroBonusInfoComponent,
     RetroBonusEditComponent,
-    RetroBonusObligationOwnerInfoComponent
+    RetroBonusObligationOwnerInfoComponent,
+    RetroBonusObligationsReceiverInfoComponent
   ],
 })
 export class TillModule {

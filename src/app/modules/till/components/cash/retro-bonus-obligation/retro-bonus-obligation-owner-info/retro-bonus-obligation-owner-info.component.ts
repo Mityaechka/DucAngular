@@ -1,3 +1,5 @@
+import { sumFunction } from 'src/app/other/resolve-fn';
+import { tillRoutes } from './../../../../till-routing.module';
 import {
   EnumDisplayCollection,
   EnumCollection,
@@ -7,6 +9,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RetroBonusObligationService } from './../../../../../../services/retro-bonus-obligation.service';
 import { DialogsService } from './../../../../../../services/dialogs.service';
 import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
+import { RetroBonusTypeEnum } from 'src/app/enums/retro-bonus-type.enum';
 
 @Component({
   selector: 'app-retro-bonus-obligation-owner-info',
@@ -34,8 +37,26 @@ export class RetroBonusObligationOwnerInfoComponent implements OnInit {
     }
     this.detector.markForCheck();
   }
+  createTransfer() {
+    this.dialogs.pushConfirm(
+      'Создание денежного обязательства',
+      'Будет содано обязательство для этого остатка. Продолжить?',
+      async () => {
+        this.dialogs.startLoading();
+        const response = await this.retroBonusObligationService.createMoneyTransfer(
+          this.retroBonusObligation.productLeft.id
+        );
+        this.dialogs.stopLoading();
+        if (response.isSuccess) {
+          this.dialogs.pushAlert('Денежое обязательство успешно создано');
+        } else {
+          this.dialogs.pushAlert(response.errorMessage);
+        }
+      }
+    );
+  }
 
-  get count() {
+  get countTotal() {
     let count = 0;
     this.retroBonusObligation.obligationHistories.reduce((prev, curr) => {
       count += curr.count;
@@ -43,20 +64,78 @@ export class RetroBonusObligationOwnerInfoComponent implements OnInit {
     }, 0);
     return count;
   }
-  get sum() {
-    if (
-      this.count >= this.retroBonusObligation.retroBonusType.sellIn.from &&
-      this.count < this.retroBonusObligation.retroBonusType.sellIn.to
-    ) {
-      let sum = 0;
-      this.retroBonusObligation.obligationHistories.reduce(
-        (prev, curr) => (sum += curr.count * curr.price),
-        0
-      );
 
-      return sum;
-    } else {
-      return 0;
+  get sumCurrent() {
+    switch (this.retroBonusObligation.retroBonusType.type) {
+      case RetroBonusTypeEnum.sellIn:
+        const sellIn = this.retroBonusObligation.retroBonusType.sellIn;
+        return this.countTotal >= sellIn.from && this.countTotal < sellIn.to
+          ? sumFunction(
+              this.retroBonusObligation.obligationHistories.filter(
+                (x) => !x.isUsed
+              ),
+              (x) => x.count * x.price
+            )
+          : 0;
+      case RetroBonusTypeEnum.sellOut:
+        const sellOut = this.retroBonusObligation.retroBonusType.sellOut;
+        return this.countTotal >= sellOut.from && this.countTotal < sellOut.to
+          ? sumFunction(
+              this.retroBonusObligation.obligationHistories.filter(
+                (x) => !x.isUsed
+              ),
+              (x) => x.count * x.price
+            )
+          : 0;
+    }
+  }
+
+  get sumTotal() {
+    switch (this.retroBonusObligation.retroBonusType.type) {
+      case RetroBonusTypeEnum.sellIn:
+        const sellIn = this.retroBonusObligation.retroBonusType.sellIn;
+        return this.countTotal >= sellIn.from && this.countTotal < sellIn.to
+          ? sumFunction(
+              this.retroBonusObligation.obligationHistories,
+              (x) => x.count * x.price
+            )
+          : 0;
+      case RetroBonusTypeEnum.sellOut:
+        const sellOut = this.retroBonusObligation.retroBonusType.sellOut;
+        return this.countTotal >= sellOut.from && this.countTotal < sellOut.to
+          ? sumFunction(
+              this.retroBonusObligation.obligationHistories,
+              (x) => x.count * x.price
+            )
+          : 0;
+    }
+  }
+  get sumCurrentForRetrun() {
+    switch (this.retroBonusObligation.retroBonusType.type) {
+      case RetroBonusTypeEnum.sellIn:
+        return (
+          this.sumCurrent *
+          (this.retroBonusObligation.retroBonusType.sellIn.value / 100)
+        );
+        case RetroBonusTypeEnum.sellOut:
+        return (
+          this.sumCurrent *
+          (this.retroBonusObligation.retroBonusType.sellOut.value / 100)
+        );
+    }
+  }
+  get sumTotalForRetrun() {
+    switch (this.retroBonusObligation.retroBonusType.type) {
+      case RetroBonusTypeEnum.sellIn:
+        return (
+          this.sumTotal *
+          (this.retroBonusObligation.retroBonusType.sellIn.value / 100)
+        );
+        case RetroBonusTypeEnum.sellOut:
+        return (
+          this.sumTotal *
+          (this.retroBonusObligation.retroBonusType.sellOut.value / 100)
+        );
     }
   }
 }

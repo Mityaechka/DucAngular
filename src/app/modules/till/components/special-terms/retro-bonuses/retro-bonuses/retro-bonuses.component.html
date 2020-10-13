@@ -11,7 +11,8 @@
   <ng-container matColumnDef="product">
     <th mat-header-cell *matHeaderCellDef> Товар </th>
     <td mat-cell *matCellDef="let element">
-      <p [matTooltip]="element.products|listToString:'product.name'">{{!element.products?'Все':element.products.length}}</p>
+      <p [matTooltip]="element.products|listToString:'product.name'">{{!element.products?'Все':element.products.length}}
+      </p>
     </td>
   </ng-container>
   <ng-container matColumnDef="types">
@@ -20,5 +21,17 @@
       <p>{{element.types.length}}</p>
     </td>
   </ng-container>
-
+  <ng-container matColumnDef="isActive">
+    <th mat-header-cell *matHeaderCellDef> Статус </th>
+    <td mat-cell *matCellDef="let element">
+      <p>{{element.isActive|isActive}}</p>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button *ngIf="element.isActive" (click)="$event.stopPropagation();changeStateRetroBonus(element.id,false)">Отключить</button>
+      <button mat-raised-button *ngIf="!element.isActive" (click)="$event.stopPropagation();changeStateRetroBonus(element.id,true)">Включить</button>
+    </td>
+  </ng-container>
 </app-table>

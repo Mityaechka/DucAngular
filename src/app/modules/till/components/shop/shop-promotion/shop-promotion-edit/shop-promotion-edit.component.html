@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="edit()" >
-  <h1 mat-dialog-title>редактирование акции</h1>
+  <h1 mat-dialog-title>Редактирование акции</h1>
   <div mat-dialog-content>
     <div fxLayout="column">
       <div fxLayout="row">
@@ -28,6 +28,14 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+      </div>
+      <div *ngIf="purposeType.value==PurposeType.Provider" >
+        <div>
+          <div class="full-width">
+            <mat-label>Выбор магазинов</mat-label>
+            <app-shop-select-input formControlName="shops" ></app-shop-select-input>
+          </div>
+        </div>
       </div>
       <div [ngSwitch]="activeCondition.value">
         <div *ngSwitchCase="ActiveCondition.Date">

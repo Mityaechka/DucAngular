@@ -1,0 +1,40 @@
+<div [formGroup]="form">
+  <div formGroupName="texts">
+    <div *ngFor="let text of texts.controls;let i = index" [formGroupName]="i">
+      <mat-form-field appearance="outline" class="m-10">
+        <mat-label>Текст</mat-label>
+        <input matInput formControlName="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="m-10">
+        <mat-label>Выравнивание</mat-label>
+        <mat-select formControlName="align">
+          <mat-option value="left">Лево</mat-option>
+          <mat-option value="center">Центр</mat-option>
+          <mat-option value="right">Право</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="m-10">
+        <mat-label>Стиль</mat-label>
+        <mat-select formControlName="style">
+          <mat-option value="normal">Обычный</mat-option>
+          <mat-option value="italic">Курсив</mat-option>
+          <mat-option value="bold">Жирный</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="m-10">
+        <mat-label>Размер</mat-label>
+        <input matInput  formControlName="fontSize" type="number" step="1" min="1" max="1000">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="m-10">
+        <mat-label>Заполнение</mat-label>
+        <input matInput min="0" max="999" formControlName="width" type="number" step="1">
+      </mat-form-field>
+      <div>
+        <button mat-raised-button (click)="removeText(i)">Удалить поле</button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button mat-raised-button (click)="addText()">Добавить поле</button>
+  </div>
+</div>

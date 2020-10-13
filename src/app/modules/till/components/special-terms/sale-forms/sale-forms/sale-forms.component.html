@@ -1,7 +1,7 @@
 <div class="m-10">
   <button mat-raised-button color="primary" (click)="createSaleForm()">Создать новую форму продажи</button>
 </div>
-<app-table [loadData]="loadData.bind(this)" (rowClick)="saleFormRowClick($event)">
+<app-table #table [loadData]="loadData.bind(this)" (rowClick)="saleFormRowClick($event)">
   <ng-container matColumnDef="shop">
     <th mat-header-cell *matHeaderCellDef> Магазин </th>
     <td mat-cell *matCellDef="let element">
@@ -36,6 +36,19 @@
     <th mat-header-cell *matHeaderCellDef> Безнал. </th>
     <td mat-cell *matCellDef="let element">
       {{element.cashless|yesNo}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="isActive">
+    <th mat-header-cell *matHeaderCellDef> Статус </th>
+    <td mat-cell *matCellDef="let element">
+      {{element.isActive?'Включен':'Отключен'}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button *ngIf="element.isActive" (click)="$event.stopPropagation();setState(element,false)">Отключить</button>
+      <button mat-raised-button *ngIf="!element.isActive"(click)="$event.stopPropagation();setState(element,true)">Включить</button>
     </td>
   </ng-container>
 </app-table>

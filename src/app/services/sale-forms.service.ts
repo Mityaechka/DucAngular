@@ -24,4 +24,9 @@ export class SaleFormsService {
   async editSaleForm(model: SaleFormCreateViewModel) {
     return await this.http.post<number>(`specialTerms/saleForms/edit`, model);
   }
+  async setSaleFormIsActive(id: number, state: boolean) {
+    return await this.http.get<SaleForm>(
+      `specialTerms/saleForms/${id}/state?state=${state}`
+    );
+  }
 }

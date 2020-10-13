@@ -65,10 +65,11 @@ export class RequestService {
       count: number;
       saleFormType: number;
       planeDeliveryDate: Date;
+      markup: number;
     }
   ) {
     return await this.http.get(
-      `product/lefts/${id}/requests/add?count=${data.count}&saleFormType=${data.saleFormType}&planeDeliveryDate=${data.planeDeliveryDate}`
+      `product/lefts/${id}/requests/add?count=${data.count}&saleFormType=${data.saleFormType}&planeDeliveryDate=${data.planeDeliveryDate}&markup=${data.markup}`
     );
   }
   async getRequestCode(id: number) {

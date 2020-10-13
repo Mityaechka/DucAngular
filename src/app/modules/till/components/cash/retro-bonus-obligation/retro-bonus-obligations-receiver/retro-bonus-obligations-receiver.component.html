@@ -1,1 +1,21 @@
-<p>retro-bonus-obligations-receiver works!</p>
+<app-table [loadData]="loadData.bind(this)" (rowClick)="ownerInfo($event)">
+  <ng-container matColumnDef="leftId">
+    <th mat-header-cell *matHeaderCellDef>ID остатка</th>
+    <td mat-cell *matCellDef="let element"> {{element.productLeft.id|absent}}</td>
+  </ng-container>
+  <ng-container matColumnDef="prodcut">
+    <th mat-header-cell *matHeaderCellDef>Продукт</th>
+    <td mat-cell *matCellDef="let element"> {{element.productLeft.product.name|absent}}</td>
+  </ng-container>
+  <ng-container matColumnDef="owner">
+    <th mat-header-cell *matHeaderCellDef>Владелец</th>
+    <td mat-cell *matCellDef="let element"> {{element.ownerShop.name|absent}}</td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Тип</th>
+    <td mat-cell *matCellDef="let element"> {{EnumDisplayCollection.RetroBonusTypeDisplay[element.retroBonusType.type]}}
+    </td>
+  </ng-container>
+</app-table>

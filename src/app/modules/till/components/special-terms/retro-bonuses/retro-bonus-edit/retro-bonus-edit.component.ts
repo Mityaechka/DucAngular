@@ -54,7 +54,6 @@ export class RetroBonusEditComponent implements OnInit {
     this.dialogs.startLoading();
     const response = await this.retroBonusService.getRetroBonus(this.bonus.id);
     this.dialogs.stopLoading();
-    debugger
     if (response.isSuccess) {
       this.bonus = response.result;
       this.form.patchValue({

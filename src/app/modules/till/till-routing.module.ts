@@ -27,6 +27,7 @@ import { ShopGroupsComponent } from './components/groups/shops/shop-groups/shop-
 import { ProductGroupsComponent } from './components/groups/products/product-groups/product-groups.component';
 import { ProductTypeTreeComponent } from './components/product-type/product-type-tree/product-type-tree.component';
 import { DirectDiscountsComponent } from './components/special-terms/direct-discounts/direct-discounts/direct-discounts.component';
+import { ReceiptEditorComponent } from '../receipt-editor/components/receipt-editor/receipt-editor.component';
 
 export const tillRoutes: Routes = [
   { path: '', component: TillWelcomeComponent },
@@ -83,6 +84,7 @@ export const tillRoutes: Routes = [
       },
     ],
   },
+  { path: 'receipts/editor', component: ReceiptEditorComponent },
   { path: '**', component: TillNotFoundComponent },
 ];
 

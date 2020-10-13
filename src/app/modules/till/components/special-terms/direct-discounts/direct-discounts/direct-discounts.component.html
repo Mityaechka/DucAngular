@@ -23,7 +23,7 @@
   <ng-container matColumnDef="isActive">
     <th mat-header-cell *matHeaderCellDef> Статус </th>
     <td mat-cell *matCellDef="let element">
-      <p>{{element.isActive?'Активен':'Отключено'}}</p>
+      <p>{{element.isActive|isActive}}</p>
     </td>
   </ng-container>
   <ng-container matColumnDef="action">

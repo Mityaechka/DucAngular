@@ -46,17 +46,17 @@ export class RetroBonusesComponent implements OnInit {
       },
     });
   }
-  async changeStateDirectDiscount(id: number, state: boolean) {
-    // this.dialogs.startLoading();
-    // const response = await this.retroBonusService.changeStateDirectDiscount(
-    //   id,
-    //   state
-    // );
-    // this.dialogs.stopLoading();
-    // if (response.isSuccess) {
-    //   this.table.loadDataEvent();
-    // } else {
-    //   this.dialogs.pushAlert(response.errorMessage);
-    // }
+  async changeStateRetroBonus(id: number, state: boolean) {
+    this.dialogs.startLoading();
+    const response = await this.retroBonusService.changeStateRetroBonus(
+      id,
+      state
+    );
+    this.dialogs.stopLoading();
+    if (response.isSuccess) {
+      this.table.loadDataEvent();
+    } else {
+      this.dialogs.pushAlert(response.errorMessage);
+    }
   }
 }

@@ -31,4 +31,11 @@ export class RetroBonusObligationService {
       `retroBonusObligation/receiver/${id}`
     );
   }
+
+  async createMoneyTransfer(id: number) {
+    return await this.http.post<RetroBonusObligation>(
+      `retroBonusObligation/owner/${id}/transfer`,
+      null
+    );
+  }
 }

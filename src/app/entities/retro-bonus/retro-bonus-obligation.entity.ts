@@ -15,4 +15,5 @@ export class ObligationHisory {
   id: number;
   count: number;
   price: number;
+  isUsed: number;
 }

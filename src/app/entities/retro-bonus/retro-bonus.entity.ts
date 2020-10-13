@@ -3,6 +3,7 @@ import { Shop } from './../shop.entity';
 import { Product } from '../product';
 export class RetroBonus {
   id: number;
+  isActive: boolean;
   ownerShop: Shop;
   shops: Shop[];
   products: Product[];
