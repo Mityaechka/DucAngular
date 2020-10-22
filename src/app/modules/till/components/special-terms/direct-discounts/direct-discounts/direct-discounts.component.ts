@@ -26,7 +26,7 @@ export class DirectDiscountsComponent implements OnInit {
       component: DirectDiscountCreateComponent,
       onInstance: (i) => {
         i.created.subscribe(() => {
-          this.table.loadDataEvent();
+          this.table.loadData();
         });
       },
     });
@@ -39,7 +39,7 @@ export class DirectDiscountsComponent implements OnInit {
       component: DirectDiscountInfoComponent,
       data: discount,
       onInstance: (i) => {
-        i.edited.subscribe(() => this.table.loadDataEvent());
+        i.edited.subscribe(() => this.table.loadData());
       },
     });
   }
@@ -51,7 +51,7 @@ export class DirectDiscountsComponent implements OnInit {
     );
     this.dialogs.stopLoading();
     if (response.isSuccess) {
-      this.table.loadDataEvent();
+      this.table.loadData();
     } else {
       this.dialogs.pushAlert(response.errorMessage);
     }

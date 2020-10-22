@@ -1,3 +1,4 @@
+import { PipesModule } from './../pipes/pipes.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -39,7 +40,8 @@ import { ReceiptEditorComponent } from './components/receipt-editor/receipt-edit
     MatCheckboxModule,
     FlexLayoutModule,
     MatExpansionModule,
+    PipesModule
   ],
-  exports: [ReceiptEditorComponent],
+  exports: [ReceiptEditorComponent,ReceiptPreviewComponent],
 })
 export class ReceiptEditorModule {}

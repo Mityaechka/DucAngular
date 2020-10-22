@@ -89,6 +89,7 @@ import { ShopProductsComponent } from './components/shop/shop-product/shop-produ
 import { ProductAttributeEditComponent } from './components/shop/product-attribute/product-attribute-edit/product-attribute-edit.component';
 import { ShopPromotionsComponent } from './components/shop/shop-promotion/shop-promotions/shop-promotions.component';
 import { ShopPromotionCreateComponent } from './components/shop/shop-promotion/shop-promotion-create/shop-promotion-create.component';
+// tslint:disable-next-line: max-line-length
 import { SellerCreateRequestDialogComponent } from './components/seller/seller-create-request-dialog/seller-create-request-dialog.component';
 import { ShopPromotionInfoComponent } from './components/shop/shop-promotion/shop-promotion-info/shop-promotion-info.component';
 import { ShopPromotionEditComponent } from './components/shop/shop-promotion/shop-promotion-edit/shop-promotion-edit.component';
@@ -125,6 +126,23 @@ import { RetroBonusObligationsReceiverComponent } from './components/cash/retro-
 import { RetroBonusConditionComponent } from './components/special-terms/retro-bonuses/retro-bonus-condition/retro-bonus-condition.component';
 import { RetroBonusObligationOwnerInfoComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligation-owner-info/retro-bonus-obligation-owner-info.component';
 import { RetroBonusObligationsReceiverInfoComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligations-receiver-info/retro-bonus-obligations-receiver-info.component';
+import { ProviderShopsComponent } from './components/requests/provider-shops/provider-shops.component';
+import { ProviderCreateRequestComponent } from './components/requests/provider-create-request/provider-create-request.component';
+import { ProviderSelectProductComponent } from './components/requests/provider-select-product/provider-select-product.component';
+import { ProviderRequstConfirmCountComponent } from './components/provider/provider-request-confirm-count/provider-request-confirm-count.component';
+import { ReceiptTemplatesComponent } from './components/receipts/receipt-template/receipt-templates/receipt-templates.component';
+import { ReceiptTemplateInfoComponent } from './components/receipts/receipt-template/receipt-template-info/receipt-template-info.component';
+import { ReceiptTemplateCreateComponent } from './components/receipts/receipt-template/receipt-template-create/receipt-template-create.component';
+import { ReceiptTemplateEditComponent } from './components/receipts/receipt-template/receipt-template-edit/receipt-template-edit.component';
+import { ReceiptShopTypesComponent } from './components/receipts/receipt-shop-types/receipt-shop-types/receipt-shop-types.component';
+import { ReceiptShopTypeCreateComponent } from './components/receipts/receipt-shop-types/receipt-shop-type-create/receipt-shop-type-create.component';
+import { ReceiptShopTypeEditComponent } from './components/receipts/receipt-shop-types/receipt-shop-type-edit/receipt-shop-type-edit.component';
+import { ReceiptInfoComponent } from './components/receipts/receipt-info/receipt-info.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { ReceiptPrintPreviewComponent } from './components/receipts/receipt-print-preview/receipt-print-preview.component';
+import { CashPeriodInfoComponent } from './components/cash/cash-period/cash-period-info/cash-period-info.component';
+import { CashPeriodReceiptsTableComponent } from './components/cash/cash-period/cash-period-receipts-table/cash-period-receipts-table.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -220,6 +238,21 @@ import { RetroBonusObligationsReceiverInfoComponent } from './components/cash/re
     RetroBonusConditionComponent,
     RetroBonusObligationOwnerInfoComponent,
     RetroBonusObligationsReceiverInfoComponent,
+    ProviderShopsComponent,
+    ProviderCreateRequestComponent,
+    ProviderSelectProductComponent,
+    ProviderRequstConfirmCountComponent,
+    ReceiptTemplatesComponent,
+    ReceiptTemplateInfoComponent,
+    ReceiptTemplateCreateComponent,
+    ReceiptTemplateEditComponent,
+    ReceiptShopTypesComponent,
+    ReceiptShopTypeCreateComponent,
+    ReceiptShopTypeEditComponent,
+    ReceiptInfoComponent,
+    ReceiptPrintPreviewComponent,
+    CashPeriodInfoComponent,
+    CashPeriodReceiptsTableComponent
   ],
   imports: [
     CommonModule,
@@ -262,7 +295,9 @@ import { RetroBonusObligationsReceiverInfoComponent } from './components/cash/re
     MatTooltipModule,
     MatTreeModule,
     DirectivesModule,
-    ReceiptEditorModule
+    ReceiptEditorModule,
+    OverlayModule,
+    MatMenuModule
   ],
   exports: [MainTillComponent],
   entryComponents: [
@@ -327,7 +362,18 @@ import { RetroBonusObligationsReceiverInfoComponent } from './components/cash/re
     RetroBonusInfoComponent,
     RetroBonusEditComponent,
     RetroBonusObligationOwnerInfoComponent,
-    RetroBonusObligationsReceiverInfoComponent
+    RetroBonusObligationsReceiverInfoComponent,
+    ProviderCreateRequestComponent,
+    ProviderSelectProductComponent,
+    ProviderRequstConfirmCountComponent,
+    ReceiptTemplateInfoComponent,
+    ReceiptTemplateCreateComponent,
+    ReceiptTemplateEditComponent,
+    ReceiptShopTypeCreateComponent,
+    ReceiptShopTypeEditComponent,
+    ReceiptInfoComponent,
+    ReceiptPrintPreviewComponent,
+    CashPeriodInfoComponent
   ],
 })
 export class TillModule {

@@ -1,0 +1,80 @@
+<!-- This button triggers the overlay and is it's origin -->
+<button mat-mini-fab (click)="isOpen = !isOpen" matBadge="&#8288;" [matBadgeHidden]="!isUse" type="button" cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin">
+  <mat-icon>filter_list</mat-icon>
+</button>
+
+<!-- This template displays the overlay content and is connected to the button -->
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen"
+  [cdkConnectedOverlayHasBackdrop]="true" (backdropClick)="backdropClick()">
+  <div fxLayout="column" class="example-list">
+    <ng-container [ngSwitch]="type">
+      <ng-container *ngSwitchCase="'enum'">
+        <form [formGroup]="enumGroup" fxLayout="column" (submit)="filter()">
+          <mat-form-field appearance="outline">
+            <mat-label>Значение</mat-label>
+            <mat-select formControlName="value" [compareWith]="{}|compareWith:''">
+              <mat-option *ngFor="let v of enum" [value]="v">
+                {{v}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+      </ng-container>
+      <ng-container *ngSwitchCase="'number'" [formGroup]="numberGroup">
+        <form [formGroup]="numberGroup" fxLayout="column" (submit)="filter()">
+          <mat-form-field appearance="outline">
+            <mat-label>Тип</mat-label>
+            <mat-select formControlName="type" [compareWith]="{}|compareWith:''">
+              <mat-option value="0">
+                Равно
+              </mat-option>
+              <mat-option value="1">
+                Не равно
+              </mat-option>
+              <mat-option value="3">
+                Больше
+              </mat-option>
+              <mat-option value="4">
+                Меньше
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Значение</mat-label>
+            <input matInput type="number" formControlName="value">
+          </mat-form-field>
+        </form>
+      </ng-container>
+      <ng-container *ngSwitchCase="'string'">
+        <form [formGroup]="stringGroup" fxLayout="column" (submit)="filter()">
+          <mat-form-field appearance="outline">
+            <mat-label>Тип</mat-label>
+            <mat-select formControlName="type" [compareWith]="{}|compareWith:''">
+              <mat-option value="0">
+                Равно
+              </mat-option>
+              <mat-option value="1">
+                Не равно
+              </mat-option>
+              <mat-option value="2">
+                Содержит
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Значение</mat-label>
+            <input matInput formControlName="value">
+          </mat-form-field>
+        </form>
+      </ng-container>
+    </ng-container>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <button mat-mini-fab color="warn" (click)="removeFilter()" [disabled]="!isUse">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+
+      <button mat-raised-button color="primary" (click)="filter()" [disabled]="!valid">Применить</button>
+    </div>
+  </div>
+</ng-template>

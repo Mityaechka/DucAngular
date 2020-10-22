@@ -1,3 +1,8 @@
+import { SnackBarService } from './../../../../services/snack-bar.service';
+import {
+  NotificationHubService,
+  NotificationModel,
+} from './../../../../services/notification-hub.service';
 import { ScannerService } from './../../../../services/scanner.service';
 import { ShopsService } from 'src/app/services/shops.service';
 import { CurrentShopSelectComponent } from './../current-shop-select/current-shop-select.component';
@@ -32,10 +37,37 @@ export class MainTillComponent implements OnInit {
     private shopsService: ShopsService,
     private detector: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private scanner: ScannerService
+    private scanner: ScannerService,
+    private notificationHubService: NotificationHubService,
+    private snackBarService: SnackBarService
   ) {}
 
   async ngOnInit() {
+    this.notificationHubService.onConnect(() => {
+      this.notificationHubService.registerForAll((data: NotificationModel) => {
+        this.snackBarService.open(data.header, data.body);
+      });
+    });
+    this.notificationHubService.registerEvents(
+      (data: NotificationModel) => {
+        this.snackBarService.openLink(
+          data.header,
+          data.body,
+          'till/cash/money-transfers'
+        );
+      },
+      'PayTransfer',
+      'AcceptTransfer'
+    );
+
+    this.authService.userChange.subscribe((user: User) => {
+      if (user) {
+        this.notificationHubService.connect();
+      } else {
+        this.notificationHubService.close();
+      }
+    });
+
     this.user = (await this.authService.getUser()).result;
     this.pageService.subscribeOnTitleChange((x) => {
       this.title = x;

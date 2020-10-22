@@ -1,34 +1,28 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { Component, EventEmitter, forwardRef, OnInit, Output } from '@angular/core';
+import { FormGroup, FormControl, FormArray, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
-  ComplexTextAreaFiled,
-  IReceiptComponent,
-  IReceiptField,
-  SimpleTextAreaFiled,
+  ReceiptComponent,
 } from '../../models/receipt-field.model';
 
 @Component({
   selector: 'app-complex-text-area',
   templateUrl: './complex-text-area.component.html',
   styleUrls: ['./complex-text-area.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => ComplexTextAreaComponent),
+    },
+  ],
 })
-export class ComplexTextAreaComponent implements OnInit, IReceiptComponent {
-  @Output() changeEvent = new EventEmitter();
-
+export class ComplexTextAreaComponent extends ReceiptComponent {
   form = new FormGroup({
     texts: new FormArray([]),
   });
   get texts() {
     return this.form.controls.texts as FormArray;
   }
-  getField(): IReceiptField {
-    return new ComplexTextAreaFiled(this.form.getRawValue());
-  }
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((value) => this.changeEvent.emit());
-  }
-
   addText() {
     this.texts.push(
       new FormGroup({

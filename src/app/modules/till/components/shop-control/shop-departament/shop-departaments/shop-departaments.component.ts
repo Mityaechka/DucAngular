@@ -27,7 +27,7 @@ export class ShopDepartamentsComponent implements OnInit {
       component: ShopDepartamentCreateComponent,
       onInstance: (i) => {
         i.created.subscribe(() => {
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+          this.tableService.tables.forEach((x) => x.table.loadData());
         });
       },
     });

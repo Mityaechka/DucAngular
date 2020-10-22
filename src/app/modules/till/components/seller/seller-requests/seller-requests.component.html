@@ -1,6 +1,9 @@
 <div class="m-5">
   <button mat-raised-button color="primary" routerLink="/till/seller/requests/create">Создать новый заказ</button>
 </div>
+<div class="m-5">
+  <button mat-raised-button color="primary" routerLink="/till/seller/requests/create2">Создать группу заказов</button>
+</div>
 <app-table [loadData]="loadData.bind(this)"  (rowClick)="selectRequest($event)">
   <ng-container matColumnDef="fromShop">
     <th mat-header-cell *matHeaderCellDef> Поставщик </th>

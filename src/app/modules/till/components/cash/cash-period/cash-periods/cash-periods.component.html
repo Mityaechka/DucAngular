@@ -1,4 +1,4 @@
-<app-table [loadData]="loadData.bind(this)" >
+<app-table [loadData]="loadData.bind(this)" (rowClick)="showPeriod($event)">
   <ng-container matColumnDef="startTime">
     <th mat-header-cell *matHeaderCellDef> Время начала </th>
     <td mat-cell *matCellDef="let element"> {{element.startTime|date:'MM.dd.yyyy HH:mm'}}</td>

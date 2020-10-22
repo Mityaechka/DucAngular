@@ -1,24 +1,50 @@
-import { IReceiptField } from './../../models/receipt-field.model';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  IReceiptField,
+  ReceiptFieldFactory,
+} from './../../models/receipt-field.model';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-receipt-preview',
   templateUrl: './receipt-preview.component.html',
   styleUrls: ['./receipt-preview.component.css'],
 })
-export class ReceiptPreviewComponent implements OnInit {
+export class ReceiptPreviewComponent implements AfterViewInit {
   @ViewChild('canvas') canvas: ElementRef<HTMLCanvasElement>;
-  @Input() data: IReceiptField[];
-  @Input() onDataCahnge: Function;
+  get fields(): IReceiptField[] {
+    return ReceiptFieldFactory.getFields(this.rawData);
+  }
+  rawData: { type: string; data: any }[] = [];
+  @Input() set data(value: { type: string; data: any }[]) {
+    if (value && Array.isArray(value)) {
+      this.rawData = value;
+      this.redrawCanvas();
+    }
+  }
+  @Input() showPrint = true;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    this.redrawCanvas();
+    this.redrawCanvas();
+  }
   redrawCanvas() {
+    if (!this.canvas) {
+      return;
+    }
     let yPos = 0;
     const nativeElement = this.canvas.nativeElement;
     const context = nativeElement.getContext('2d');
     context.clearRect(0, 0, nativeElement.width, nativeElement.height);
-    this.onDataCahnge().forEach((x) => {
+    this.fields.forEach((x) => {
       if (x) {
         yPos = x.drawField(nativeElement, yPos);
       }
@@ -41,8 +67,10 @@ export class ReceiptPreviewComponent implements OnInit {
     canvas.height = height;
     canvas.getContext('2d').drawImage(tempCanvas, 0, 0);
   }
-  sendMessage() {
-    const dataUrl = this.canvas.nativeElement.toDataURL('image/png').replace('data:image/png;base64,', '');
+  print() {
+    const dataUrl = this.canvas.nativeElement
+      .toDataURL('image/png')
+      .replace('data:image/png;base64,', '');
     const event = new CustomEvent('printCanvas', {
       detail: {
         commands: [

@@ -17,6 +17,7 @@ import { ShopsService } from 'src/app/services/shops.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { SaleForm } from 'src/app/entities/sale-form.entity';
 import { ShopsSelectComponent } from '../../../shop/shops-select/shops-select.component';
+import { SaleFormType } from 'src/app/enums/sale-form-type.enum';
 
 @Component({
   selector: 'app-sale-form-edit',
@@ -32,8 +33,7 @@ export class SaleFormEditComponent implements OnInit {
     shopsValue: new FormControl(),
     products: new FormControl(),
     productsValue: new FormControl(),
-    canConsigment: new FormControl(),
-    canImplement: new FormControl(false),
+    saleFormType: new FormControl(0),
     maxTermConsigment: new FormControl(0, [
       Validators.required,
       Validators.min(0),
@@ -43,8 +43,8 @@ export class SaleFormEditComponent implements OnInit {
     cashless: new FormControl(false),
   });
   get canConsigment() {
-    const control = this.form.controls.canConsigment as FormControl;
-    if (control.value) {
+    const control = this.form.controls.saleFormType as FormControl;
+    if (control.value === SaleFormType.Consigment) {
       this.maxTermConsigment.setValidators(Validators.required);
     } else {
       this.maxTermConsigment.setValidators(null);
@@ -91,8 +91,7 @@ export class SaleFormEditComponent implements OnInit {
         shopsValue: new FormControl(saleFormResponse.result.shops),
         products: new FormControl(saleFormResponse.result.products?.map((x) => x.id)),
         productsValue: new FormControl(saleFormResponse.result.products),
-        canConsigment: new FormControl(saleFormResponse.result.canConsignment),
-        canImplement: new FormControl(saleFormResponse.result.canImplement),
+        saleFormType: new FormControl(saleFormResponse.result.saleFormType),
         maxTermConsigment: new FormControl(
           saleFormResponse.result.maxTermConsignment,
           [Validators.required, Validators.min(0)]

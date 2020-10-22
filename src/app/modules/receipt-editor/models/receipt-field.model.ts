@@ -1,4 +1,6 @@
-import { ElementRef } from '@angular/core';
+import { AfterContentInit, OnInit } from '@angular/core';
+import { ControlValueAccessor, FormGroup } from '@angular/forms';
+
 declare function CanvasTextWrapper(
   canvas,
   text: string,
@@ -6,11 +8,38 @@ declare function CanvasTextWrapper(
   optionns: any
 ): { x: number; y: number };
 
-export interface IReceiptComponent {
-  getField(): IReceiptField;
+export class ReceiptComponent
+  implements OnInit, ControlValueAccessor, AfterContentInit {
+  form: FormGroup;
+
+  ngAfterContentInit(): void {
+    // debugger
+    this.onChange(this.form.getRawValue());
+  }
+
+  onChange = (data: any) => {};
+
+  writeValue(obj: any): void {
+    if (obj) {
+      this.form.patchValue(obj);
+      this.onChange(this.form.getRawValue());
+    }
+  }
+  registerOnChange(fn: (rating: number[]) => void): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: () => void): void {}
+  setDisabledState(isDisabled: boolean): void {}
+
+  ngOnInit(): void {
+    this.form.valueChanges.subscribe((value) => {
+      this.onChange(this.form.getRawValue());
+    });
+  }
 }
 
 export interface IReceiptField {
+  getData(): any;
   drawField(canvas: HTMLCanvasElement, startPos: number): number;
 }
 export class SimpleTextAreaFiled implements IReceiptField {
@@ -22,6 +51,9 @@ export class SimpleTextAreaFiled implements IReceiptField {
       align: string;
     }
   ) {}
+  getData() {
+    return this.data;
+  }
 
   drawField(canvas: HTMLCanvasElement, startPos: number): number {
     const ctx = canvas.getContext('2d');
@@ -48,7 +80,9 @@ export class DoubleTextAreaFiled implements IReceiptField {
       align: string;
     }
   ) {}
-
+  getData() {
+    return this.data;
+  }
   drawField(canvas: HTMLCanvasElement, startPos: number): number {
     const ctx = canvas.getContext('2d');
     ctx.fillStyle = 'black';
@@ -89,7 +123,9 @@ export class ComplexTextAreaFiled implements IReceiptField {
       }[];
     }
   ) {}
-
+  getData() {
+    return this.data;
+  }
   drawField(canvas: HTMLCanvasElement, startPos: number): number {
     const ctx = canvas.getContext('2d');
     const canvasWidth = canvas.width;
@@ -126,7 +162,9 @@ export class ComplexTextAreaFiled implements IReceiptField {
 
 export class IndentAreaFiled implements IReceiptField {
   constructor(public data: { indent: number }) {}
-
+  getData() {
+    return this.data;
+  }
   drawField(canvas: HTMLCanvasElement, startPos: number): number {
     return startPos + this.data.indent;
   }
@@ -134,7 +172,9 @@ export class IndentAreaFiled implements IReceiptField {
 
 export class LineAreaFiled implements IReceiptField {
   constructor(public data: { symbol: string; fontSize: number }) {}
-
+  getData() {
+    return this.data;
+  }
   drawField(canvas: HTMLCanvasElement, startPos: number): number {
     const ctx = canvas.getContext('2d');
     if (!this.data.symbol) {
@@ -165,7 +205,9 @@ export class TableAreaFiled implements IReceiptField {
       data: { width: number; align: string; value: string }[][][];
     }
   ) {}
-
+  getData() {
+    return this.data;
+  }
   drawField(canvas: HTMLCanvasElement, startPos: number): number {
     const ctx = canvas.getContext('2d');
     ctx.fillStyle = 'black';
@@ -271,7 +313,60 @@ export class TableAreaFiled implements IReceiptField {
     return startPos;
   }
 }
+export class ReceiptFieldFactory {
+  static getFieled(rawFiled: { type: string; data: any }) {
+    switch (rawFiled.type) {
+      case '0':
+        return new SimpleTextAreaFiled(rawFiled.data);
+      case '1':
+        return new DoubleTextAreaFiled(rawFiled.data);
+      case '2':
+        return new ComplexTextAreaFiled(rawFiled.data);
+      case '3':
+        return new IndentAreaFiled(rawFiled.data);
+      case '4':
+        return new LineAreaFiled(rawFiled.data);
+      case '5':
+        return new TableAreaFiled(rawFiled.data);
+    }
+  }
+  static getFields(rawFiled: { type: string; data: any }[]) {
+    return rawFiled.map((x) => this.getFieled(x));
+  }
+  static prepareTemplate(
+    rawFields: { type: string; data: any }[],
+    data: any
+  ) {
+    for (const rawField of rawFields) {
+      if (rawField.type !== '5') {
+        // tslint:disable-next-line: forin
+        for (const key in data) {
+          const regex = new RegExp(`#${key}#`);
+          rawField.data = JSON.parse(
+            JSON.stringify(rawField.data).replace(regex, data[key])
+          );
+        }
+      } else {
+        const tableRows = [];
 
+        const rawRaw = rawField.data.data[0];
+
+        for (const row of data.table) {
+            let newRow = JSON.stringify(rawRaw);
+            for (const column in row) {
+              if (Object.prototype.hasOwnProperty.call(row, column)) {
+                const regex = new RegExp(`#${column}#`);
+                newRow =newRow.replace(regex,row[column]);
+              }
+            }
+            tableRows.push(JSON.parse(newRow));
+        }
+        rawField.data.data = tableRows;
+      }
+    }
+    return rawFields;
+  }
+}
 function getTextSize(font, text, size, fontWeight) {
   const div = document.createElement('div');
   div.innerHTML = text;

@@ -13,7 +13,11 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
   showFiller = false;
-  constructor(private pageService: PageService, private titleService: Title) {}
+  constructor(
+    private pageService: PageService,
+    private titleService: Title,
+    private authService: AuthService
+  ) {}
   ngOnInit() {
     this.pageService.subscribeOnTitleChange((x) => {
       this.titleService.setTitle(`DUK - ${x}`);

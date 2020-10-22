@@ -28,7 +28,7 @@ export class ProductAttributesComponent implements OnInit {
       config: { },
       onInstance: (i) => {
         i.created.subscribe(() =>
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent())
+          this.tableService.tables.forEach((x) => x.table.loadData())
         );
       },
     });
@@ -40,7 +40,7 @@ export class ProductAttributesComponent implements OnInit {
       data: attribute,
       onInstance: (i) => {
         i.edited.subscribe(() =>
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent())
+          this.tableService.tables.forEach((x) => x.table.loadData())
         );
       },
     });

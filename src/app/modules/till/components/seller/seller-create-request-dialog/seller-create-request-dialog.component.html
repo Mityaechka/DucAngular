@@ -13,30 +13,13 @@
       <mat-label>Наценка</mat-label>
       <input  matInput type="number" min="0" formControlName="markup">
     </mat-form-field>
-    <mat-form-field appearance="outline" *ngIf="saleForm">
-      <mat-label>Форма продажи</mat-label>
-      <mat-select formControlName="saleFormType" >
-        <mat-option value="0">
-          Нет
-        </mat-option>
-        <ng-container *ngIf="saleForm.canConsignment">
-          <mat-option value="1">
-            Консигнация
-          </mat-option>
-        </ng-container>
-        <ng-container *ngIf="saleForm.canImplement">
-          <mat-option value="2">
-            Реализация
-          </mat-option>
-        </ng-container>
-      </mat-select>
-    </mat-form-field>
-    <ng-container *ngIf="saleFormType==1">
+    <p>Форма продажи: {{EnumDisplayCollection.SaleFormTypeDisplay[saleForm.saleFormType]}}</p>
+    <ng-container *ngIf="saleForm.saleFormType==1">
       <p>Срок консигнации: {{saleForm.maxTermConsignment}}</p>
     </ng-container>
     <p>Скидка: {{directDiscount}} %</p>
-    <p>Цена: {{productLeft.price}}</p>
-    <p>Цена с наценкой: {{productLeft.price+productLeft.price*(markup/100)}}</p>
+    <p>Цена: {{productLeft.retailPrice}}</p>
+    <p>Цена с наценкой: {{productLeft.retailPrice+productLeft.retailPrice*(markup/100)}}</p>
     <p>Текущая стоимость: {{totalSum}}</p>
     <p>С учетом скидки: {{totalDiscountSum}}</p>
 

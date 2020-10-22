@@ -8,6 +8,7 @@ import { EnumArrayPipe } from './enum-array.pipe';
 import { EnumDisplayPipe } from './enum-display.pipe';
 import { SumPipe } from './sum.pipe';
 import { WherePipe } from './where.pipe';
+import { CompareWithPipe } from './compare-with.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { WherePipe } from './where.pipe';
     EnumDisplayPipe,
     SumPipe,
     WherePipe,
-    IsActivePipe
+    IsActivePipe,
+    CompareWithPipe
   ],
   imports: [CommonModule],
   exports: [
@@ -30,6 +32,7 @@ import { WherePipe } from './where.pipe';
     SumPipe,
     WherePipe,
     IsActivePipe,
+    CompareWithPipe,
   ],
 })
 export class PipesModule {}

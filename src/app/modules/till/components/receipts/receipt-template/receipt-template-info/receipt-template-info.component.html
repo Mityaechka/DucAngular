@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Шаблон {{template.name}}</h1>
+<div mat-dialog-content class="height-small">
+  <app-receipt-preview #preview [data]="template.receiptFields" [showPrint]='false'></app-receipt-preview>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button (click)="edit()">Редактировать</button>
+  <button mat-button (click)="print()">Пробная печать</button>
+</div>

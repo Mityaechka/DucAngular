@@ -12,19 +12,13 @@
   </div>
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div>
-      <p>Возможность консигнации: {{saleForm.canConsignment|yesNo}}</p>
+      <p>Форма продажи: {{EnumDisplayCollection.SaleFormTypeDisplay[saleForm.saleFormType]}}</p>
     </div>
-    <div *ngIf="saleForm.canConsignment">
+    <div *ngIf="saleForm.saleFormType==1">
       <p>Макс. срок консигнации: {{saleForm.maxTermConsignment}}</p>
-    </div>
-    <div *ngIf="saleForm.canConsignment">
+
       <p>Заказы при просрочке: {{saleForm.orderOnDelayConsignment|yesNo}}</p>
     </div>
-  </div>
-</div>
-<div fxLayout="row" fxLayoutAlign="space-between center">
-  <div>
-    <p>Возможность реализации: {{saleForm.canImplement|yesNo}}</p>
   </div>
 </div>
 <div fxLayout="row" fxLayoutAlign="space-between center">

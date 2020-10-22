@@ -1,3 +1,4 @@
+import { SaleFormType } from './../../../../../../enums/sale-form-type.enum';
 import { ShopsSelectComponent } from './../../../shop/shops-select/shops-select.component';
 import { ProductsService } from './../../../../../../services/products.service';
 import { DialogsService } from 'src/app/services/dialogs.service';
@@ -26,8 +27,8 @@ export class SaleFormCreateComponent implements OnInit {
   products: Product[];
   form: FormGroup;
   get canConsigment() {
-    const control = this.form.controls.canConsigment as FormControl;
-    if (control.value) {
+    const control = this.form.controls.saleFormType as FormControl;
+    if (control.value === SaleFormType.Consigment) {
       this.maxTermConsigment.setValidators(Validators.required);
     } else {
       this.maxTermConsigment.setValidators(null);
@@ -47,7 +48,9 @@ export class SaleFormCreateComponent implements OnInit {
   get otherShops() {
     let other = '';
     if (this.selectedShops.value.length > 1) {
-      this.selectedShops.value.slice(1).forEach((x) => (other += `\n${x.name}`));
+      this.selectedShops.value
+        .slice(1)
+        .forEach((x) => (other += `\n${x.name}`));
     }
     return other;
   }
@@ -66,8 +69,7 @@ export class SaleFormCreateComponent implements OnInit {
       shopsValue: new FormControl(),
       products: new FormControl(),
       productsValue: new FormControl(),
-      canConsigment: new FormControl(false),
-      canImplement: new FormControl(false),
+      saleFormType: new FormControl(0),
       maxTermConsigment: new FormControl(0, [
         Validators.required,
         Validators.min(0),

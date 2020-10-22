@@ -18,6 +18,6 @@ export class TableService {
     this._tables = this._tables.filter((x) => x.table !== t);
   }
   reloadAll() {
-    this.tables.forEach((x) => x.table.loadDataEvent());
+    this.tables.forEach((x) => x.table.loadData());
   }
 }

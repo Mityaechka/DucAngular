@@ -3,6 +3,7 @@ import { HttpService } from './http.service';
 import { Injectable } from '@angular/core';
 import { ProductLeft } from '../entities/product-left.entity';
 import { SaleForm } from '../entities/sale-form.entity';
+import { Filter } from '../models/filter.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,10 +31,10 @@ export class LeftsService {
       `product/lefts/barcode?barcode=${barcode}`
     );
   }
-  async getProviderProductsLefts() {
+  async getProviderProductsLefts(filter?: Filter) {
     return await this.http.post<List<ProductLeft>>(
       `product/lefts/provider`,
-      null
+      filter
     );
   }
   async getProviderProductsLeft(id: number) {

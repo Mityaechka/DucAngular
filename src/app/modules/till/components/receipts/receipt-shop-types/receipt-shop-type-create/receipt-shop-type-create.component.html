@@ -1,0 +1,25 @@
+<form [formGroup]="form" (submit)="create()">
+  <h1 mat-dialog-title>Прязка шаблона</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Шаблон чека</mat-label>
+      <mat-select [compareWith]="{}|compareWith:'id'" formControlName="templateId">
+        <mat-option *ngFor="let template of templates" [value]="template.id">
+          {{template.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Тип операции</mat-label>
+      <mat-select [compareWith]="{}|compareWith:'id'" formControlName="typeId">
+        <mat-option *ngFor="let type of types" [value]="type.id">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Закрыть</button>
+    <button mat-button [disabled]="form.invalid">Привязать</button>
+  </div>
+</form>

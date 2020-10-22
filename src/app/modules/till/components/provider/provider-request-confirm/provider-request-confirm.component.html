@@ -1,31 +1,60 @@
 <h1 mat-dialog-title>Подтверждение заказа</h1>
 <div mat-dialog-content>
-  <div>
-    <p>Общая стоимость: {{productRequest.totalSum}}</p>
-    <p>К оплате: {{productRequest.totalSumToPaid}}</p>
-    <mat-form-field appearance="outline" *ngIf="logisticticShops" class="full-width">
-      <mat-label>Транспортная компания</mat-label>
-      <mat-select (selectionChange)="onCompanySelect($event)" [(ngModel)]="logisticCompanyId">
-        <mat-option *ngFor="let shop of logisticticShops" [value]="shop.id">
-          {{shop.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="outline" *ngIf="productRequest.logisticProductRequest" class="full-width">
-      <mat-label>Водитель</mat-label>
-      <mat-select (selectionChange)="onDriverSelect($event)" [(ngModel)]="logisticDriverId">
-        <mat-option *ngFor="let driver of dirvers" [value]="driver.id">
-          {{driver.fio}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Расчетная дата поставки</mat-label>
-      <input (input)="onDateChange($event)" matInput placeholder="Дата" type="date" [value]="productRequest.planeDeliveryDate">
-    </mat-form-field>
-  </div>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Логисты">
+      <p>Общая стоимость: {{productRequest.totalSum}}</p>
+      <p>К оплате: {{productRequest.totalSumToPaid}}</p>
+      <mat-form-field appearance="outline" *ngIf="logisticticShops" class="full-width">
+        <mat-label>Транспортная компания</mat-label>
+        <mat-select (selectionChange)="onCompanySelect($event)" [(ngModel)]="logisticCompanyId">
+          <mat-option *ngFor="let shop of logisticticShops" [value]="shop.id">
+            {{shop.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" *ngIf="productRequest.logisticProductRequest" class="full-width">
+        <mat-label>Водитель</mat-label>
+        <mat-select (selectionChange)="onDriverSelect($event)" [(ngModel)]="logisticDriverId">
+          <mat-option *ngFor="let driver of dirvers" [value]="driver.id">
+            {{driver.fio}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Расчетная дата поставки</mat-label>
+        <input (input)="onDateChange($event)" matInput placeholder="Дата" type="date"
+          [value]="productRequest.planeDeliveryDate">
+      </mat-form-field>
+    </mat-tab>
+    <mat-tab label="Продукты">
+      <app-table [rawData]="productRequest.productLines" [showPagination]="false" [hover]="false">
+        <ng-container matColumnDef="productLeftId">
+          <th mat-header-cell *matHeaderCellDef> Id остатка</th>
+          <td mat-cell *matCellDef="let element"> {{element.productLeft.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="productLeftName">
+          <th mat-header-cell *matHeaderCellDef> Продукт </th>
+          <td mat-cell *matCellDef="let element"> {{element.productLeft.product.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="requestCount">
+          <th mat-header-cell *matHeaderCellDef> Запрошенно </th>
+          <td mat-cell *matCellDef="let element"> {{element.requestCount}} </td>
+        </ng-container>
+        <ng-container matColumnDef="responseCount">
+          <th mat-header-cell *matHeaderCellDef> Подтвержденно</th>
+          <td mat-cell *matCellDef="let element"> {{element.responseCount}} </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-raised-button (click)="confirmCount(element)">Изменить</button>
+          </td>
+        </ng-container>
+      </app-table>
+    </mat-tab>
+  </mat-tab-group>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Закрыть</button>
-  <button mat-button mat-dialog-close *ngIf="canConfirmRequest" (click)="confirmRequest()" >Подтвердить</button>
+  <button mat-button mat-dialog-close *ngIf="canConfirmRequest" (click)="confirmRequest()">Подтвердить</button>
 </div>

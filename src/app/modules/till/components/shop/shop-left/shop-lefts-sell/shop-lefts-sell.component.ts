@@ -1,3 +1,4 @@
+import { SnackBarService } from './../../../../../../services/snack-bar.service';
 import { ScannerService } from './../../../../../../services/scanner.service';
 import {
   Component,
@@ -35,7 +36,8 @@ export class ShopLeftsSellComponent implements OnInit, OnDestroy {
     private leftsService: LeftsService,
     private dialogs: DialogsService,
     private detector: ChangeDetectorRef,
-    private scannerService: ScannerService
+    private scannerService: ScannerService,
+    private snackBarService: SnackBarService
   ) {}
   ngOnDestroy(): void {
     if (this.scanSubscription) {
@@ -82,8 +84,8 @@ export class ShopLeftsSellComponent implements OnInit, OnDestroy {
     this.dialogs.stopLoading();
     if (response.isSuccess) {
       this.products = [];
-      this.dialogs.pushAlert('Товары успешно проданы!', 'Сообщение');
-      await this.productLeftsTable.loadDataEvent();
+      this.snackBarService.open('Сообщение', 'Товары успешно проданы');
+      await this.productLeftsTable.loadData();
     } else {
       this.dialogs.pushAlert(response.errorMessage);
     }

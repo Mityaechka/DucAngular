@@ -29,7 +29,7 @@ export class RetroBonusesComponent implements OnInit {
       component: RetroBonusCreateComponent,
       onInstance: (i) => {
         i.created.subscribe(() => {
-          this.table.loadDataEvent();
+          this.table.loadData();
         });
       },
     });
@@ -42,7 +42,7 @@ export class RetroBonusesComponent implements OnInit {
       component: RetroBonusInfoComponent,
       data: bonus,
       onInstance: (i) => {
-        i.edited.subscribe(() => this.table.loadDataEvent());
+        i.edited.subscribe(() => this.table.loadData());
       },
     });
   }
@@ -54,7 +54,7 @@ export class RetroBonusesComponent implements OnInit {
     );
     this.dialogs.stopLoading();
     if (response.isSuccess) {
-      this.table.loadDataEvent();
+      this.table.loadData();
     } else {
       this.dialogs.pushAlert(response.errorMessage);
     }

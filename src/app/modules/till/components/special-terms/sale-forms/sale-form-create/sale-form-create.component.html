@@ -23,20 +23,23 @@
     </div>
     <div fxLayout="column">
       <div fxFlex>
-        <mat-checkbox formControlName="canConsigment">Возможность консигнации</mat-checkbox>
+        <mat-form-field appearance="outline">
+          <mat-label>Форма продажи</mat-label>
+          <mat-select formControlName="saleFormType">
+            <mat-option value="1">Консигнация</mat-option>
+            <mat-option value="2">Реализация</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div fxFlex fxLayout="row" fxLayoutAlign="space-between"
-        [style.visibility]="canConsigment.value?'visible':'hidden'">
+        [style.visibility]="canConsigment.value==1?'visible':'hidden'">
         <div>
           <mat-form-field appearance="outline">
             <mat-label>Макс. срок консигнации</mat-label>
-            <input matInput placeholder="Скрок" type="number" min="1" formControlName="maxTermConsigment">
+            <input matInput type="number" min="1" formControlName="maxTermConsigment">
           </mat-form-field>
         </div>
         <mat-checkbox class="m-10" fxFlex formControlName="orderOnDelayConsignment">Заказы при просрочке</mat-checkbox>
-      </div>
-      <div fxFlex>
-        <mat-checkbox formControlName="canImplement">Возможность реализации</mat-checkbox>
       </div>
       <div fxFlex fxLayout="row">
         <mat-checkbox formControlName="cash">Нал. расчет</mat-checkbox>

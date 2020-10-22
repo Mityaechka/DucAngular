@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Закуп товара у поставщика "{{provider.name}}"</h1>
+<div mat-dialog-content>
+  <div>
+    <form [formGroup]="form" (submit)="search()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Название продукта</mat-label>
+        <input matInput formControlName="search">
+        <mat-icon matSuffix (click)="search()">search</mat-icon>
+      </mat-form-field>
+    </form>
+    <mat-selection-list *ngIf="result&&result.length!=0;else empty"  [multiple]="false" (selectionChange)="onSelect($event)">
+      <mat-list-option *ngFor="let left of result" [value]="left">
+        {{left.product.name}}
+      </mat-list-option>
+    </mat-selection-list>
+    <ng-template #empty>
+      <p>Ничего не найдено</p>
+    </ng-template>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+</div>

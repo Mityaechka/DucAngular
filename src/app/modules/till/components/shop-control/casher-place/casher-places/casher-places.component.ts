@@ -27,7 +27,7 @@ export class CasherPlacesComponent implements OnInit {
       component: CasherPlaceCreateComponent,
       onInstance: (i) => {
         i.created.subscribe(async () => {
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+          this.tableService.tables.forEach((x) => x.table.loadData());
         });
       },
     });
@@ -42,7 +42,7 @@ export class CasherPlacesComponent implements OnInit {
         data: response.result,
         onInstance: (i) => {
           i.edited.subscribe(async () => {
-            this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+            this.tableService.tables.forEach((x) => x.table.loadData());
           });
         },
       });

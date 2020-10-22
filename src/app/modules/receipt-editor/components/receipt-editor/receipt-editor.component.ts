@@ -1,42 +1,73 @@
-import { AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
-import { IReceiptComponent } from '../../models/receipt-field.model';
-import { ReceiptPreviewComponent } from '../receipt-preview/receipt-preview.component';
+import { AfterViewInit } from '@angular/core';
+import { Component, OnInit, forwardRef } from '@angular/core';
+import {
+  FormGroup,
+  FormArray,
+  FormControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-receipt-editor',
   templateUrl: './receipt-editor.component.html',
-  styleUrls: ['./receipt-editor.component.css']
+  styleUrls: ['./receipt-editor.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => ReceiptEditorComponent),
+    },
+  ],
 })
-export class ReceiptEditorComponent implements AfterViewInit {
-  @ViewChildren('field') fieldsComponents: QueryList<IReceiptComponent>;
-  @ViewChild('preview') previewComponent: ReceiptPreviewComponent;
-
+export class ReceiptEditorComponent
+  implements AfterViewInit, ControlValueAccessor {
   form = new FormGroup({
     fields: new FormArray([]),
   });
+
   get fields() {
     return this.form.controls.fields as FormArray;
   }
-  constructor() {}
 
+  constructor() {}
   ngAfterViewInit(): void {}
-  redrawCanvas() {
-    this.previewComponent.redrawCanvas()
+
+  onChange = (data: any) => {};
+
+  writeValue(obj: any[]): void {
+    if (obj) {
+      for (const o of obj) {
+        this.addField(o.type, o.data);
+      }
+    }
+    this.onChange(this.form.getRawValue());
   }
-  getData() {
-    return this.fieldsComponents?.map((x) => x.getField());
+  registerOnChange(fn: (rating: number[]) => void): void {
+    this.onChange = fn;
   }
-  addField() {
-    this.fields.controls.push(
-      new FormGroup({
-        type: new FormControl('0'),
-      })
-    );
+  registerOnTouched(fn: () => void): void {}
+  setDisabledState(isDisabled: boolean): void {}
+
+  addField(type = '0', data?: any) {
+    this.onChange(this.fields.getRawValue());
+
+    const dataControl = new FormControl(data);
+    const group = new FormGroup({
+      type: new FormControl(type),
+      data: dataControl,
+    });
+    this.fields.controls.push(group);
+
+    dataControl.valueChanges.subscribe((value) => {
+      this.onChange(this.fields.getRawValue());
+    });
   }
   removeField(i: number) {
     this.fields.removeAt(i);
+    this.onChange(this.fields.getRawValue());
   }
+
   move(shift, currentIndex) {
     let newIndex: number = currentIndex + shift;
     if (newIndex === -1) {
@@ -49,9 +80,7 @@ export class ReceiptEditorComponent implements AfterViewInit {
     this.fields.removeAt(currentIndex);
     this.fields.insert(newIndex, currentGroup);
   }
-
   compareCategoryObjects(object1: any, object2: any) {
     return object1 && object2 && object1 === object2;
   }
 }
-

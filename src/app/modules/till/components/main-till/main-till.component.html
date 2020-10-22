@@ -47,7 +47,8 @@
 
       <app-nav-title title="Чеки"></app-nav-title>
 
-      <app-nav title="Редактор" path="/till/receipts/editor"></app-nav>
+      <app-nav title="Шаблоны чеков" path="/till/receipts/templates"></app-nav>
+      <app-nav title="Типы чеков" path="/till/receipts/operations"></app-nav>
     </mat-list>
   </mat-drawer>
 
@@ -62,9 +63,17 @@
       <div class="mr-10">
         <a (click)="selectShopclick()">Текущий магазин: {{currentShop?currentShop.name:'Отсуствует'}}</a>
       </div>
-      <div *ngIf="user">
-        <span>{{user.fio}}</span>
-      </div>
+      <ng-container *ngIf="user">
+        <a mat-flat-button [matMenuTriggerFor]="menu">{{user.fio}}</a>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button>
+
+        </mat-menu>
+      </ng-container>
       <button mat-icon-button (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
       </button>

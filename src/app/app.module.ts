@@ -39,14 +39,20 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { ReceiptEditorModule } from './modules/receipt-editor/receipt-editor.module';
 import { MatTreeModule } from '@angular/material/tree';
 import { DirectivesModule } from './modules/directives/directives.module';
-
+import {MatBadgeModule} from '@angular/material/badge';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SnackBarNotificationComponent } from './components/snack-bar-notification/snack-bar-notification.component';
+import { SnackBarLinkNotificationComponent } from './components/snack-bar-link-notification/snack-bar-link-notification.component';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
     LoadingComponent,
     AlertComponent,
     IntroComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    SnackBarNotificationComponent,
+    SnackBarLinkNotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -83,11 +89,14 @@ import { DirectivesModule } from './modules/directives/directives.module';
     MatTooltipModule,
     ReceiptEditorModule,
     MatTreeModule,
-    DirectivesModule
+    DirectivesModule,
+    MatBadgeModule,
+    MatSnackBarModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],
   exports: [],
-  entryComponents: [LoadingComponent, AlertComponent, ConfirmComponent],
+  entryComponents: [LoadingComponent, AlertComponent, ConfirmComponent,SnackBarNotificationComponent,SnackBarLinkNotificationComponent],
 })
 export class AppModule {}

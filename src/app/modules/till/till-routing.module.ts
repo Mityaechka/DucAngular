@@ -1,3 +1,5 @@
+import { ReceiptShopTypesComponent } from './components/receipts/receipt-shop-types/receipt-shop-types/receipt-shop-types.component';
+import { ProviderShopsComponent } from './components/requests/provider-shops/provider-shops.component';
 import { RetroBonusObligationsComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligations/retro-bonus-obligations.component';
 import { RetroBonusesComponent } from './components/special-terms/retro-bonuses/retro-bonuses/retro-bonuses.component';
 import { RetroBonusCreateComponent } from './components/special-terms/retro-bonuses/retro-bonus-create/retro-bonus-create.component';
@@ -27,13 +29,14 @@ import { ShopGroupsComponent } from './components/groups/shops/shop-groups/shop-
 import { ProductGroupsComponent } from './components/groups/products/product-groups/product-groups.component';
 import { ProductTypeTreeComponent } from './components/product-type/product-type-tree/product-type-tree.component';
 import { DirectDiscountsComponent } from './components/special-terms/direct-discounts/direct-discounts/direct-discounts.component';
-import { ReceiptEditorComponent } from '../receipt-editor/components/receipt-editor/receipt-editor.component';
+import { ReceiptTemplatesComponent } from './components/receipts/receipt-template/receipt-templates/receipt-templates.component';
 
 export const tillRoutes: Routes = [
   { path: '', component: TillWelcomeComponent },
   { path: 'provider/requests', component: ProviderRequestsComponent },
   { path: 'seller/requests', component: SellerRequestsComponent },
   { path: 'seller/requests/create', component: SellerCreateRequestComponent },
+  { path: 'seller/requests/create2', component: ProviderShopsComponent },
   { path: 'logistic/requests', component: LogisticRequestsComponent },
   {
     path: 'special-terms',
@@ -84,7 +87,8 @@ export const tillRoutes: Routes = [
       },
     ],
   },
-  { path: 'receipts/editor', component: ReceiptEditorComponent },
+  { path: 'receipts/templates', component: ReceiptTemplatesComponent },
+  { path: 'receipts/operations', component: ReceiptShopTypesComponent },
   { path: '**', component: TillNotFoundComponent },
 ];
 

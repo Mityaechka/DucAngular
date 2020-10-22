@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Информация о периоде расчета</h1>
+<div mat-dialog-content>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Информация">
+      <div fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <p>Сумма на начало: {{cashPeriod.startSum}}</p>
+          <p>Сумма на закрытие: {{cashPeriod.endTime? cashPeriod.endSum:null|absent}}</p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <p>Время открытия: {{cashPeriod.startTime|date:'dd.MM.yy HH:mm'}}</p>
+          <p>Время закрытия: {{cashPeriod.endTime|date:'dd.MM.yy HH:mm'|absent}}</p>
+        </div>
+        <p>Кассир: {{cashPeriod.user?.fio|absent}}</p>
+        <p>Касса: {{cashPeriod.casherPlace?.name|absent}}</p>
+      </div>
+    </mat-tab>
+    <mat-tab label="Чеки">
+     <div class="mt-10">
+      <app-cash-period-receipts-table [cashPeriodId]="cashPeriod.id"></app-cash-period-receipts-table>
+     </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+</div>

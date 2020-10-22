@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Информация о чеке</h1>
+<div mat-dialog-content>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Информация">
+      <div fxLayout="column">
+        <p>Тип операции: {{receipt.receiptType?.name|absent}}</p>
+        <p>Сумма: {{receipt.sum}}</p>
+        <p>Шаблон чека: {{receipt.receiptTemplate?.name|absent}}</p>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="receipt.products&&receipt.products.length!=0"  label="Проданные товары">
+      <app-table [rawData]="receipt.products">
+        <ng-container matColumnDef="productLeftId">
+          <th mat-header-cell *matHeaderCellDef> Id остатка </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef> Продукт </th>
+          <td mat-cell *matCellDef="let element"> {{element.product.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Кол-во </th>
+          <td mat-cell *matCellDef="let element"> {{element.price}}</td>
+        </ng-container>
+        <ng-container matColumnDef="count">
+          <th mat-header-cell *matHeaderCellDef> Кол-во </th>
+          <td mat-cell *matCellDef="let element"> {{element.count}}</td>
+        </ng-container>
+        <ng-container matColumnDef="sum">
+          <th mat-header-cell *matHeaderCellDef> Сумма </th>
+          <td mat-cell *matCellDef="let element"> {{element.sum}}</td>
+        </ng-container>
+      </app-table>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button *ngIf="receipt.receiptTemplate" (click)="print()">Просмотр чека</button>
+</div>

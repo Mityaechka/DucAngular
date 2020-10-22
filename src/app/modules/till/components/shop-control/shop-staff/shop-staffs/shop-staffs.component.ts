@@ -24,7 +24,7 @@ export class ShopStaffsComponent implements OnInit {
       component: ShopStaffCreateComponent,
       onInstance: (i) => {
         i.created.subscribe(async () => {
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+          this.tableService.tables.forEach((x) => x.table.loadData());
         });
       },
     });

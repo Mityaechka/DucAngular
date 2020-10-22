@@ -1,3 +1,5 @@
+import { SaleForm } from 'src/app/entities/sale-form.entity';
+import { SaleFormTypeDisplay } from './sale-form-type.enum';
 import { PurposeTypeDisplay, PurposeType } from './purpose-type.enum';
 import { Measure, MeasureDisplay } from './measure.enum';
 import { PromotionTypeDisplay, PromotionType } from './promotion-type.enum';
@@ -16,6 +18,7 @@ export const EnumDisplayCollection = {
   PurposeTypeDisplay,
   MeasureDisplay,
   RetroBonusTypeDisplay,
+  SaleFormTypeDisplay
 };
 
 export const EnumCollection = {
@@ -24,6 +27,7 @@ export const EnumCollection = {
   PurposeType: PurposeType,
   Measure: Measure,
   RetroBonusTypeEnum: RetroBonusTypeEnum,
+  SaleForm:SaleForm
 };
 
 export const IEnumDisplayCollection = {

@@ -1,16 +1,28 @@
-import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
+import { ProductLine } from './../../../../../entities/product-line';
+import {
+  Component,
+  OnInit,
+  Inject,
+  ChangeDetectorRef,
+  Output,
+} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductRequest } from 'src/app/entities/product-request.entity';
 import { RequestService } from 'src/app/services/request.service';
 import { DialogsService } from 'src/app/services/dialogs.service';
 import { Shop } from 'src/app/entities/shop.entity';
 import { User } from 'src/app/entities/user.entity';
+import { ProviderRequstConfirmCountComponent } from '../provider-request-confirm-count/provider-request-confirm-count.component';
+import { EventEmitter } from '@angular/core';
+
 
 @Component({
   templateUrl: './provider-request-confirm.component.html',
   styleUrls: ['./provider-request-confirm.component.css'],
 })
 export class ProviderRequestConfirmComponent implements OnInit {
+  @Output() edited = new EventEmitter();
+
   logisticticShops: Shop[];
   dirvers: User[];
 
@@ -112,5 +124,20 @@ export class ProviderRequestConfirmComponent implements OnInit {
     } else {
       this.dialogs.pushAlert(response.errorMessage);
     }
+  }
+  confirmCount(productLine: ProductLine) {
+    this.dialogs.push({
+      component: ProviderRequstConfirmCountComponent,
+      data: { requestId: this.productRequest.id, productLine },
+      onInstance: (i) => {
+        i.confirmed.subscribe(async () => {
+          this.dialogs.startLoading();
+          await this.loadData();
+          this.dialogs.stopLoading();
+          this.edited.emit();
+          this.detector.detectChanges();
+        });
+      },
+    });
   }
 }

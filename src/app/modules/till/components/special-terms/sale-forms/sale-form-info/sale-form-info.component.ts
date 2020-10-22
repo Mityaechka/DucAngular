@@ -5,6 +5,7 @@ import { DialogsService } from 'src/app/services/dialogs.service';
 import { SaleForm } from './../../../../../../entities/sale-form.entity';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
+import { EnumDisplayCollection } from 'src/app/enums/enum-display.collection';
 
 @Component({
   selector: 'app-sale-form-info',
@@ -12,6 +13,7 @@ import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./sale-form-info.component.css'],
 })
 export class SaleFormInfoComponent implements OnInit {
+  EnumDisplayCollection= EnumDisplayCollection;
   constructor(
     @Inject(MAT_DIALOG_DATA) public saleForm: SaleForm,
     private dialogs: DialogsService,
@@ -30,7 +32,7 @@ export class SaleFormInfoComponent implements OnInit {
         instance.saleFormEdited.subscribe(async (saleFormId) => {
           //this.dialogs.pop();
           this.dialogs.startLoading();
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+          this.tableService.tables.forEach((x) => x.table.loadData());
           const saleFormResponse = await this.saleFormsService.getSaleForm(
             saleFormId
           );

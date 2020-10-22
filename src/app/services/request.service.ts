@@ -1,3 +1,4 @@
+import { ProductLine } from './../entities/product-line';
 import { Shop } from './../entities/shop.entity';
 import { HttpService } from './http.service';
 import { Injectable } from '@angular/core';
@@ -72,6 +73,18 @@ export class RequestService {
       `product/lefts/${id}/requests/add?count=${data.count}&saleFormType=${data.saleFormType}&planeDeliveryDate=${data.planeDeliveryDate}&markup=${data.markup}`
     );
   }
+  async createRequestForProductLefts(data: {
+    planeDeliveryDate: Date;
+    providerShopId: number;
+    products: {
+      productLeftId: number;
+      count: number;
+      saleForm: number;
+      markup: number;
+    }[];
+  }) {
+    return await this.http.post(`product/lefts/requests/add`, data);
+  }
   async getRequestCode(id: number) {
     return await this.http.get<number>(`requests/${id}/code/show`);
   }
@@ -83,6 +96,21 @@ export class RequestService {
   async confirmPayRequest(id: number, code: string) {
     return await this.http.get<any>(
       `logistic/requests/${id}/payRequests/active/confirm?code=${code}`
+    );
+  }
+
+  async confirmResponseCount(
+    requestId: number,
+    productLineId: number,
+    count: number
+  ) {
+    return await this.http.get<any>(
+      `requests/${requestId}/lines/${productLineId}/count/${count}`
+    );
+  }
+  async getProductline(requestId: number, productLineId: number) {
+    return await this.http.get<ProductLine>(
+      `requests/${requestId}/lines/${productLineId}`
     );
   }
 }

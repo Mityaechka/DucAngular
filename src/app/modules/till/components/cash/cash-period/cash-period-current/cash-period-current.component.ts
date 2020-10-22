@@ -1,3 +1,5 @@
+import { Filter } from './../../../../../../models/filter.model';
+import { ReceiptInfoComponent } from './../../../receipts/receipt-info/receipt-info.component';
 import { CashPeriodCollectCashComponent } from './../cash-period-collect-cash/cash-period-collect-cash.component';
 import { CashPeriodOpenNewComponent } from './../cash-period-open-new/cash-period-open-new.component';
 import { TableService } from './../../../../../../services/table.service';
@@ -31,8 +33,8 @@ export class CashPeriodCurrentComponent implements OnInit {
     this.cashPeriod = response.result;
     this.detector.detectChanges();
   }
-  async loadReceipts() {
-    return await this.shopsService.getCashPeriodReceipts(this.cashPeriod.id);
+  async loadReceipts(filter: Filter) {
+    return await this.shopsService.getCashPeriodReceipts(this.cashPeriod.id,filter);
   }
   closeCurrentPeriod() {
     this.dialogs.pushConfirm(
@@ -51,7 +53,7 @@ export class CashPeriodCurrentComponent implements OnInit {
       }
     );
   }
-  collectCash () {
+  collectCash() {
     this.dialogs.push({
       component: CashPeriodCollectCashComponent,
       onInstance: (i) => {
@@ -72,8 +74,11 @@ export class CashPeriodCurrentComponent implements OnInit {
     });
   }
   async load() {
-    this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+    this.tableService.tables.forEach((x) => x.table.loadData());
     this.cashPeriod = (await this.shopsService.getCurrentPeriod()).result;
     this.detector.detectChanges();
+  }
+  openReceipt(receipt: Receipt) {
+    this.dialogs.push({ component: ReceiptInfoComponent, data: receipt });
   }
 }

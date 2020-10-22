@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Печать чека</h1>
+<div mat-dialog-content>
+<app-receipt-preview *ngIf="template"  [data]="template" [showPrint]="false" #preview></app-receipt-preview>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Закрыть</button>
+  <button mat-button color="primary" (click)="print()">Печатать</button>
+</div>

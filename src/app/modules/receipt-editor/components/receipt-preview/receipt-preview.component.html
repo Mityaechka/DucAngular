@@ -1,2 +1,8 @@
-<canvas style="border:solid;width: 400px;" width="2000" #canvas ></canvas>
-<button mat-raised-button color="primary" (click)="sendMessage()">Печатать</button>
+
+<div fxLayout="column" fxLayoutAlign="start center">
+  <div class="m-10">
+    <button *ngIf="showPrint" mat-raised-button color="primary" (click)="print()">Печатать</button>
+  </div>
+  <canvas style="border:solid;width: 400px;" width="2000" #canvas></canvas>
+
+</div>

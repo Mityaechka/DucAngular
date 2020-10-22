@@ -1,4 +1,4 @@
-<div fxLayout="row">
+<!-- <div fxLayout="row">
   <div [formGroup]="form" fxFlex="50">
     <div class="m-10">
       <button mat-raised-button (click)="addField()">Добавить поле</button>
@@ -39,7 +39,7 @@
           <button mat-raised-button (click)="move(-1, i)">Вверх</button>
         </mat-action-row>
       </mat-expansion-panel>
-      <!-- <div *ngFor="let field of fields.controls;let i = index" [formGroupName]="i">
+      <div *ngFor="let field of fields.controls;let i = index" [formGroupName]="i">
         <h1>Поле {{i+1}}</h1>
         <mat-form-field appearance="outline" class="m-10">
           <mat-label>Поле</mat-label>
@@ -65,11 +65,11 @@
           <button mat-raised-button (click)="move(1, i)">Вниз</button>
           <button mat-raised-button (click)="move(-1, i)">Вверх</button>
         </div>
-      </div> -->
+      </div>
     </mat-accordion>
   </div>
   <div fxFlex="50" fxLayout="column" fxLayoutAlign="start center">
     <h1>Предпросмотр</h1>
     <app-receipt-preview #preview [onDataCahnge]="getData.bind(this)" ></app-receipt-preview>
   </div>
-</div>
+</div> -->

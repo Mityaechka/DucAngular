@@ -1,0 +1,19 @@
+
+<form [formGroup]="form">
+  <h1 mat-dialog-title>Редактирвание шаблона</h1>
+  <div mat-dialog-content class="height-small">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Название шаблона</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <div fxLayout="row">
+      <app-receipt-editor fxFlex formControlName="receiptFields"></app-receipt-editor>
+      <app-receipt-preview fxFlex [data]="receiptFields.value"></app-receipt-preview>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Закрыть</button>
+    <button mat-button [disabled]="form.invalid" (click)="edit()" type="submit">Сохранить</button>
+  </div>
+</form>

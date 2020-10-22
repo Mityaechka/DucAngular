@@ -2,9 +2,11 @@ import { TableService } from './../../../../../../services/table.service';
 import { async } from '@angular/core/testing';
 import { DialogsService } from 'src/app/services/dialogs.service';
 import { MoneyTransferState } from './../../../../../../enums/money-transfer-state.enum';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MoneyTransferService } from 'src/app/services/money-transfer.service';
 import { MoneyTransfer } from 'src/app/entities/money-transfer.entity';
+import { TableComponent } from 'src/app/modules/table/table/table.component';
+import { NotificationHubService, NotificationModel } from 'src/app/services/notification-hub.service';
 
 @Component({
   selector: 'app-from-not-transfered',
@@ -12,14 +14,21 @@ import { MoneyTransfer } from 'src/app/entities/money-transfer.entity';
   styleUrls: ['./from-not-transfered.component.css'],
 })
 export class FromNotTransferedComponent implements OnInit {
+  @ViewChild('table') table: TableComponent<any>;
   MoneyTransferState = MoneyTransferState;
   constructor(
     private transferService: MoneyTransferService,
     private dialogs: DialogsService,
-    private tableService: TableService
+    private tableService: TableService,
+    private notificationHubService: NotificationHubService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.notificationHubService.registerEvents((data: NotificationModel) => {
+      this.table.loadData();
+    },
+    'AcceptTransfer');
+  }
   async loadData() {
     return await this.transferService.getFromNotTransfered();
   }
@@ -32,7 +41,7 @@ export class FromNotTransferedComponent implements OnInit {
         const response = await this.transferService.payTransfer(transfer.id);
         this.dialogs.stopLoading();
         if (response.isSuccess) {
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+          this.tableService.tables.forEach((x) => x.table.loadData());
         } else {
           this.dialogs.pushAlert(response.errorMessage);
         }

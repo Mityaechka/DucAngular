@@ -33,7 +33,7 @@ export class SupplyDebtsOwnerComponent implements OnInit {
       data: debt,
       onInstance: (i) => {
         i.onBinded.subscribe(async () => {
-          this.tableService.tables.forEach(x=>x.table.loadDataEvent());
+          this.tableService.tables.forEach(x=>x.table.loadData());
           this.dialogs.pushAlert('Водитель успешно назначен');
         });
       },

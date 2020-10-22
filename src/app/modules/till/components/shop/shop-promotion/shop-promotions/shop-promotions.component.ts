@@ -34,7 +34,7 @@ export class ShopPromotionsComponent implements OnInit {
       config: { width: '600px' },
       onInstance: (i) => {
         i.created.subscribe(() => {
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+          this.tableService.tables.forEach((x) => x.table.loadData());
         });
       },
     });
@@ -46,7 +46,7 @@ export class ShopPromotionsComponent implements OnInit {
       data: product,
       onInstance: (i) => {
         i.edited.subscribe(() =>
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent())
+          this.tableService.tables.forEach((x) => x.table.loadData())
         );
       },
     });

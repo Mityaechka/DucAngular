@@ -1,8 +1,9 @@
+import { TableComponent } from './../../../../table/table/table.component';
 import { ProviderRequestConfirmComponent } from './../provider-request-confirm/provider-request-confirm.component';
 import { ProviderRequestInfoComponent } from './../provider-request-info/provider-request-info.component';
 import { DialogsService } from './../../../../../services/dialogs.service';
 import { RequestService } from './../../../../../services/request.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductRequest } from 'src/app/entities/product-request.entity';
 
 @Component({
@@ -11,13 +12,7 @@ import { ProductRequest } from 'src/app/entities/product-request.entity';
   styleUrls: ['./provider-requests.component.css'],
 })
 export class ProviderRequestsComponent implements OnInit {
-  displayedColumns: string[] = [
-    'fromShop',
-    'fromUser',
-    'payedSum',
-    'totalSum',
-    'leftSum',
-  ];
+  @ViewChild('table') table: TableComponent<any>;
   constructor(
     private requestService: RequestService,
     private dialogs: DialogsService
@@ -35,7 +30,15 @@ export class ProviderRequestsComponent implements OnInit {
       if (response.result.isTransferredToLogistic) {
         this.dialogs.push({ component: ProviderRequestInfoComponent });
       } else {
-        this.dialogs.push({ component: ProviderRequestConfirmComponent,data:response.result });
+        this.dialogs.push({
+          component: ProviderRequestConfirmComponent,
+          data: response.result,
+          onInstance: (i) => {
+            i.edited.subscribe(() => {
+              this.table.loadData();
+            });
+          },
+        });
       }
     } else {
       this.dialogs.pushAlert(response.errorMessage);

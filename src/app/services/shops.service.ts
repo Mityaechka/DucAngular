@@ -1,3 +1,4 @@
+import { Filter } from './../models/filter.model';
 import { PurposeType } from './../enums/purpose-type.enum';
 import { ActiveCondition } from './../enums/active-condition.enum';
 import { ShopType } from './../enums/shop-type.enum';
@@ -27,7 +28,7 @@ export class ShopsService {
     });
     return response;
   }
-  reloadCurrenShop(){
+  reloadCurrenShop() {
     this.getCurrentShop().then((x) => {
       this.currentShopChange.emit(x.result);
     });
@@ -48,13 +49,16 @@ export class ShopsService {
   async getCashPeriods() {
     return await this.http.post<List<CashPeriod[]>>(`shop/cashPeriods`, null);
   }
+  async getCashPeriod(id: number) {
+    return await this.http.get<CashPeriod>(`shop/cashPeriods/${id}`);
+  }
   async getCurrentPeriod() {
     return await this.http.get<CashPeriod>(`shop/period/current`);
   }
-  async getCashPeriodReceipts(id: number) {
+  async getCashPeriodReceipts(id: number, filter?: Filter) {
     return await this.http.post<List<Receipt>>(
       `shop/cashPeriods/${id}/receipts`,
-      null
+      filter
     );
   }
   async closeCurrentPeriod() {
@@ -148,5 +152,9 @@ export class ShopsService {
     }
   ) {
     return await this.http.post<any>(`shop/promotions/${id}/edit`, data);
+  }
+
+  async getAllProviderShops() {
+    return await this.http.post<List<Shop>>(`shops/providers`, null);
   }
 }

@@ -37,7 +37,7 @@ export class ProductAttributeInfoComponent implements OnInit {
       onInstance: (i) => {
         i.edited.subscribe(async () => {
           this.loadData();
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+          this.tableService.tables.forEach((x) => x.table.loadData());
         });
       },
     });

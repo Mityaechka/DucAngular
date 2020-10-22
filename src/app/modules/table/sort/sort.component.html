@@ -1,0 +1,5 @@
+  <a mat-button color="primary" (click)="changeDirecction()">
+    <ng-content></ng-content>
+    <mat-icon *ngIf="direction!=0" [class.desc]="direction==2" [class.asc]="direction==1">sort</mat-icon>
+  </a>
+

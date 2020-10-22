@@ -27,8 +27,15 @@ export class DialogsService {
 
     this.dialogs.push(ref);
   }
+  getCurrentRef() {
+    return this.dialogs[this.dialogs.length - 1];
+  }
   pop(): void {
     const ref = this.dialogs.pop();
+    ref.close();
+  }
+  popByRef(ref: MatDialogRef<any, any>): void {
+    this.dialogs = this.dialogs.filter((x) => x !== ref);
     ref.close();
   }
   popAll(): void {

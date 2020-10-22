@@ -33,7 +33,7 @@ export class ShopProductsComponent implements OnInit {
     this.dialogs.push({
       component: ShopProductCreateComponent,
       onInstance: (i) => {
-        i.created.subscribe(() => this.productsTable.loadDataEvent());
+        i.created.subscribe(() => this.productsTable.loadData());
       },
     });
   }
@@ -42,7 +42,7 @@ export class ShopProductsComponent implements OnInit {
       component: ShopProductArrivingComponent,
       data: product,
       onInstance: (i) => {
-        i.created.subscribe(() => this.productsTable.loadDataEvent());
+        i.created.subscribe(() => this.productsTable.loadData());
       },
     });
   }
@@ -51,7 +51,7 @@ export class ShopProductsComponent implements OnInit {
       component: ShopProductInfoComponent,
       data: product,
       onInstance: (i) => {
-        i.edited.subscribe(() => this.productsTable.loadDataEvent());
+        i.edited.subscribe(() => this.productsTable.loadData());
       },
     });
   }

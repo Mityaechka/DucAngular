@@ -34,7 +34,7 @@ export class SupplyDebtActivePayRequestTakeComponent implements OnInit {
     if (response.isSuccess) {
       this.dialogs.pop();
       this.dialogs.pushAlert('Заказ успешно подтвержден');
-      this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+      this.tableService.tables.forEach((x) => x.table.loadData());
     } else {
       this.dialogs.pushAlert(response.errorMessage);
     }

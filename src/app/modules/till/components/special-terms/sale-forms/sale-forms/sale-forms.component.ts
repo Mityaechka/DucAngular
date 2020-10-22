@@ -1,3 +1,4 @@
+import { EnumDisplayCollection } from './../../../../../../enums/enum-display.collection';
 import { TableComponent } from './../../../../../table/table/table.component';
 import { ShopsSelectComponent } from './../../../shop/shops-select/shops-select.component';
 import { SaleForm } from './../../../../../../entities/sale-form.entity';
@@ -18,6 +19,7 @@ import {
   styleUrls: ['./sale-forms.component.css'],
 })
 export class SaleFormsComponent implements OnInit {
+  EnumDisplayCollection = EnumDisplayCollection;
   public selecеtionForm: typeof SelecеtionForm;
   SelecеtionFormDisplay = SelecеtionFormDisplay;
   @ViewChild('table')
@@ -41,7 +43,7 @@ export class SaleFormsComponent implements OnInit {
         instance.saleFormCreated.subscribe(async (saleFormId) => {
           //this.dialogs.pop();
           this.dialogs.startLoading();
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+          this.tableService.tables.forEach((x) => x.table.loadData());
           const saleFormResponse = await this.saleformsService.getSaleForm(
             saleFormId
           );
@@ -78,7 +80,7 @@ export class SaleFormsComponent implements OnInit {
     );
     this.dialogs.stopLoading();
     if (response.isSuccess) {
-      this.table.loadDataEvent();
+      this.table.loadData();
     } else {
       this.dialogs.pushAlert(response.errorMessage);
     }

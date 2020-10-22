@@ -1,8 +1,7 @@
-import { TableAreaFiled } from './../../models/receipt-field.model';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { ReceiptComponent, TableAreaFiled } from './../../models/receipt-field.model';
+import { Component, EventEmitter, forwardRef, OnInit, Output } from '@angular/core';
+import { FormGroup, FormControl, FormArray, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
-  IReceiptComponent,
   IReceiptField,
 } from '../../models/receipt-field.model';
 
@@ -10,10 +9,15 @@ import {
   selector: 'app-table-area',
   templateUrl: './table-area.component.html',
   styleUrls: ['./table-area.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => TableAreaComponent),
+    },
+  ],
 })
-export class TableAreaComponent implements OnInit, IReceiptComponent {
-  @Output() changeEvent = new EventEmitter();
-
+export class TableAreaComponent extends ReceiptComponent {
   form = new FormGroup({
     fontSize: new FormControl(15),
     showBorder: new FormControl(false),
@@ -32,13 +36,8 @@ export class TableAreaComponent implements OnInit, IReceiptComponent {
   getRow(i: number) {
     return this.rows.controls[i] as FormArray;
   }
-  getField(): IReceiptField {
-    return new TableAreaFiled(this.form.getRawValue());
-  }
 
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((value) => this.changeEvent.emit());
-  }
+
 
   addHeaders() {
     this.headers.push(

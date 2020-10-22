@@ -1,7 +1,6 @@
 import { ReceiptPreviewComponent } from './../receipt-preview/receipt-preview.component';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import {
-  IReceiptComponent,
   IReceiptField,
 } from './../../models/receipt-field.model';
 import {
@@ -20,7 +19,7 @@ import {
   styleUrls: ['./example-editor.component.css'],
 })
 export class ExampleEditorComponent implements AfterViewInit {
-  @ViewChildren('field') fieldsComponents: QueryList<IReceiptComponent>;
+  @ViewChildren('field') fieldsComponents: QueryList<any>;
   @ViewChild('preview') previewComponent: ReceiptPreviewComponent;
 
   form = new FormGroup({

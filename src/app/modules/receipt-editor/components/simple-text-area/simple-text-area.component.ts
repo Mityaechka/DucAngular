@@ -1,5 +1,13 @@
-import { SimpleTextAreaFiled } from './../../models/receipt-field.model';
-import { FormGroup, FormControl } from '@angular/forms';
+import {
+  ReceiptComponent,
+  SimpleTextAreaFiled,
+} from './../../models/receipt-field.model';
+import {
+  FormGroup,
+  FormControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 import {
   Component,
   ElementRef,
@@ -9,11 +17,10 @@ import {
   AfterViewInit,
   AfterContentInit,
   AfterViewChecked,
+  Input,
+  forwardRef,
 } from '@angular/core';
-import {
-  IReceiptComponent,
-  IReceiptField,
-} from '../../models/receipt-field.model';
+import { IReceiptField } from '../../models/receipt-field.model';
 declare function CanvasTextWrapper(
   canvas,
   text: string,
@@ -25,27 +32,19 @@ declare function CanvasTextWrapper(
   selector: 'app-simple-text-area',
   templateUrl: './simple-text-area.component.html',
   styleUrls: ['./simple-text-area.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => SimpleTextAreaComponent),
+    },
+  ],
 })
-export class SimpleTextAreaComponent
-  implements OnInit, AfterViewChecked, IReceiptComponent {
-  ngAfterViewChecked(): void {
-    this.changeEvent.emit();
-  }
-
-  @Output() changeEvent = new EventEmitter();
-
+export class SimpleTextAreaComponent extends ReceiptComponent {
   form = new FormGroup({
     text: new FormControl('Пример текста'),
     align: new FormControl('left'),
     style: new FormControl('normal'),
     fontSize: new FormControl(15),
   });
-
-  getField(): IReceiptField {
-    return new SimpleTextAreaFiled(this.form.getRawValue());
-  }
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((value) => this.changeEvent.emit());
-  }
 }

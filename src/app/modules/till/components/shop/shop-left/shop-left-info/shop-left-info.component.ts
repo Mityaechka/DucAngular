@@ -25,7 +25,7 @@ export class ShopLeftInfoComponent implements OnInit {
   }
   async reload() {
     await this.loadData();
-    this.tables.tables.forEach(async (x) => await x.table.loadDataEvent());
+    this.tables.tables.forEach(async (x) => await x.table.loadData());
   }
   async loadData() {
     this.dialogs.startLoading();

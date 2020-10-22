@@ -1,15 +1,21 @@
-import { DoubleTextAreaFiled } from './../../models/receipt-field.model';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { IReceiptComponent, IReceiptField, SimpleTextAreaFiled } from '../../models/receipt-field.model';
+import { Component, EventEmitter, forwardRef, OnInit, Output } from '@angular/core';
+import { FormGroup, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ReceiptComponent } from '../../models/receipt-field.model';
 
 @Component({
   selector: 'app-double-text-area',
   templateUrl: './double-text-area.component.html',
-  styleUrls: ['./double-text-area.component.css']
+  styleUrls: ['./double-text-area.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => DoubleTextAreaComponent),
+    },
+  ],
 })
-export class DoubleTextAreaComponent implements OnInit, IReceiptComponent {
-  @Output() changeEvent = new EventEmitter();
+export class DoubleTextAreaComponent extends ReceiptComponent {
+
 
   form = new FormGroup({
     firstText: new FormControl('Пример текста'),
@@ -18,11 +24,4 @@ export class DoubleTextAreaComponent implements OnInit, IReceiptComponent {
     fontSize: new FormControl(15),
   });
 
-  getField(): IReceiptField {
-    return new DoubleTextAreaFiled(this.form.getRawValue());
-  }
-
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe((value) => this.changeEvent.emit());
-  }
 }

@@ -35,7 +35,7 @@ export class SupplyDebtsDebtorComponent implements OnInit {
         const response = await this.supplyDebtService.makeRequest(debt.id);
 
         if (response.isSuccess) {
-          this.tableService.tables.forEach((x) => x.table.loadDataEvent());
+          this.tableService.tables.forEach((x) => x.table.loadData());
           const payRequest = await this.supplyDebtService.getActivePayRequest(
             debt.id
           );

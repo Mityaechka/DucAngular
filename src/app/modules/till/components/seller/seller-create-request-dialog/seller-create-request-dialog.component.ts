@@ -1,3 +1,4 @@
+import { EnumDisplayCollection } from 'src/app/enums/enum-display.collection';
 import { SaleForm } from 'src/app/entities/sale-form.entity';
 import { RequestService } from 'src/app/services/request.service';
 import { DialogsService } from './../../../../../services/dialogs.service';
@@ -12,13 +13,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./seller-create-request-dialog.component.css'],
 })
 export class SellerCreateRequestDialogComponent implements OnInit {
+  EnumDisplayCollection = EnumDisplayCollection;
   today = new Date().toJSON().split('T')[0];
   saleForm: SaleForm;
 
   directDiscount: number;
 
   get totalSum() {
-    return this.currentCount * this.productLeft.price;
+    return this.currentCount * this.productLeft.retailPrice;
   }
   get markup() {
     return this.form.controls.markup.value;
@@ -30,13 +32,12 @@ export class SellerCreateRequestDialogComponent implements OnInit {
     return this.form.controls.saleFormType.value;
   }
   get totalDiscountSum() {
-    return this.totalSum + this.totalSum * (this.directDiscount / 100);
+    return this.totalSum - this.totalSum * (this.directDiscount / 100);
   }
   form = new FormGroup({
     count: new FormControl(0, [Validators.required, Validators.min(1)]),
     markup: new FormControl(0, [Validators.required, Validators.min(0)]),
-    planeDeliveryDate: new FormControl('', [Validators.required]),
-    saleFormType: new FormControl(0),
+    planeDeliveryDate: new FormControl('', [Validators.required])
   });
   constructor(
     @Inject(MAT_DIALOG_DATA) public productLeft: ProductLeft,
