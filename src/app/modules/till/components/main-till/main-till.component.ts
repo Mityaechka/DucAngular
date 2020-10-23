@@ -1,3 +1,6 @@
+import { OperatorEnum } from 'src/app/models/filter.model';
+import { OperatioType } from './../../../../enums/operation-type.enum';
+import { PermanentNotificationService } from './../../../../services/permanent-notification.service';
 import { SnackBarService } from './../../../../services/snack-bar.service';
 import {
   NotificationHubService,
@@ -15,9 +18,12 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  OnDestroy,
+  ViewRef,
 } from '@angular/core';
 import { User } from 'src/app/entities/user.entity';
 import { Shop } from 'src/app/entities/shop.entity';
+import { RouteNames } from 'src/app/models/route-names.model';
 
 @Component({
   selector: 'app-main-till',
@@ -25,10 +31,12 @@ import { Shop } from 'src/app/entities/shop.entity';
   styleUrls: ['./main-till.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainTillComponent implements OnInit {
+export class MainTillComponent implements OnInit, OnDestroy {
   user: User;
   currentShop: Shop;
   title = 'DUK';
+  notificationsCount = 0;
+  isOpen = false;
   constructor(
     private authService: AuthService,
     private dialogs: DialogsService,
@@ -39,27 +47,51 @@ export class MainTillComponent implements OnInit {
     private route: ActivatedRoute,
     private scanner: ScannerService,
     private notificationHubService: NotificationHubService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private permanentNotificationService: PermanentNotificationService
   ) {}
+  ngOnDestroy(): void {
+    this.detector.detach();
+  }
 
   async ngOnInit() {
-    this.notificationHubService.onConnect(() => {
-      this.notificationHubService.registerForAll((data: NotificationModel) => {
-        this.snackBarService.open(data.header, data.body);
-      });
+    this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        const end = val as NavigationEnd;
+        const obj = RouteNames.routeNamesObject.find((x) => x.path === end.url);
+        this.pageService.cahngeTitle(obj?.title ?? 'DUC');
+      }
     });
-    this.notificationHubService.registerEvents(
-      (data: NotificationModel) => {
-        this.snackBarService.openLink(
-          data.header,
-          data.body,
-          'till/cash/money-transfers'
-        );
-      },
-      'PayTransfer',
-      'AcceptTransfer'
-    );
 
+    this.notificationHubService.connect();
+
+    this.notificationHubService.registerForAll((data: NotificationModel) => {
+      this.snackBarService.open(data.header, data.body);
+    });
+    this.notificationHubService.registerEvents((data: NotificationModel) => {
+      this.permanentNotificationService
+        .getNotCheckedNotificationsCount()
+        .then((result) => {
+          if ((this.detector as ViewRef).destroyed) {
+            return;
+          }
+          if (result.isSuccess) {
+            this.notificationsCount = result.result;
+          }
+          this.detector.detectChanges();
+        });
+    }, 'PermanentNotification');
+
+    // this.notificationHubService.onConnect(() => {
+
+    // });
+    this.permanentNotificationService
+      .getNotCheckedNotificationsCount()
+      .then((result) => {
+        if (result.isSuccess) {
+          this.notificationsCount = result.result;
+        }
+      });
     this.authService.userChange.subscribe((user: User) => {
       if (user) {
         this.notificationHubService.connect();
@@ -73,10 +105,17 @@ export class MainTillComponent implements OnInit {
       this.title = x;
     });
     this.shopsService.currentShopChangeSubscribe((shop) => {
+      if ((this.detector as ViewRef).destroyed) {
+        return;
+      }
       this.currentShop = shop;
       this.detector.detectChanges();
     });
     this.shopsService.reloadCurrenShop();
+
+    const path = this.router.url;
+    const obj = RouteNames.routeNamesObject.find((x) => x.path === path);
+    this.pageService.cahngeTitle(obj?.title ?? 'DUC');
   }
   async logout() {
     this.dialogs.startLoading();

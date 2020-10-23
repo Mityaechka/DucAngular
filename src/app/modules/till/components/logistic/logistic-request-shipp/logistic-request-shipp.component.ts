@@ -20,8 +20,7 @@ export class LogisticRequestShippComponent implements OnInit {
   sum: FormControl;
   get canConfirm() {
     return (
-      (this.accept.value == false ||
-        this.productRequest.logisticProductRequest.isShipped) &&
+      (this.accept.value ||this.productRequest.logisticProductRequest.isShipped) &&
       (this.sum.value !== 0 || this.productRequest.leftSum === 0)
     );
   }
@@ -33,7 +32,7 @@ export class LogisticRequestShippComponent implements OnInit {
 
   ngOnInit(): void {
     this.accept = new FormControl(false, [Validators.required]);
-    this.sum = new FormControl('0', [
+    this.sum = new FormControl(0, [
       Validators.required,
       Validators.max(this.productRequest.leftSum),
     ]);
@@ -45,10 +44,10 @@ export class LogisticRequestShippComponent implements OnInit {
       this.sum.value
     );
     this.dialogs.stopLoading();
-    if (response.isSuccess){
+    if (response.isSuccess) {
       this.dialogs.pop();
       this.dialogs.pushAlert('Запрос успешно отправлен');
-    }else{
+    } else {
       this.dialogs.pushAlert(response.errorMessage);
     }
   }

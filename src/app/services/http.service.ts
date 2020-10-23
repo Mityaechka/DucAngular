@@ -100,10 +100,15 @@ export class HttpService {
       !(data instanceof File)
     ) {
       Object.keys(data).forEach((key) => {
+        const c = isNaN(Number(key));
         this.buildFormData(
           formData,
           data[key],
-          parentKey ? `${parentKey}[${key}]` : key
+          parentKey
+            ? !isNaN(Number(key))
+              ? `${parentKey}[${key}]`
+              : `${parentKey}.${key}`
+            : key
         );
       });
     } else {

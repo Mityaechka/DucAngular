@@ -16,7 +16,6 @@ export class ProductRequest {
     public planeDeliveryDate: Date,
     public isTransferredToLogistic: boolean,
     public logisticProductRequest: LogisticProductRequest,
-    public hasActivePayRequest:boolean
+    public hasActivePayRequest: boolean
   ) {}
 }
-

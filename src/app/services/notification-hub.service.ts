@@ -87,6 +87,10 @@ export class NotificationHubService {
     for (const e of events) {
       this.events.push({ name: e, action });
     }
+    return action;
+  }
+  public removeEvent(action: (data: NotificationModel) => void) {
+    this.events = this.events.filter((x) => x.action !== action);
   }
   public registerForAll(action: (data: NotificationModel) => void) {
     this.globalEvents.push(action);

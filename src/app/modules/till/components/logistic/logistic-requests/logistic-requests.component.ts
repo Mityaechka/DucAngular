@@ -28,6 +28,7 @@ export class LogisticRequestsComponent implements OnInit {
     const response = await this.requestService.getLogisticRequest(request.id);
     this.dialogs.stopLoading();
     if (response.isSuccess) {
+      debugger
       if (
         response.result.logisticProductRequest.isShipped &&
         response.result.totalSumToPaid === 0

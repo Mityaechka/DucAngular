@@ -14,6 +14,7 @@
       <app-nav-title title="Продукты"></app-nav-title>
 
       <app-nav title="Эксклюзивные продукты" path="/till/shop/products"></app-nav>
+      <app-nav title="Импорт продуктов" path="/till/shop/products/import"></app-nav>
       <app-nav title="Эксклюзивные атрибуты" path="/till/shop/attributes"></app-nav>
       <app-nav title="Эксклюзивные категории" path="/till/shop/product-types"></app-nav>
 
@@ -60,23 +61,26 @@
       <span>{{title}}</span>
 
       <span class="spacer"></span>
-      <div class="mr-10">
-        <a (click)="selectShopclick()">Текущий магазин: {{currentShop?currentShop.name:'Отсуствует'}}</a>
+      <div class="m-10">
+        <button (click)="isOpen = !isOpen" mat-button type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+          <mat-icon [matBadge]="notificationsCount">notifications</mat-icon>
+        </button>
       </div>
+
       <ng-container *ngIf="user">
-        <a mat-flat-button [matMenuTriggerFor]="menu">{{user.fio}}</a>
-
+        <h1 mat-button [matMenuTriggerFor]="menu">{{user.fio}}</h1>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon>dialpad</mat-icon>
-            <span>Redial</span>
+          <button mat-menu-item (click)="selectShopclick()">
+            <mat-icon>edit</mat-icon>
+            <span>{{currentShop?currentShop.name:'Отсуствует'}}</span>
           </button>
-
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Выход</span>
+          </button>
         </mat-menu>
       </ng-container>
-      <button mat-icon-button (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>
-      </button>
+
     </mat-toolbar>
     <div clas="full-page">
       <router-outlet></router-outlet>
@@ -84,3 +88,8 @@
   </div>
 
 </mat-drawer-container>
+
+
+<ng-template #notification (backdropClick)="isOpen = false" cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="isOpen" [cdkConnectedOverlayHasBackdrop]="true">
+  <app-permanent-notifications class="notification-container"></app-permanent-notifications>
+</ng-template>

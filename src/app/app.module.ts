@@ -32,18 +32,20 @@ import { CommonComponentsModule } from './modules/common-components/common-compo
 import { PipesModule } from './modules/pipes/pipes.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ConfirmComponent } from './components/confirm/confirm.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReceiptEditorModule } from './modules/receipt-editor/receipt-editor.module';
 import { MatTreeModule } from '@angular/material/tree';
 import { DirectivesModule } from './modules/directives/directives.module';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackBarNotificationComponent } from './components/snack-bar-notification/snack-bar-notification.component';
 import { SnackBarLinkNotificationComponent } from './components/snack-bar-link-notification/snack-bar-link-notification.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +54,7 @@ import {MatMenuModule} from '@angular/material/menu';
     IntroComponent,
     ConfirmComponent,
     SnackBarNotificationComponent,
-    SnackBarLinkNotificationComponent
+    SnackBarLinkNotificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,11 +94,19 @@ import {MatMenuModule} from '@angular/material/menu';
     DirectivesModule,
     MatBadgeModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDividerModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
   exports: [],
-  entryComponents: [LoadingComponent, AlertComponent, ConfirmComponent,SnackBarNotificationComponent,SnackBarLinkNotificationComponent],
+  entryComponents: [
+    LoadingComponent,
+    AlertComponent,
+    ConfirmComponent,
+    SnackBarNotificationComponent,
+    SnackBarLinkNotificationComponent,
+  ],
 })
 export class AppModule {}

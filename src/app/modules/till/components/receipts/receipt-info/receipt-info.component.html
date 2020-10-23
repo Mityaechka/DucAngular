@@ -6,6 +6,7 @@
         <p>Тип операции: {{receipt.receiptType?.name|absent}}</p>
         <p>Сумма: {{receipt.sum}}</p>
         <p>Шаблон чека: {{receipt.receiptTemplate?.name|absent}}</p>
+        <p>Дата проведения: {{receipt.createDate|date:'dd.MM.yyy mm:HH'}}</p>
       </div>
     </mat-tab>
     <mat-tab *ngIf="receipt.products&&receipt.products.length!=0"  label="Проданные товары">

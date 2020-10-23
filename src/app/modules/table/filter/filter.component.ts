@@ -10,11 +10,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { FilterParametr, OperatorEnum } from 'src/app/models/filter.model';
-import { MatHeaderCell } from '@angular/material/table';
-import { CdkColumnDef } from '@angular/cdk/table';
-import { QueryValueType } from '@angular/compiler/src/core';
-type FilterType = 'equal' | 'notEqual' | 'contains';
-type ValueType = 'number' | 'string' | 'enum';
+type ValueType = 'number' | 'string' | 'enum' | 'date';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -37,6 +33,10 @@ export class FilterComponent implements OnInit {
     value: new FormControl(0, [Validators.required]),
     type: new FormControl(0, [Validators.required]),
   });
+  dateGroup = new FormGroup({
+    value: new FormControl(0, [Validators.required]),
+    type: new FormControl(0, [Validators.required]),
+  });
   stringGroup = new FormGroup({
     value: new FormControl(undefined, [Validators.required]),
     type: new FormControl(0, [Validators.required]),
@@ -50,6 +50,8 @@ export class FilterComponent implements OnInit {
         return this.enumGroup.valid;
       case 'string':
         return this.stringGroup.valid;
+        case 'date':
+        return this.dateGroup.valid;
       default:
         return false;
     }
@@ -78,6 +80,13 @@ export class FilterComponent implements OnInit {
           data: this.numberGroup.controls.value.value,
         };
         break;
+        case 'date':
+          parametr = {
+            parametr: this.path,
+            operator: this.dateGroup.controls.type.value,
+            data: this.dateGroup.controls.value.value,
+          };
+          break;
       case 'string':
         parametr = {
           parametr: this.path,
@@ -98,7 +107,7 @@ export class FilterComponent implements OnInit {
       //this.isOpen = false;
     }
   }
-  backdropClick(){
+  backdropClick() {
     this.isOpen = false;
   }
 }

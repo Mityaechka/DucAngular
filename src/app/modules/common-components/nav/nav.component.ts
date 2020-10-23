@@ -1,3 +1,4 @@
+import { RouteNames } from './../../../models/route-names.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PageService } from '../../../services/page.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -20,7 +21,9 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {}
 
   navigate() {
-    this.pageService.cahngeTitle(this.title);
+    //const obj = RouteNames.routeNamesObject[this.path];
+
+    //this.pageService.cahngeTitle(obj.title);
     this.router.navigate([this.path], { relativeTo: this.route });
   }
 }

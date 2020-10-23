@@ -1,0 +1,24 @@
+<mat-progress-bar *ngIf="isLoading;else data" mode="indeterminate"></mat-progress-bar>
+<ng-template #data>
+  <div *ngIf="notifications&& notifications.length!=0;else empty">
+    <div *ngFor="let notification of notifications">
+
+      <div fxLayout="column" fxLayoutAlign="space-around start">
+        <div fxLayout="row" fxLayoutAlign="space-between start" class="full-width">
+          <h2>{{notification.header}}</h2>
+          <button mat-button (click)="checkNotification(notification)">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between end" class="full-width">
+          <p> {{notification.body}} </p>
+          <p>{{notification.date|date:'dd.MM.yyyy HH:mm'}}</p>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+  <ng-template #empty>
+    <p>У Вас отсуствуют уведомления</p>
+  </ng-template>
+</ng-template>

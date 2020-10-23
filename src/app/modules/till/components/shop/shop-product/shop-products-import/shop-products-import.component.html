@@ -1,0 +1,30 @@
+<form class="full-page" [formGroup]="form">
+  <mat-form-field appearance="outline" class="full-width m-10">
+    <mat-label>Файл</mat-label>
+    <ngx-mat-file-input formControlName="file" accept=".xlsx,.xls,.csv"></ngx-mat-file-input>
+  </mat-form-field>
+  <ng-container *ngIf="isLoaded;else empty">
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab label="Основные параметры">
+        <div fxLayout="column">
+          <mat-form-field appearance="outline" *ngFor="let property of properties" class="m-10">
+            <mat-label>{{property.title}}</mat-label>
+            <mat-select formControlName="{{property.name}}" [compareWith]="{}|compareWith:''">
+              <mat-option *ngFor="let header of headers|keyvalue" [value]="header.key">{{header.value}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="m-10">
+            <mat-label>Родительская категория</mat-label>
+            <app-product-type-select formControlName="rootCategory"></app-product-type-select>
+          </div>
+
+        </div>
+      </mat-tab>
+      <mat-tab label="Атрибуты"></mat-tab>
+    </mat-tab-group>
+
+  </ng-container>
+  <ng-template #empty>
+    <h1>Для продолжения выберете файл</h1>
+  </ng-template>
+</form>

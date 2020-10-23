@@ -1,4 +1,11 @@
 <app-table [loadData]="loadReceipts.bind(this)" (rowClick)="openReceipt($event)" #table>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>
+      <app-sort [parentTable]="table" path="Id">Id</app-sort>
+      <app-filter [parentTable]="table" path="Id" type="number" ></app-filter>
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+  </ng-container>
   <ng-container matColumnDef="operation">
     <th mat-header-cell *matHeaderCellDef>
      Операция
@@ -13,9 +20,10 @@
     </th>
     <td mat-cell *matCellDef="let element"> {{element.sum}}</td>
   </ng-container>
-  <ng-container matColumnDef="sum">
+  <ng-container matColumnDef="createDate">
     <th mat-header-cell *matHeaderCellDef>
-      <app-sort [parentTable]="table" path="Sum">Дата создания</app-sort>
+      <app-sort [parentTable]="table" path="CreateDate">Дата создания</app-sort>
+      <app-filter [parentTable]="table" path="CreateDate" type="date" ></app-filter>
     </th>
     <td mat-cell *matCellDef="let element"> {{element.createDate|date:'dd.MM.yyyy  HH:mm'}}</td>
   </ng-container>

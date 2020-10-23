@@ -1,3 +1,4 @@
+import { ShopProductsImportComponent } from './components/shop/shop-product/shop-products-import/shop-products-import.component';
 import { ReceiptShopTypesComponent } from './components/receipts/receipt-shop-types/receipt-shop-types/receipt-shop-types.component';
 import { ProviderShopsComponent } from './components/requests/provider-shops/provider-shops.component';
 import { RetroBonusObligationsComponent } from './components/cash/retro-bonus-obligation/retro-bonus-obligations/retro-bonus-obligations.component';
@@ -30,48 +31,128 @@ import { ProductGroupsComponent } from './components/groups/products/product-gro
 import { ProductTypeTreeComponent } from './components/product-type/product-type-tree/product-type-tree.component';
 import { DirectDiscountsComponent } from './components/special-terms/direct-discounts/direct-discounts/direct-discounts.component';
 import { ReceiptTemplatesComponent } from './components/receipts/receipt-template/receipt-templates/receipt-templates.component';
+import { RouteNames } from 'src/app/models/route-names.model';
+import { Route } from '@angular/compiler/src/core';
 
 export const tillRoutes: Routes = [
-  { path: '', component: TillWelcomeComponent },
-  { path: 'provider/requests', component: ProviderRequestsComponent },
-  { path: 'seller/requests', component: SellerRequestsComponent },
-  { path: 'seller/requests/create', component: SellerCreateRequestComponent },
-  { path: 'seller/requests/create2', component: ProviderShopsComponent },
-  { path: 'logistic/requests', component: LogisticRequestsComponent },
+  { path: '', component: TillWelcomeComponent, data: { name: 'DUC' } },
+  {
+    path: 'provider/requests',
+    component: ProviderRequestsComponent,
+    data: { name: '' },
+  },
+  {
+    path: 'seller/requests',
+    component: SellerRequestsComponent,
+    data: { name: '' },
+  },
+  {
+    path: 'seller/requests/create',
+    component: SellerCreateRequestComponent,
+    data: { name: '' },
+  },
+  {
+    path: 'seller/requests/create2',
+    component: ProviderShopsComponent,
+    data: { name: '' },
+  },
+  {
+    path: 'logistic/requests',
+    component: LogisticRequestsComponent,
+    data: { name: '' },
+  },
   {
     path: 'special-terms',
     children: [
-      { path: 'sale-forms', component: SaleFormsComponent },
-      { path: 'direct-discounts', component: DirectDiscountsComponent },
-      { path: 'retro-bonuses', component: RetroBonusesComponent },
+      { path: 'sale-forms', component: SaleFormsComponent, data: { name: '' } },
+      {
+        path: 'direct-discounts',
+        component: DirectDiscountsComponent,
+        data: { name: '' },
+      },
+      {
+        path: 'retro-bonuses',
+        component: RetroBonusesComponent,
+        data: { name: '' },
+      },
     ],
   },
   {
     path: 'cash',
     children: [
-      { path: 'cash-periods', component: CashPeriodsComponent },
+      {
+        path: 'cash-periods',
+        component: CashPeriodsComponent,
+        data: { name: '' },
+      },
       {
         path: 'cash-periods/current',
         component: CashPeriodCurrentComponent,
+        data: { name: '' },
       },
-      { path: 'money-transfers', component: MoneyTransfersComponent },
-      { path: 'supply-debts', component: SupplyDebtsComponent },
-      { path: 'retro-bonuses', component: RetroBonusObligationsComponent },
+      {
+        path: 'money-transfers',
+        component: MoneyTransfersComponent,
+        data: { name: '' },
+      },
+      {
+        path: 'supply-debts',
+        component: SupplyDebtsComponent,
+        data: { name: '' },
+      },
+      {
+        path: 'retro-bonuses',
+        component: RetroBonusObligationsComponent,
+        data: { name: '' },
+      },
     ],
   },
   {
     path: 'shop',
     children: [
-      { path: 'casher-places', component: CasherPlacesComponent },
-      { path: 'departaments', component: ShopDepartamentsComponent },
-      { path: 'staff', component: ShopStaffsComponent },
-      { path: 'about', component: ShopAboutComponent },
-      { path: 'lefts', component: ShopLeftsComponent },
-      { path: 'lefts/sell', component: ShopLeftsSellComponent },
-      { path: 'products', component: ShopProductsComponent },
-      { path: 'attributes', component: ProductAttributesComponent },
-      { path: 'promotions', component: ShopPromotionsComponent },
-      { path: 'product-types', component: ProductTypeTreeComponent },
+      {
+        path: 'casher-places',
+        component: CasherPlacesComponent,
+        data: { name: '' },
+      },
+      {
+        path: 'departaments',
+        component: ShopDepartamentsComponent,
+        data: { name: '' },
+      },
+      { path: 'staff', component: ShopStaffsComponent, data: { name: '' } },
+      { path: 'about', component: ShopAboutComponent, data: { name: '' } },
+      { path: 'lefts', component: ShopLeftsComponent, data: { name: '' } },
+      {
+        path: 'lefts/sell',
+        component: ShopLeftsSellComponent,
+        data: { name: 'Продажа товаров', data: { name: '' } },
+      },
+      {
+        path: 'products',
+        component: ShopProductsComponent,
+        data: { name: '' },
+      },
+      {
+        path: 'products/import',
+        component: ShopProductsImportComponent,
+        data: { name: 'Импорт продуктов' },
+      },
+      {
+        path: 'attributes',
+        component: ProductAttributesComponent,
+        data: { name: '' },
+      },
+      {
+        path: 'promotions',
+        component: ShopPromotionsComponent,
+        data: { name: '' },
+      },
+      {
+        path: 'product-types',
+        component: ProductTypeTreeComponent,
+        data: { name: '' },
+      },
     ],
   },
   {
@@ -79,21 +160,45 @@ export const tillRoutes: Routes = [
     children: [
       {
         path: 'shops',
-        children: [{ path: '', component: ShopGroupsComponent }],
+        children: [
+          { path: '', component: ShopGroupsComponent, data: { name: '' } },
+        ],
       },
       {
         path: 'products',
-        children: [{ path: '', component: ProductGroupsComponent }],
+        children: [
+          { path: '', component: ProductGroupsComponent, data: { name: '' } },
+        ],
       },
     ],
   },
-  { path: 'receipts/templates', component: ReceiptTemplatesComponent },
-  { path: 'receipts/operations', component: ReceiptShopTypesComponent },
+  {
+    path: 'receipts/templates',
+    component: ReceiptTemplatesComponent,
+    data: { name: '' },
+  },
+  {
+    path: 'receipts/operations',
+    component: ReceiptShopTypesComponent,
+    data: { name: '' },
+  },
   { path: '**', component: TillNotFoundComponent },
 ];
-
+tillRoutes.forEach((route) => {
+  addRoute(route);
+});
 @NgModule({
   imports: [RouterModule.forChild(tillRoutes)],
   exports: [RouterModule],
 })
 export class TillRoutingModule {}
+
+function addRoute(route, parentName: string[] = ['/till']) {
+  if (route.data && route.data.name) {
+    RouteNames.routeNamesObject.push({
+      title: route.data.name,
+      path: parentName.join('/') + `/${route.path}`,
+    });
+  }
+  route.children?.forEach((r) => addRoute(r, [...parentName, route.path]));
+}

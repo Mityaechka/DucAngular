@@ -1,3 +1,7 @@
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
+import { MatBadgeModule } from '@angular/material/badge';
 import { ReceiptEditorModule } from './../receipt-editor/receipt-editor.module';
 import { DirectivesModule } from './../directives/directives.module';
 import { DirectDiscountsComponent } from './components/special-terms/direct-discounts/direct-discounts/direct-discounts.component';
@@ -21,13 +25,10 @@ import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { TableModule } from '../table/table.module';
 import { ProviderRequestInfoComponent } from './components/provider/provider-request-info/provider-request-info.component';
 import { ProviderRequestConfirmComponent } from './components/provider/provider-request-confirm/provider-request-confirm.component';
@@ -143,6 +144,10 @@ import { ReceiptPrintPreviewComponent } from './components/receipts/receipt-prin
 import { CashPeriodInfoComponent } from './components/cash/cash-period/cash-period-info/cash-period-info.component';
 import { CashPeriodReceiptsTableComponent } from './components/cash/cash-period/cash-period-receipts-table/cash-period-receipts-table.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import { PermanentNotificationsComponent } from './components/permanent-notifications/permanent-notifications/permanent-notifications.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ShopProductsImportComponent } from './components/shop/shop-product/shop-products-import/shop-products-import.component';
 
 
 @NgModule({
@@ -252,7 +257,9 @@ import { MatMenuModule } from '@angular/material/menu';
     ReceiptInfoComponent,
     ReceiptPrintPreviewComponent,
     CashPeriodInfoComponent,
-    CashPeriodReceiptsTableComponent
+    CashPeriodReceiptsTableComponent,
+    PermanentNotificationsComponent,
+    ShopProductsImportComponent
   ],
   imports: [
     CommonModule,
@@ -297,7 +304,10 @@ import { MatMenuModule } from '@angular/material/menu';
     DirectivesModule,
     ReceiptEditorModule,
     OverlayModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDividerModule,
+    MatBadgeModule,
+    MatProgressBarModule,
   ],
   exports: [MainTillComponent],
   entryComponents: [

@@ -46,6 +46,25 @@
           </mat-form-field>
         </form>
       </ng-container>
+      <ng-container *ngSwitchCase="'date'" [formGroup]="dateGroup">
+        <form [formGroup]="dateGroup" fxLayout="column" (submit)="filter()">
+          <mat-form-field appearance="outline">
+            <mat-label>Тип</mat-label>
+            <mat-select formControlName="type" [compareWith]="{}|compareWith:''">
+              <mat-option value="3">
+                Больше
+              </mat-option>
+              <mat-option value="4">
+                Меньше
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Значение</mat-label>
+            <input matInput type="datetime-local" formControlName="value">
+          </mat-form-field>
+        </form>
+      </ng-container>
       <ng-container *ngSwitchCase="'string'">
         <form [formGroup]="stringGroup" fxLayout="column" (submit)="filter()">
           <mat-form-field appearance="outline">
